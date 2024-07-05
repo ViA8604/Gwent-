@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameButton : MonoBehaviour
 {
-    
+    public string sidename;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,10 +24,12 @@ public class GameButton : MonoBehaviour
     public void GoToGameRedSn ()
     {
         SceneManager.LoadScene("RedrawScene");
+        DontDestroyOnLoad(gameObject);
     }
     public void GoToCreatorSn ()
     {
         SceneManager.LoadScene("EditorScene");
+        DontDestroyOnLoad(gameObject);
     }
 
     public void ExitGame ()

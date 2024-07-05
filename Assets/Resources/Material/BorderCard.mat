@@ -31,5 +31,5 @@ Material:
     m_Floats:
     - _BorderSize: 0.03
     m_Colors:
-    - _BorderColor: {r: 0.14733891, g: 0.36349872, b: 0.7264151, a: 1}
+    - _BorderColor: {r: 0.10980392, g: 0.16470589, b: 0.2784314, a: 1}
   m_BuildTextureStacks: []

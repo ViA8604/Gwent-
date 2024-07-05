@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.PlayerLoop;
@@ -10,6 +11,7 @@ using UnityEngine.UI;
 
 namespace GwentPro
 {
+
     public class CardClass : MonoBehaviour
     {
         public string cardname;
@@ -20,11 +22,11 @@ namespace GwentPro
         public bool playable;
         public bool isdragging;
         public bool alreadyplayed;
-        public Material material;
-        public float newCardWidth = 0.2194931f;
-        public float newcardHeight = 0.2167f;
-        public float newCardLength = 1.7259f;
-        Faction faction;
+        Material material;
+        protected float newCardWidth = 0.2194931f;
+        protected float newcardHeight = 0.2167f;
+        protected float newCardLength = 1.7259f;
+        public Faction faction;
 
         public virtual float NewCardWidth
         {
@@ -42,36 +44,39 @@ namespace GwentPro
             get { return newcardHeight; }
             set { newCardWidth = value; }
         }
-        void Start()
+        public void Awake()
         {
-            faction = new Faction("Crows");
-            gameObject.AddComponent<BoxCollider2D>();
             ResizeCardObj();
-            material = GameObject.Find("material").GetComponent<SpriteRenderer>().material;
-            // Resources.Load<Material>("Material/BorderCard.mat");
-            if (material == null)
+            faction = new Faction(gameObject.tag);
+            Material materialTemplate = Resources.Load<Material>("material/BorderCard");
+            if (materialTemplate == null)
             {
-                Debug.Log("Material no cargado");
+                Debug.Log("Material not loaded");
+                return;
             }
-            Debug.Log("Parece que cargó algo");
+
+            material = new Material(materialTemplate);
             SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
             if (renderer != null)
             {
                 renderer.material = material;
             }
+
         }
 
-            void Update()
+        void Update()
+        {
+            if (selected)
             {
-                if (selected)
-                {
-                    material.SetColor("_BorderColor", faction.darkborder);
-                }
-                else
-                {
-                    material.SetColor("_BorderColor", faction.normalcolor);
-                }
-            }   
+                material.SetColor("_BorderColor", faction.darkborder);
+            }
+            else
+            {
+                material.SetColor("_BorderColor", faction.normalcolor);
+
+            }
+
+        }
         void OnMouseDown()
         {
             selected = !selected;

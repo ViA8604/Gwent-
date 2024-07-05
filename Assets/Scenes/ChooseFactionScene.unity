@@ -377,6 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d84d236af38b116a5d7ff0c28b1231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sidename: 
 --- !u!4 &854584242
 Transform:
   m_ObjectHideFlags: 0
@@ -406,7 +407,7 @@ GameObject:
   - component: {fileID: 875293893}
   m_Layer: 5
   m_Name: SelectCrows
-  m_TagString: Player1
+  m_TagString: Crows
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -478,6 +479,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1150562250}
         m_TargetAssemblyTypeName: PickPlayButton, Assembly-CSharp
         m_MethodName: ShowButtons
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1150562250}
+        m_TargetAssemblyTypeName: PickPlayButton, Assembly-CSharp
+        m_MethodName: GetTag
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -582,7 +595,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 7d2fe08787923b37680208a5432369bf, type: 3}
+  m_Texture: {fileID: 2800000, guid: 4a6094cbcee646117b0e0bc6dce985e5, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -894,8 +907,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70db65f239f40a8e1b7d3ae88fb0e342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayButton: {fileID: 6606218622893001066, guid: 436a1f4d3bf38b78f8e3e27c76768163, type: 3}
-  EditorButton: {fileID: 5380844444741136869, guid: 4357ff11c3efbd36796dca9775c8a2cb, type: 3}
+  PlayButton: {fileID: 6965169635545114492, guid: aefd962fd57a93af9a5bab95adf143a3, type: 3}
+  EditorButton: {fileID: 6461138709336911380, guid: 2593454e1deb51d9c92d99711c7e511c, type: 3}
 --- !u!4 &1150562251
 Transform:
   m_ObjectHideFlags: 0

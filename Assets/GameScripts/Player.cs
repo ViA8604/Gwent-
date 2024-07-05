@@ -13,26 +13,36 @@ namespace GwentPro
 {
     public class Player : MonoBehaviour
     {
-        string fname;
+        public string fname;
+        public string path_to_data;
         bool turn;
-        GameObject deckhold;        //TAg
+        GameObject DeckObj;
+        Deck deck;
 
 
         void Start()
         {
-
-            Faction faction = new Faction(fname);
+            Path_to_data();
+            DeckObj = new GameObject(fname + "Deck");
+            deck = DeckObj.AddComponent<Deck>();
+            deck.path_to_data = path_to_data;
 
         }
 
-
-        public void CreateDeck(Faction faction)
+        void Path_to_data()
         {
-            deckhold = new GameObject("Deckhold");
-            Deck DeckComp = deckhold.AddComponent<Deck>();
-            DeckComp.deckfaction = faction;
+
+            if (fname == "Crows")
+            {
+                path_to_data = "CrowData";
+            }
+            else
+            {
+                path_to_data = "SunData";
+            }
 
         }
+
 
 
     }
@@ -46,7 +56,7 @@ namespace GwentPro
 
         public Faction(string factionname)
         {
-            factionname = this.factionname;
+            this.factionname = factionname;
             if (factionname == "Crows")
             {
                 normalcolor = new Color(12f / 255f, 35f / 255f, 179f / 255f);
