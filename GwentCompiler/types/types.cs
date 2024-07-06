@@ -36,6 +36,15 @@ namespace GwentCompiler
             this.value = value ;
             this.type = type ;
         }
+
+        public bool ToBool()
+        {
+            if(type == GwentType.GwentBool)
+            {
+                return (bool)value;
+            }
+            throw new Exception("GwentObject non-booleable");
+        }
     }
     public enum GwentType{
         GwentNumber, GwentString, GwentBool, GwentVoid, GwentNull,

@@ -16,7 +16,7 @@ namespace GwentPro
         // Start is called before the first frame update
         void Start()
         {
-            Positioner = GameObject.FindGameObjectWithTag("Player");
+            Positioner = GameObject.FindWithTag("Player");
             SetBackImage();
         }
 

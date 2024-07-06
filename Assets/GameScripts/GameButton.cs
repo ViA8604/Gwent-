@@ -12,11 +12,7 @@ public class GameButton : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     public void GoToGameSn ()
     {
         SceneManager.LoadScene("ChooseFactionScene");

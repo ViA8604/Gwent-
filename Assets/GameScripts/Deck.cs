@@ -61,36 +61,42 @@ namespace GwentPro
                 if (prefabsList.Count > 0)
                 {
                     GameObject displayedCard = PopCard(prefabsList);
-                    Vector3 position;
-                    GetPosition(out position);
-                    GameObject instantiatedCard = Instantiate(displayedCard, position, Quaternion.identity);
-                    ResizeInstance(instantiatedCard);
-                    hand.Add(instantiatedCard);
+                    List<Vector3> positions = new List<Vector3>(); // Create a list to store positions
+                    GetPosition(out positions); // Pass the list of positions
+                    if (positions.Count > 0)
+                    {
+                        Vector3 position = positions[i % positions.Count]; // Get the position based on index and available positions
+                        GameObject instantiatedCard = Instantiate(displayedCard, position, Quaternion.identity);
+                        ResizeInstance(instantiatedCard);
+                        hand.Add(instantiatedCard);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("No positions found. Unable to instantiate the card.");
+                    }
                 }
             }
             return hand;
         }
-        void GetPosition(out Vector3 position)
+        void GetPosition(out List<Vector3> positions)
         {
-            position = new Vector3(0, 0, 0); // Default assignment
+            positions = new List<Vector3>(); // List to store positions
 
-            /*if (SceneManager.GetActiveScene().name == "RedrawScene")
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "RedrawScene")
             {
-                GameObject positioner = GameObject.Find("RedrawObj").GetComponent<RedrawScene>().Positioner;
-                if (positioner != null)
+                GameObject[] positioners = GameObject.FindGameObjectsWithTag("Player"); // Find all GameObjects with the "Player" tag
+                foreach (GameObject positioner in positioners)
                 {
-                    for (int i = 0; i < positioner.transform.childCount; i++)
-                    {
-                        position = positioner.transform.GetChild(i).transform.position;
+                    positions.Add(positioner.transform.position); // Add the position of each GameObject to the list
+                }
 
-                    }
-                }
-                else
+                if (positions.Count == 0)
                 {
-                    Debug.LogWarning("RedrawObj not found or does not have RedrawScene component attached.");
+                    Debug.LogWarning("No GameObjects with the 'Player' tag found.");
                 }
-          */  }
-        
+            }
+        }
+
 
         public static GameObject PopCard(List<GameObject> Mazo)
         {
