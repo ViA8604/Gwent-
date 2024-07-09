@@ -57,9 +57,12 @@ namespace GwentPro
 
             material = new Material(materialTemplate);
             SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
-            if (renderer != null)
+            Image image = gameObject.GetComponent<Image>();
+
+            if (renderer != null && image != null)
             {
                 renderer.material = material;
+                image.material = material;
             }
 
         }

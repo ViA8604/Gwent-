@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using Newtonsoft.Json;
+using UnityEngine.UI;
 
 namespace GwentPro
 {
@@ -61,6 +62,12 @@ namespace GwentPro
             Sprite cardimg = Resources.Load<Sprite>("CardImg" + "/" + card.Image);
             sr.sprite = cardimg;
             cardobj.AddComponent<BoxCollider2D>();
+
+            Image image = cardobj.AddComponent<Image>(); // Adding an Image component so the card works with the horizontal layout group.
+            Sprite sprite = Resources.Load<Sprite>("CardImg" + "/" + card.Image);
+            image.sprite = sprite; // Set the Sprite to the Image component
+            cardobj.AddComponent<BoxCollider2D>();
+
         }
 
         // Returns the appropriate CardScript based on the card's CombatType

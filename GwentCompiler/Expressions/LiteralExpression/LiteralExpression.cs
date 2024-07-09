@@ -1,7 +1,10 @@
+using static GwentCompiler.GwentObject;
+
 namespace GwentCompiler
 {
     class LiteralExpression : IExpression
     {
+        //Caso base
         GwentObject obj;
         public LiteralExpression(GwentObject gwentObject)
         {

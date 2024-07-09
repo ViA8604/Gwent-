@@ -1,27 +1,38 @@
+using static GwentCompiler.GwentObject;
+
 namespace GwentCompiler
 {
-class BinaryExpression : IExpression
-{
-    IExpression left;
-    IExpression right;
-    public BinaryExpression(IExpression left, IExpression right)
+    public abstract class BinaryExpression : IExpression
     {
-        this.left = left;
-        this.right = right;
-    }
+        protected IExpression left;
+        protected IExpression right;
+        protected Operation operation;
 
-    public GwentObject Evaluate()
-    {
-        throw new System.NotImplementedException();
-    }
+        public delegate GwentObject Operation(GwentObject left, GwentObject right);
 
-    public bool CheckSemantic()
-    {
-        throw new System.NotImplementedException();
-    }
+        public BinaryExpression(IExpression left, IExpression right, Operation operation)
+        {
+            this.left = left;
+            this.right = right;
+            this.operation = operation;
+        }
 
-    public GwentType ReturnType { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-}
+        public GwentObject Evaluate()
+        {
+            return operation(left.Evaluate(), right.Evaluate());
+        }
+
+        public virtual bool CheckSemantic()
+        {
+            if(left.CheckSemantic() && right.CheckSemantic())
+            {
+                return true;
+            }
+            else throw new Exception("Both operands must be the same type");
+        }
+
+        public virtual GwentType ReturnType { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    }
 
 
 

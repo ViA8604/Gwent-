@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using System.Reflection.Metadata.Ecma335;
+using static GwentCompiler.GwentObject;
 
 namespace GwentCompiler
 {

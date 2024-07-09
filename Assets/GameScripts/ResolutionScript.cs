@@ -9,6 +9,8 @@ namespace GwentPro
     {
         public GameObject Dropdown;
         public Button SetButton;
+        public Toggle MusicToggle;
+        public Toggle ScreenToggle;
         public TMP_Dropdown resolutionDropdown;
 
         void Start()
@@ -19,14 +21,23 @@ namespace GwentPro
             {
                 OnResolutionChange(resolutionDropdown);
             });
+
+            // Add listener for when the ScreenToggle value changes
+            ScreenToggle.onValueChanged.AddListener(delegate
+            {
+                OnScreenToggleChange(ScreenToggle);
+
+                // Initialize the screen mode based on the initial value of ScreenToggle
+                OnScreenToggleChange(ScreenToggle);
+            });
         }
 
-        void Update ()
+        void Update()
         {
             SetButton.onClick.AddListener(() =>
             {
                 GameObject rawImage = SetButton.transform.parent.GameObject();
-                //rawImage.gameObject.SetActive(fal)
+                rawImage.gameObject.SetActive(false);
             });
         }
 
@@ -48,6 +59,11 @@ namespace GwentPro
             {
                 Debug.LogError("Invalid resolution format: " + selectedResolution);
             }
+        }
+
+        void OnScreenToggleChange(Toggle toggle)
+        {
+            Screen.fullScreen = toggle.isOn;
         }
     }
 }

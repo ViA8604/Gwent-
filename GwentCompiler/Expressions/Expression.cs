@@ -1,3 +1,5 @@
+using static GwentCompiler.GwentObject;
+
 namespace GwentCompiler
 {
     public interface IExpression {
