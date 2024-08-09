@@ -61,11 +61,12 @@ namespace GwentPro
             SpriteRenderer sr = cardobj.AddComponent<SpriteRenderer>();
             Sprite cardimg = Resources.Load<Sprite>("CardImg" + "/" + card.Image);
             sr.sprite = cardimg;
-            cardobj.AddComponent<BoxCollider2D>();
 
             Image image = cardobj.AddComponent<Image>(); // Adding an Image component so the card works with the horizontal layout group.
             Sprite sprite = Resources.Load<Sprite>("CardImg" + "/" + card.Image);
             image.sprite = sprite; // Set the Sprite to the Image component
+            image.enabled = false
+            ;
             cardobj.AddComponent<BoxCollider2D>();
 
         }

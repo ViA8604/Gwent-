@@ -22,22 +22,32 @@ namespace GwentPro
             Positioner = GameObject.FindWithTag("Player");
             SelectButton = GameObject.Find("ChooseButton").GetComponent<Button>();
             SetBackImage();
+
+            // Add the onClick listener here to ensure it's added only once
+            if (SelectButton != null)
+            {
+                SelectButton.onClick.AddListener(() =>
+                {
+                    Picked = true;
+                    player.alreadyset = true;
+
+                });
+            }
         }
 
         // Update is called once per frame
         void Update()
         {
-            SelectButton.onClick.AddListener(() =>
-           {
-               Picked = true;
-               StartCoroutine(WaitAndChangeScene());
-           });
+            if (!Picked)
+            {
+            }
         }
 
         IEnumerator WaitAndChangeScene()
         {
-            yield return new WaitForSeconds(10.0f); // Wait for 10 seconds
-            SceneManager.LoadScene("AnotherSceneName");
+            Debug.Log("Entered Coroutine");
+            yield return new WaitForSeconds(5.0f); // Wait for 5 seconds
+            SceneManager.LoadScene("CardGameScene");
         }
 
 

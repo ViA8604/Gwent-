@@ -17,6 +17,7 @@ namespace GwentPro
         public string path_to_data;
         RedrawScene redrawScene;       // Reference to the RedrawScene object
         bool timetochange;
+        public GameObject LeaderCard;
         public List<GameObject> prefabsList;
         List<GameObject> showedcards;
         public List<GameObject> hand = new List<GameObject>();
@@ -26,6 +27,7 @@ namespace GwentPro
         {
             prefabsList = CardModerator.PrefabsList(path_to_data);
             redrawScene = GameObject.Find("RedrawObj").GetComponent<RedrawScene>();
+            LeaderCard = PopCard(prefabsList);
             showedcards = DeckBuilder(prefabsList);
         }
 
@@ -33,16 +35,20 @@ namespace GwentPro
         {
             if (redrawScene.Picked && timetochange)
             {
-                hand = FinalDeck(showedcards);
+                showedcards = FinalDeck(showedcards);
+                DestroyHand(showedcards);
+                redrawScene.player.alreadyset = true;
+                redrawScene.Picked = false;
                 timetochange = false;
             }
         }
 
 
         List<GameObject> DeckBuilder(List<GameObject> prefabsList)
-        {   // Builds the initial deck of cards.
+        {
+            // Builds the initial deck of cards.
             Shuffle(prefabsList);
-            return MakeHand();
+            return MakeHand(prefabsList);
         }
 
 
@@ -61,7 +67,7 @@ namespace GwentPro
             }
         }
 
-        List<GameObject> MakeHand()
+        List<GameObject> MakeHand(List<GameObject> prefabsList)
         {
             List<GameObject> scenecards = new List<GameObject>();
             for (int i = 0; i < 10; i++)
@@ -94,42 +100,42 @@ namespace GwentPro
             List<GameObject> selectedCards = new List<GameObject>();
             List<Vector3> positions = new List<Vector3>();
 
-            int cardsChanged = 0;
-
-            foreach (GameObject item in collection)
+            if (collection.Count != 0)
             {
-                if (PeekCardInvoked(item))
+                foreach (GameObject item in collection)
                 {
-                    selectedCards.Add(item);
-                    positions.Add(item.transform.position);
-                }
-            }
-
-            if (selectedCards.Count > 0)
-            {
-                for (int i = 0; i < selectedCards.Count; i++)
-                {
-                    if (cardsChanged < 2)
+                    if (PeekCardInvoked(item) && selectedCards.Count < 2)
                     {
-                        GameObject selectedCard = selectedCards[i];
-                        Vector3 position = positions[i];
-
-                        collection.Remove(selectedCard);
-                        Destroy(selectedCard);
-                        // After instantiating a new card
-                        GameObject newCard = PopCard(prefabsList);
-                        hand.Add(newCard); // Add the new prefab card to the hand list
-
-                        GameObject instantiatedCard = Instantiate(newCard, position, Quaternion.identity);
-                        ResizeInstance(instantiatedCard);
-                        collection.Add(instantiatedCard);
-                        cardsChanged++;
+                        selectedCards.Add(item);
+                        positions.Add(item.transform.position);
                     }
                 }
-            }
 
-            return collection;
+                foreach (GameObject selectedCard in selectedCards)
+                {
+                    int i = collection.IndexOf(selectedCard);
+                    collection.Remove(selectedCard);
+                    Destroy(selectedCard);
+
+                    GameObject newCard = PopCard(prefabsList);
+
+                    // Instantiate new card and set position
+                    GameObject instantiatedCard = Instantiate(newCard, positions[selectedCards.IndexOf(selectedCard)], Quaternion.identity);
+                    ResizeInstance(instantiatedCard);
+                    collection.Add(instantiatedCard);
+                    // Add the new card to the hand list (prefabs only)
+                    hand.RemoveAt(i);
+                    hand.Add(newCard);
+                }
+
+                return collection;
+            }
+            else
+            {
+                return collection;
+            }
         }
+
         void GetPosition(out List<Vector3> positions)
         {
             positions = new List<Vector3>(); // List to store positions
@@ -187,6 +193,14 @@ namespace GwentPro
             else
             {
                 return false;
+            }
+        }
+
+        static void DestroyHand(List<GameObject> hand)
+        {
+            foreach (GameObject card in hand)
+            {
+                Destroy(card);
             }
         }
 

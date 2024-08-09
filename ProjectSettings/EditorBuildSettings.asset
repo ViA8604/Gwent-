@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RedrawScene.unity
     guid: a0bc5beec9ca3da119797db5911ffb3e
+  - enabled: 1
+    path: Assets/Scenes/CardGameScene.unity
+    guid: 1abbedac6b6b3655cb8beff87a837c82
   m_configObjects: {}

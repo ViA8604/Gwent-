@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameButton : MonoBehaviour
 {
-    public string sidename;
+    public string yoursidename;
+    public string othersidename;
+
     // Start is called before the first frame update
     void Start()
     {

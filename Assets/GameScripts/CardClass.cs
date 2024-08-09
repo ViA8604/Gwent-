@@ -19,14 +19,21 @@ namespace GwentPro
         public bool selected;
         public cardtype crdtype;
         public combatype cmbtype;
-        public bool playable;
+        public Player player;
         public bool isdragging;
-        public bool alreadyplayed;
+        public GameObject actualzone;
         Material material;
         protected float newCardWidth = 0.2194931f;
         protected float newcardHeight = 0.2167f;
         protected float newCardLength = 1.7259f;
         public Faction faction;
+        public Camera activecamera;
+        private Vector3 offset;
+
+        // Declare screenPoint and draggedposition as fields
+        private Vector3 screenPoint;
+        public Vector3 initialLocalPosition;
+
 
         public virtual float NewCardWidth
         {
@@ -44,6 +51,7 @@ namespace GwentPro
             get { return newcardHeight; }
             set { newCardWidth = value; }
         }
+
         public void Awake()
         {
             ResizeCardObj();
@@ -67,22 +75,37 @@ namespace GwentPro
 
         }
 
+        void Start()
+        {
+            initialLocalPosition = transform.localPosition;
+        }
+
         void Update()
         {
             if (selected)
             {
                 material.SetColor("_BorderColor", faction.darkborder);
+                SetActiveCamera();
+                if (activecamera != null)
+                {
+                    // Calculate the offset only when the card is selected
+                    offset = transform.position - activecamera.ScreenToWorldPoint(
+                        new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z)
+                    );
+                }
             }
             else
             {
                 material.SetColor("_BorderColor", faction.normalcolor);
 
             }
-
         }
         void OnMouseDown()
         {
             selected = !selected;
+            screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position); // Obtiene la posición del objeto en coordenadas de pantalla
+            offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z)); // Calcula el desplazamiento
+            initialLocalPosition = transform.localPosition;
         }
         void OnMouseUp()
         {
@@ -90,8 +113,52 @@ namespace GwentPro
             {
                 isdragging = false;
                 selected = false;
+                if (actualzone != null && actualzone.GetComponent<CombatZone>().cmbtype == cmbtype && player.gameObject.tag == actualzone.tag)
+                {
+                    gameObject.transform.SetParent(actualzone.transform);
+                    actualzone = null;
+                    player.cardplayed = true;
+                }
+                else
+                {
+                    // Check if the card has moved
+                    Vector3 currentLocalPosition = transform.localPosition;
+                    if (currentLocalPosition != initialLocalPosition)
+                    {
+                        // Card has moved, return it to the initial local position
+                        transform.localPosition = initialLocalPosition;
+                    }
+                }
             }
         }
+        void SetActiveCamera()
+        {
+            if (gameObject.scene.name == "RedrawScene" || cmbtype == combatype.Leader || player.cardplayed)
+            {
+                activecamera = null;
+            }
+            else
+            {
+                GameObject crdgameobj = GameObject.Find("CardGameObj");
+                CardGameScene cardGame = crdgameobj.GetComponent<CardGameScene>();
+                activecamera = cardGame.dragcamera;
+
+            }
+        }
+
+        void OnMouseDrag()
+        {
+            if (activecamera != null && !player.cardplayed)
+            {
+                isdragging = true;
+                // Mientras se mantiene pulsado el botón izquierdo del ratón y se mueve:
+                Vector3 cursorPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z); // Obtiene la posición del cursor en coordenadas del mundo
+                Vector3 currentPosition = Camera.main.ScreenToWorldPoint(cursorPoint) + offset; // Calcula la nueva posición del objeto
+                transform.position = currentPosition; // Actualiza la posición del objeto
+            }
+
+        }
+
 
         protected void ResizeCardObj()
         {
@@ -109,7 +176,6 @@ namespace GwentPro
             Siege,
             Leader,
             Special
-
 
         }
 

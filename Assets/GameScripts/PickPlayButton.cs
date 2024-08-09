@@ -12,10 +12,13 @@ public class PickPlayButton : MonoBehaviour
     Button InstEdit;
     Button Crows;
     Button Suns;
+    GameButton side;
     void Start()
     {
         Crows = GameObject.Find("SelectCrows").GetComponent<Button>();
         Suns = GameObject.Find("SelectSuns").GetComponent<Button>();
+        side = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameButton>();
+
     }
     public void ShowButtons()
     {
@@ -34,15 +37,15 @@ public class PickPlayButton : MonoBehaviour
     {
         Crows.onClick.AddListener(() =>
     {
-        Debug.Log("Crows button clicked");
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameButton>().sidename = "Crows";
+        side.yoursidename = "Crows";
+        side.othersidename = "Suns";
         // Perform desired action when Crows button is clicked
     });
 
         Suns.onClick.AddListener(() =>
         {
-            Debug.Log("Suns button clicked");
-            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameButton>().sidename = "Suns";
+            side.yoursidename = "Suns";
+            side.othersidename = "Crows";
             // Perform desired action when Suns button is clicked
         });
     }

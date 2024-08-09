@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,21 +18,34 @@ namespace GwentPro
         public string path_to_data;
         bool turn;
         GameObject DeckObj;
-        Deck deck;
-
+        public Deck deck;
+        public bool alreadyset;
+        public bool cardplayed;
+        public List<GameObject> PlayerZones;
+        bool displayedhand;
+        List<GameObject> CardsInScene;
 
         void Start()
         {
             Path_to_data();
-            DeckObj = new GameObject(fname + "Deck");
-            deck = DeckObj.AddComponent<Deck>();
-            deck.path_to_data = path_to_data;
+            AssignPlayerDeck();
+        }
 
+        void Update()
+        {
+            if (PlayerZones != null && !displayedhand)
+            {
+                Debug.Log("Went into the display hand task");
+                SetHand();
+                displayedhand = true;
+            }
+
+            
+            //Here you could make the cards of the hand not draggable.
         }
 
         void Path_to_data()
         {
-
             if (fname == "Crows")
             {
                 path_to_data = "CrowData";
@@ -40,14 +54,55 @@ namespace GwentPro
             {
                 path_to_data = "SunData";
             }
+        }
+
+
+        void AssignPlayerDeck()
+        {
+            DeckObj = new GameObject(fname + "Deck");
+            DeckObj.transform.SetParent(transform); // Set the parent of DeckObj to the current GameObject
+            deck = DeckObj.AddComponent<Deck>();
+            deck.path_to_data = path_to_data;
+        }
+
+
+        void SetHand()
+        {
+            GameObject handObj = GetGOByName("Hand", PlayerZones);
+            GameObject leaderObj = GetGOByName("LeaderCard", PlayerZones);
+            foreach (GameObject item in deck.hand)
+            {
+                GameObject cardinst = Instantiate(item, handObj.transform);
+                cardinst.GetComponent<CardClass>().player = this;    
+                cardinst.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
+                cardinst.transform.SetParent(handObj.transform);
+
+                CardsInScene = new List<GameObject>
+                {
+                    cardinst
+                };
+            }
+            //The issue with the leader card is probably here
+            GameObject leaderinst = Instantiate(deck.LeaderCard, leaderObj.transform);
+            leaderinst.transform.SetParent(leaderObj.transform);
+            leaderinst.transform.localScale = new Vector3(4.35f, 4.35f, 3.35f);
+
 
         }
 
 
-
+        GameObject GetGOByName(string name, List<GameObject> collection)
+        {
+            foreach (GameObject go in collection)
+            {
+                if (go.name.Contains(name))
+                {
+                    return go;
+                }
+            }
+            return null;
+        }
     }
-
-
     public class Faction
     {
         public string factionname;
