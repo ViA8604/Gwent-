@@ -117,7 +117,7 @@ namespace GwentPro
                 {
                     gameObject.transform.SetParent(actualzone.transform);
                     actualzone = null;
-                    player.cardplayed = true;
+                    player.alreadyplayed = true;
                 }
                 else
                 {
@@ -133,7 +133,7 @@ namespace GwentPro
         }
         void SetActiveCamera()
         {
-            if (gameObject.scene.name == "RedrawScene" || cmbtype == combatype.Leader || player.cardplayed)
+            if (gameObject.scene.name == "RedrawScene" || cmbtype == combatype.Leader)
             {
                 activecamera = null;
             }
@@ -148,7 +148,7 @@ namespace GwentPro
 
         void OnMouseDrag()
         {
-            if (activecamera != null && !player.cardplayed)
+            if (activecamera != null)
             {
                 isdragging = true;
                 // Mientras se mantiene pulsado el botón izquierdo del ratón y se mueve:

@@ -16,11 +16,10 @@ namespace GwentPro
     {
         public string fname;
         public string path_to_data;
-        bool turn;
         GameObject DeckObj;
         public Deck deck;
         public bool alreadyset;
-        public bool cardplayed;
+        public bool alreadyplayed;
         public List<GameObject> PlayerZones;
         bool displayedhand;
         List<GameObject> CardsInScene;
@@ -30,7 +29,6 @@ namespace GwentPro
             Path_to_data();
             AssignPlayerDeck();
         }
-
         void Update()
         {
             if (PlayerZones != null && !displayedhand)
@@ -39,9 +37,6 @@ namespace GwentPro
                 SetHand();
                 displayedhand = true;
             }
-
-            
-            //Here you could make the cards of the hand not draggable.
         }
 
         void Path_to_data()

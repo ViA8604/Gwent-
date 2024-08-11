@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
@@ -11,6 +12,7 @@ namespace GwentPro
         GameObject BoardObj;
         public Player player1;
         public Player player2;
+        public SkipButton SkipButton;
         public List<GameObject> ZonesPlayer1;
         List<GameObject> ZonesPlayer2;
         public Camera dragcamera;
@@ -36,8 +38,9 @@ namespace GwentPro
         // Update is called once per frame
         void Update()
         {
-            
+
         }
+
 
         void FillZones()
         {
@@ -63,10 +66,10 @@ namespace GwentPro
 
         public void ChangeCamera()
         {
-            if(!cameramoved)
+            if (!cameramoved)
             {
-            dragcamera.transform.position = new Vector3(954.10f, 582.20f, -88.20f);
-            dragcamera.transform.rotation = new Quaternion(0.00024f, 0.13996f, -0.99016f, 0.00048f);
+                dragcamera.transform.position = new Vector3(954.10f, 582.20f, -88.20f);
+                dragcamera.transform.rotation = new Quaternion(0.00024f, 0.13996f, -0.99016f, 0.00048f);
             }
             else
             {

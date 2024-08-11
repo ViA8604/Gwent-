@@ -1,21 +1,24 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace GwentPro
 {
     public class GameManager : MonoBehaviour
     {
+        static Player[] Players;
+        public Player currentPlayer => Players[currentTurn];
         GameObject Player1Obj;
         GameObject Player2Obj;
-        static Player Player1;
-        static Player Player2;
+        public CardGameScene cardGame;
         GameButton gameButton;
+        SkipButton skipbutton;
+        int currentTurn;
         bool sceneChanged = false;
-        int turncounter;
         public bool setupComplete;
         public bool gamestarted;
-        CardGameScene cardGame;
         private static GameManager instance;
+
 
         void Awake()
         {
@@ -29,16 +32,14 @@ namespace GwentPro
                 Destroy(gameObject);
             }
         }
-
-
-
         void Start()
         {
+            Players = new Player[2];
+            currentTurn = 0;
+
             GameObject chooseinfo = GameObject.FindGameObjectWithTag("GameController");
             gameButton = chooseinfo.GetComponent<GameButton>();
-
             SceneManager.sceneLoaded += OnSceneLoaded;
-            turncounter = 0;
         }
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -50,7 +51,9 @@ namespace GwentPro
                 gameObject.transform.SetParent(canvas.transform);
                 Player1Obj.transform.SetParent(canvas.transform);
                 Player2Obj.transform.SetParent(canvas.transform);
+                SceneManager.SetActiveScene(SceneManager.GetSceneByName("CardGameScene"));
                 CardGameScene();
+                skipbutton = cardGame.SkipButton;
             }
         }
 
@@ -63,7 +66,7 @@ namespace GwentPro
 
             if (setupComplete && !sceneChanged)
             {
-                if (Player1Obj != null && Player1.alreadyset && Player2Obj != null && Player2.alreadyset)
+                if (Player1Obj != null && Players[0].alreadyset && Player2Obj != null && Players[1].alreadyset)
                 {
                     SceneManager.LoadScene("CardGameScene");
                     DontDestroyOnLoad(gameObject);
@@ -74,39 +77,40 @@ namespace GwentPro
             }
             if (sceneChanged && !gamestarted)
             {
-                Debug.Log("Called CardGame function");
                 CardGameScene(); // Call the CardGameScene function
                 gamestarted = true;
             }
 
             if (gamestarted)
             {
-                if (Player1.cardplayed || Player2.cardplayed)
+                if (currentPlayer.alreadyplayed)
                 {
+                    currentPlayer.alreadyplayed = false;
                     ChangeTurn();
                 }
+                if (skipbutton.Clicked)
+                {
+                    skipbutton.Clicked = false;
+                    ChangeTurn();
+                }
+
             }
         }
-
-
-
         public void CreatePlayers()
         {
             if (Player1Obj == null)
             {
-                CreatePlayer("Player1", out Player1Obj, out Player1, gameButton.yoursidename);
-                GameBuilder(Player1);
+                CreatePlayer("Player1", out Player1Obj, out Players[0], gameButton.yoursidename);
+                GameBuilder(Players[0]);
             }
 
-            if (Player1Obj != null && Player1.alreadyset && Player2Obj == null)
+            if (Player1Obj != null && Players[0].alreadyset && Player2Obj == null)
             {
-                CreatePlayer("Player2", out Player2Obj, out Player2, gameButton.othersidename);
-                GameBuilder(Player2);
+                CreatePlayer("Player2", out Player2Obj, out Players[1], gameButton.othersidename);
+                GameBuilder(Players[1]);
                 setupComplete = true;
             }
         }
-
-
         public void CreatePlayer(string playerName, out GameObject playerObj, out Player player, string side)
         {
             playerObj = new GameObject(playerName);
@@ -136,31 +140,19 @@ namespace GwentPro
             GameObject CardGameObj = new GameObject("CardGameObj");
             CardGameObj.transform.SetParent(canvas.transform);
 
+
             // Add the CardGameScene component to the CardGameObj
             cardGame = CardGameObj.AddComponent<CardGameScene>();
 
             // Assign the players to the card game object
-            cardGame.player1 = Player1;
-            cardGame.player2 = Player2;
-
-
+            cardGame.player1 = Players[0];
+            cardGame.player2 = Players[1];
         }
 
         void ChangeTurn()
         {
-           
-           /* if (turncounter == 0)
-            {
-                Player2.cardplayed = false;     //If you restore the cardplayed, the cards become playeble again.
-            }
-            else if (turncounter == 1)
-            {
-                Player1.cardplayed = false;
-            }
             cardGame.ChangeCamera();
-            turncounter = (turncounter + 1) % 2; // Alternates between 0 & 1
-            */
+            currentTurn = (currentTurn + 1) % 2;
         }
     }
-
 }
