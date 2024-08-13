@@ -12,8 +12,10 @@ namespace GwentPro
         GameObject Player2Obj;
         public CardGameScene cardGame;
         GameButton gameButton;
-        SkipButton skipbutton;
+        public SkipButton skipbutton;
         int currentTurn;
+        int roundsCounter;
+        bool lastPlayerSkipped;
         bool sceneChanged = false;
         public bool setupComplete;
         public bool gamestarted;
@@ -36,6 +38,7 @@ namespace GwentPro
         {
             Players = new Player[2];
             currentTurn = 0;
+            roundsCounter = 0;
 
             GameObject chooseinfo = GameObject.FindGameObjectWithTag("GameController");
             gameButton = chooseinfo.GetComponent<GameButton>();
@@ -53,7 +56,6 @@ namespace GwentPro
                 Player2Obj.transform.SetParent(canvas.transform);
                 SceneManager.SetActiveScene(SceneManager.GetSceneByName("CardGameScene"));
                 CardGameScene();
-                skipbutton = cardGame.SkipButton;
             }
         }
 
@@ -86,12 +88,24 @@ namespace GwentPro
                 if (currentPlayer.alreadyplayed)
                 {
                     currentPlayer.alreadyplayed = false;
+                    lastPlayerSkipped = false;
                     ChangeTurn();
                 }
-                if (skipbutton.Clicked)
+
+                skipbutton = cardGame.SkipButton;
+                if (skipbutton != null)
                 {
-                    skipbutton.Clicked = false;
-                    ChangeTurn();
+                    if (skipbutton.Clicked)
+                    {
+                        currentPlayer.Skippedturns++;
+                        skipbutton.Clicked = false;
+                        if (lastPlayerSkipped)
+                        {
+                            EndRound();
+                        }
+                        lastPlayerSkipped = true;
+                        ChangeTurn();
+                    }
                 }
 
             }
@@ -153,6 +167,65 @@ namespace GwentPro
         {
             cardGame.ChangeCamera();
             currentTurn = (currentTurn + 1) % 2;
+        }
+
+        void EndRound()
+        {
+            GetRoundWinner();
+            SetNextRound();
+            if(roundsCounter >= 3)
+            {
+                EndGame();
+            }
+        }
+        void SetNextRound()
+        {
+            foreach (var player in Players)
+            {
+                player.Skippedturns = 0;
+                player.CleanPlayerZones();
+                cardGame.SetCardScore(player , 0);
+                player.Add2Hand();
+            }
+            roundsCounter ++;
+            lastPlayerSkipped = false;
+        }
+
+        void GetRoundWinner()
+        {
+            int pointsP1 = cardGame.GetCardScore(Players[0]);
+            int pointsP2 = cardGame.GetCardScore(Players[1]);
+
+            if (pointsP1 > pointsP2)
+            {
+                cardGame.ShowWinnerText(Players[0].fname + "  ganan");
+                Players[0].Rounds++;
+            }
+            else if (pointsP1 < pointsP2)
+            {
+                cardGame.ShowWinnerText(Players[1].fname + "  ganan");
+                Players[1].Rounds++;
+            }
+            else
+            {
+                cardGame.ShowWinnerText("EMPATE");
+            }
+        }
+
+        void EndGame()
+        {
+            if(Players[0].Rounds > Players[1].Rounds)
+            {
+                cardGame.ShowWinnerText(Players[0].fname + " ganan \n la partidaa");
+            }
+            else if(Players[0].Rounds < Players[1].Rounds)
+            {
+                cardGame.ShowWinnerText(Players[1].fname + " ganan \n la partidaa");
+            }
+            else
+            {
+                cardGame.ShowWinnerText("EMPATEEE");
+            }
         }
     }
 }

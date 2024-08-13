@@ -115,6 +115,7 @@ namespace GwentPro
                 selected = false;
                 if (actualzone != null && actualzone.GetComponent<CombatZone>().cmbtype == cmbtype && player.gameObject.tag == actualzone.tag)
                 {
+                    actualzone.GetComponent<CombatZone>().AddCardPoints(gameObject);
                     gameObject.transform.SetParent(actualzone.transform);
                     actualzone = null;
                     player.alreadyplayed = true;

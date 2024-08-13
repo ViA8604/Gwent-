@@ -22,6 +22,8 @@ namespace GwentPro
         public bool alreadyplayed;
         public List<GameObject> PlayerZones;
         bool displayedhand;
+        public int Skippedturns;
+        public int Rounds;
         List<GameObject> CardsInScene;
 
         void Start()
@@ -64,11 +66,10 @@ namespace GwentPro
         void SetHand()
         {
             GameObject handObj = GetGOByName("Hand", PlayerZones);
-            GameObject leaderObj = GetGOByName("LeaderCard", PlayerZones);
             foreach (GameObject item in deck.hand)
             {
                 GameObject cardinst = Instantiate(item, handObj.transform);
-                cardinst.GetComponent<CardClass>().player = this;    
+                cardinst.GetComponent<CardClass>().player = this;
                 cardinst.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
                 cardinst.transform.SetParent(handObj.transform);
 
@@ -77,14 +78,23 @@ namespace GwentPro
                     cardinst
                 };
             }
-            //The issue with the leader card is probably here
-            GameObject leaderinst = Instantiate(deck.LeaderCard, leaderObj.transform);
-            leaderinst.transform.SetParent(leaderObj.transform);
-            leaderinst.transform.localScale = new Vector3(4.35f, 4.35f, 3.35f);
-
-
         }
 
+        public void Add2Hand()
+        {
+            GameObject handObj = GetGOByName("Hand", PlayerZones);
+            for (int i = 0; i < 2; i++)
+            {
+                if (deck.prefabsList.Count > 0 & handObj.transform.childCount < 10)
+                {
+                    GameObject cardinst = Instantiate(deck.PopCard(deck.prefabsList), handObj.transform);
+                    cardinst.GetComponent<CardClass>().player = this;
+                    cardinst.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
+                    cardinst.transform.SetParent(handObj.transform);
+                    CardsInScene.Add(cardinst);
+                }
+            }
+        }
 
         GameObject GetGOByName(string name, List<GameObject> collection)
         {
@@ -96,6 +106,18 @@ namespace GwentPro
                 }
             }
             return null;
+        }
+
+        public void CleanPlayerZones()
+        {
+            foreach (GameObject go in PlayerZones)
+            {
+                if (go.name.Contains("Zone"))
+                {
+                    go.GetComponent<CombatZone>().ClearZone();
+                }
+            }
+
         }
     }
     public class Faction

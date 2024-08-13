@@ -156,7 +156,7 @@ namespace GwentPro
         }
 
 
-        public static GameObject PopCard(List<GameObject> Mazo)
+        public GameObject PopCard(List<GameObject> Mazo)
         {
             GameObject card = Mazo[0];
             Mazo.Remove(Mazo[0]);

@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardname: Laurinha Armara
-  cardpoint: 5
+  cardpoint: 2
   selected: 0
   crdtype: 1
   cmbtype: 1

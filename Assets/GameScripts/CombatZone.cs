@@ -1,53 +1,93 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using GwentPro;
+//using Microsoft.Unity.VisualStudio.Editor;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class CombatZone : MonoBehaviour
+namespace GwentPro
 {
-    public List<GameObject> CardsInScene;
-    public CardClass.combatype cmbtype;
-
-    // Start is called before the first frame update
-    void Start()
+    public class CombatZone : MonoBehaviour
     {
-        CardsInScene = new List<GameObject>();
-    }
+        public List<GameObject> CardsInScene;
+        public CardClass.combatype cmbtype;
+        public TMPro.TextMeshProUGUI PointsCounter;
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        CardClass card = collision.gameObject.GetComponent<CardClass>();
-        if (card != null)
+        // Start is called before the first frame update
+        void Start()
         {
-            card.actualzone = gameObject;
+            CardsInScene = new List<GameObject>();
+            PointsCounter = SetPointCounter(gameObject.tag);
         }
 
-    }
-
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        CardClass card = collision.gameObject.GetComponent<CardClass>();
-        if (card != null)
+        void Update()
         {
-            card.actualzone = gameObject;
         }
-    }
 
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        CardClass card = collision.gameObject.GetComponent<CardClass>();
-        if (card != null)
-       card.actualzone = null;
-    }
+        public void AddCardPoints(GameObject card)
+        {
+            int sum = Convert.ToInt32(PointsCounter.text) + card.GetComponent<CardClass>().cardpoint;
+            PointsCounter.text = sum.ToString();
+        }
+        public TextMeshProUGUI SetPointCounter(string tag)
+        {
+            if (PointsCounter == null)
+            {
+                TextMeshProUGUI[] Objs = GameObject.FindObjectsOfType<TextMeshProUGUI>();
+                foreach (TextMeshProUGUI obj in Objs)
+                {
+                    if (obj.tag == tag)
+                    {
+                        return obj;
+                    }
+                }
+            }
+            return null;
+        }
 
 
-    // Update is called once per frame
-    void Update()
-    {
-        /* foreach(Transform child in gameObject.transform)
-         {
-             CardsInScene.Add(child.gameObject);
-         }
-     */
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            CardClass card = collision.gameObject.GetComponent<CardClass>();
+            if (card != null)
+            {
+                card.actualzone = gameObject;
+            }
+
+        }
+
+        void OnCollisionStay2D(Collision2D collision)
+        {
+            CardClass card = collision.gameObject.GetComponent<CardClass>();
+            if (card != null)
+            {
+                card.actualzone = gameObject;
+            }
+        }
+
+        void OnCollisionExit2D(Collision2D collision)
+        {
+            CardClass card = collision.gameObject.GetComponent<CardClass>();
+            if (card != null)
+                card.actualzone = null;
+        }
+
+        public void ClearZone()
+        {
+            foreach (Transform child in gameObject.transform)
+            {
+                foreach (Component component in child.GetComponents<Component>())
+                {
+                    if (component is UnityEngine.UI.Image || component is RawImage)
+                    {
+                        Destroy(component);
+                    }
+                }
+                Destroy(child.gameObject);
+            }
+        }
     }
 }
