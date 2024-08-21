@@ -71,9 +71,7 @@ namespace GwentPro
                 if (Player1Obj != null && Players[0].alreadyset && Player2Obj != null && Players[1].alreadyset)
                 {
                     SceneManager.LoadScene("CardGameScene");
-                    DontDestroyOnLoad(gameObject);
-                    DontDestroyOnLoad(Player1Obj);
-                    DontDestroyOnLoad(Player2Obj);
+                    DontDestroyThisObj();
                     sceneChanged = true;
                 }
             }
@@ -137,6 +135,12 @@ namespace GwentPro
         {
             RedrawScene(player);
         }
+        void DontDestroyThisObj()
+        {
+            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(Player1Obj);
+            DontDestroyOnLoad(Player2Obj);
+        }
 
         public static void RedrawScene(Player player)
         {
@@ -173,7 +177,7 @@ namespace GwentPro
         {
             GetRoundWinner();
             SetNextRound();
-            if(roundsCounter >= 3)
+            if (roundsCounter >= 3)
             {
                 EndGame();
             }
@@ -184,10 +188,10 @@ namespace GwentPro
             {
                 player.Skippedturns = 0;
                 player.CleanPlayerZones();
-                cardGame.SetCardScore(player , 0);
+                cardGame.SetCardScore(player, 0);
                 player.Add2Hand();
             }
-            roundsCounter ++;
+            roundsCounter++;
             lastPlayerSkipped = false;
         }
 
@@ -214,11 +218,11 @@ namespace GwentPro
 
         void EndGame()
         {
-            if(Players[0].Rounds > Players[1].Rounds)
+            if (Players[0].Rounds > Players[1].Rounds)
             {
                 cardGame.ShowWinnerText(Players[0].fname + " ganan \n la partidaa");
             }
-            else if(Players[0].Rounds < Players[1].Rounds)
+            else if (Players[0].Rounds < Players[1].Rounds)
             {
                 cardGame.ShowWinnerText(Players[1].fname + " ganan \n la partidaa");
             }

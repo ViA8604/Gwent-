@@ -112,11 +112,23 @@ namespace GwentCompiler
             double rightValue = (double)right.value;
 
             return new GwentObject(leftValue % rightValue, GwentType.GwentNumber);
+        }
+
+
     }
     public enum GwentType
     {
         GwentNumber, GwentString, GwentBool, GwentVoid, GwentNull,
     }
+    public class GwentVar
+    {
+        string name;
+        GwentType type;
 
-}
+        public GwentVar(string Name, GwentType Type)
+        {
+            name = Name;
+            type = Type;
+        }
+    }
 }

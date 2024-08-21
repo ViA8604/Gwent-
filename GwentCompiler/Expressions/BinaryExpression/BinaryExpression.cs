@@ -1,4 +1,4 @@
-using static GwentCompiler.GwentObject;
+
 
 namespace GwentCompiler
 {

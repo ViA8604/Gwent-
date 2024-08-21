@@ -1,6 +1,4 @@
-
 using System.Linq.Expressions;
-using static GwentCompiler.GwentObject;
 
 namespace GwentCompiler
 {

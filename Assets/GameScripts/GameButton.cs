@@ -14,6 +14,10 @@ public class GameButton : MonoBehaviour
         
     }
 
+    public void GoToMenuSn ()
+    {
+        SceneManager.LoadScene("MainMenuScene");
+    }
     
     public void GoToGameSn ()
     {
