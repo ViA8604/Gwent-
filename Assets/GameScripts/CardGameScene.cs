@@ -11,7 +11,6 @@ using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 using UnityEngine.Windows;
 using Input = UnityEngine.Input;
-using UnityEditor.VersionControl;
 
 
 namespace GwentPro
@@ -25,9 +24,11 @@ namespace GwentPro
         TextMeshProUGUI[] Counters;
         Canvas canvas;
         public TextMeshProUGUI WinnerSign;
+        public Compiler Compiler;
         public List<GameObject> ZonesPlayer1;
         List<GameObject> ZonesPlayer2;
         public Camera dragcamera;
+        bool cardGameScenefound;
         bool cameramoved;
         bool winTextActive;
         // Start is called before the first frame update
@@ -93,9 +94,11 @@ namespace GwentPro
 
         void Update()
         {
-            if (SceneManager.GetActiveScene().name == "CardGameScene")
+            if (SceneManager.GetActiveScene().name == "CardGameScene" && !cardGameScenefound)
             {
                 SkipButton = GameObject.Find("SkipObj").GetComponent<SkipButton>();
+
+                cardGameScenefound = true;
             }
             
             if (Input.GetMouseButtonDown(0))
@@ -114,7 +117,6 @@ namespace GwentPro
             {
                 if (BoardObj.transform.childCount != 0)
                 {
-                    Debug.Log("boardObj got children");
                     foreach (Transform child in BoardObj.transform)
                     {
                         if (child.tag == "Player1")

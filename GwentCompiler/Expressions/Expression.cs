@@ -1,5 +1,3 @@
-
-
 namespace GwentCompiler
 {
     public interface IExpression {

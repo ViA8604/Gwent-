@@ -4,29 +4,50 @@ namespace GwentCompiler
     public class Scope
     {
         Scope? parent;
-        Dictionary <GwentVar , GwentObject> table;
+        Dictionary<string, GwentType> types;
+        Dictionary<string, GwentObject> values;
 
         public Scope(Scope? Parent = null)
         {
             parent = Parent;
-            table = new Dictionary<GwentVar, GwentObject>();
+            types = [];
+            values = [];
         }
-        public void Set(GwentVar var , GwentObject value)
+        
+        public void SetType(string name , GwentType type)
         {
-            table[var] = value;                 //magia
+            types[name] = type;
         }
 
-        public GwentObject Get(GwentVar var)
+        public GwentType GetType(string name)
         {
-            if(table.ContainsKey(var))
+            if(types.ContainsKey(name))
             {
-                return table[var];
+                return types[name];
             }
-            if(parent!= null)
+            if(parent != null)
             {
-                return parent.Get(var);
+                return parent.GetType(name);
             }
-            throw new NullReferenceException ("La variable " + var + " no existe en el contexto actual.");
+            return GwentType.GwentNull;
+        }
+
+        public void SetValue(string name , GwentObject obj)
+        {
+            values[name] = obj;    //Hacer la l'ogica del chequeo de tipos
+        }
+
+        public GwentObject GetValue(string name)
+        {
+            if(values.ContainsKey(name))
+            {
+                return values[name];
+            }
+            if(parent != null)
+            {
+                return parent.GetValue(name);
+            }
+            throw new NullReferenceException ("Variable " + name + " sin inicializar.");
         }
     }
 

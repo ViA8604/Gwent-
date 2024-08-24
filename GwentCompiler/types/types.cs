@@ -26,7 +26,18 @@ namespace GwentCompiler
         Hashrockettoken, InequalityOperatortoken,
         AtSigntoken,
         DoubleAtSigntoken,
-        Exclamationtoken
+        Exclamationtoken,
+        KeywordAndtoken,
+        KeywordTruetoken,
+        KeywordFalsetoken,
+        KeywordCardtoken,
+        KeywordTypetoken,
+        KeywordUnitoken,
+        KeywordSelectortoken,
+        KeywordSourcetoken,
+        KeywordSingletoken,
+        KeywordPredicatetoken,
+        KeywordPosActiontoken
     }
 
     public class GwentObject
@@ -120,15 +131,5 @@ namespace GwentCompiler
     {
         GwentNumber, GwentString, GwentBool, GwentVoid, GwentNull,
     }
-    public class GwentVar
-    {
-        string name;
-        GwentType type;
-
-        public GwentVar(string Name, GwentType Type)
-        {
-            name = Name;
-            type = Type;
-        }
-    }
+   
 }

@@ -10,6 +10,7 @@ TagManager:
   - Crows
   - Suns
   - SkipB
+  - Compiler
   layers:
   - Default
   - TransparentFX

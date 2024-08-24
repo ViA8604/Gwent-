@@ -81,7 +81,7 @@ namespace GwentPro
                 gamestarted = true;
             }
 
-            if (gamestarted)
+            if (gamestarted && SceneManager.GetActiveScene().name == "CardGameScene")
             {
                 if (currentPlayer.alreadyplayed)
                 {

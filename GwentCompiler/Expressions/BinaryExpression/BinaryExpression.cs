@@ -31,7 +31,7 @@ namespace GwentCompiler
             else throw new Exception("Both operands must be the same type");
         }
 
-        public virtual GwentType ReturnType { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public virtual GwentType ReturnType => GwentType.GwentNull;
     }
 
 

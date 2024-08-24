@@ -1,8 +1,6 @@
-
-
 namespace GwentCompiler
 {
-    class LiteralExpression : IExpression
+    public class LiteralExpression : IExpression
     {
         //Caso base
         GwentObject obj;

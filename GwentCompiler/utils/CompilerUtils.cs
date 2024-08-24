@@ -3,28 +3,32 @@ namespace GwentCompiler
     public static class CompilerUtils
     {
         public static Dictionary<string, TokenType> Getkeyword = new Dictionary<string, TokenType>() {
-            { "Effect", TokenType.KeywordDeclarationEffecttoken },
-            { "effect", TokenType.KeywordEffectCalltoken },
-            { "Name", TokenType.KeywordNametoken },
-            { "Params", TokenType.KeywordParamstoken },
-            { "Number", TokenType.KeywordNumbertoken },
-            { "String", TokenType.KeywordStringtoken },
-            { "Bool", TokenType.KeywordBooltoken },
-            { "Action", TokenType.KeywordActiontoken },
-            { "targets", TokenType.KeywordTargetstoken },
-            { "context", TokenType.KeywordContextoken },
-            {"for" , TokenType.KeywordFortoken},
-            { "in", TokenType.KeywordIntoken },
-            { "while", TokenType.KeywordWhiletoken },
-            { "TriggerPlayer", TokenType.KeywordTriggerPlayertoken },
-            { "Board", TokenType.KeywordBoardtoken},
-            {"Type" , TokenType.KeywordCardTypetoken},
-            {"Faction" , TokenType.KeywordFactiontoken},
-            {"Power" , TokenType.KeywordPowertoken},
-            {"Range" , TokenType.KeywordRangetoken},
-            {"OnActivation" , TokenType.KeywordOnActivationtoken},
-            {"deck" , TokenType.KeywordDecktoken},
-            {"Hand" , TokenType.KeywordHandtoken}};
+            {"and" , TokenType.KeywordAndtoken} ,
+            {"true" , TokenType.KeywordTruetoken} ,
+            {"false" , TokenType.KeywordFalsetoken} ,
+            {"for" , TokenType.KeywordFortoken} ,
+            {"in" , TokenType.KeywordIntoken} ,
+            {"while" , TokenType.KeywordWhiletoken} ,
+            {"card" , TokenType.KeywordCardtoken} ,
+            {"effect" , TokenType.KeywordDeclarationEffecttoken} ,
+            {"Name" , TokenType.KeywordNametoken} ,
+            {"Params" , TokenType.KeywordParamstoken} ,
+            {"Action" , TokenType.KeywordActiontoken} ,
+            {"Type" , TokenType.KeywordTypetoken} ,
+            {"Faction" , TokenType.KeywordFactiontoken} ,
+            {"Power" , TokenType.KeywordPowertoken} ,
+            {"Range" , TokenType.KeywordRangetoken} ,
+            {"OnActivation" , TokenType.KeywordOnActivationtoken} ,
+            {"Effect" , TokenType.KeywordEffectCalltoken} ,
+            {"Number" , TokenType.KeywordNumbertoken} ,
+            {"String" , TokenType.KeywordStringtoken} ,
+            {"Bool" , TokenType.KeywordBooltoken} ,
+            {"unit" , TokenType.KeywordUnitoken} ,
+            {"Selector" , TokenType.KeywordSelectortoken} ,
+            {"Source" , TokenType.KeywordSourcetoken} ,
+            {"Single" , TokenType.KeywordSingletoken} ,
+            {"Predicate" , TokenType.KeywordPredicatetoken} ,
+            {"PostAction" , TokenType.KeywordPosActiontoken}};
 
         public static Dictionary<string, TokenType> Getsymbol = new Dictionary<string, TokenType>(){
         {"+" , TokenType.PlusOperatortoken} ,
@@ -64,8 +68,54 @@ namespace GwentCompiler
         {"\0" , TokenType.EOFtoken},
         };
 
+        public static Dictionary<string, EffectExpression> EffectList = [];
+
+        public static EffectExpression FindEffect(string name , List<(string, IExpression)> callparameters)
+        {
+            foreach (var param in callparameters)
+            {
+                if (EffectList.ContainsKey(name))
+                {
+                    if (param.Item2.ReturnType == EffectList[param.Item1].ReturnType)
+                    {
+                        return (EffectExpression)param.Item2;
+                    }
+                    else
+                    {
+                        throw new Exception("Effect parameters don't match effect declaration");
+                    }
+                }
+            }
+            throw new Exception("Effect not found, make sure it's been declared.");
+        }
     }
 
+    public static class GwentPredicates
+    {
+        public static GwentObject Sum(GwentObject a, GwentObject b)
+        {
+            return a + b;
+        }
 
+        public static GwentObject Sub(GwentObject a, GwentObject b)
+        {
+            return a - b;
+        }
+
+        public static GwentObject Mul(GwentObject a, GwentObject b)
+        {
+            return a * b;
+        }
+
+        public static GwentObject Div(GwentObject a, GwentObject b)
+        {
+            return a / b;
+        }
+
+        public static GwentObject Mod(GwentObject a, GwentObject b)
+        {
+            return a % b;
+        }
+    }
 
 }

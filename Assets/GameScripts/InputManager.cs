@@ -6,7 +6,7 @@ using TMPro;
 
 public class InputManager : MonoBehaviour
 {
-    TMP_InputField inputField;
+    public TMP_InputField inputField;
     // Start is called before the first frame update
     void Start()
     {
