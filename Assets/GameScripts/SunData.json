@@ -5,7 +5,8 @@
         "CardType": "Gold",
         "CombatType": "Leader",
         "Faction": "Suns",
-        "Image": "Suns 00"
+        "Image": "Suns 00",
+        "EffectName": "None"
     },
     {
         "Name": "Faskian Basil",
@@ -13,7 +14,8 @@
         "CardType": "Silver",
         "CombatType": "Range",
         "Faction": "Suns",
-        "Image": "Suns 01"
+        "Image": "Suns 01",
+        "EffectName": "None"
     },
     {
         "Name": "Laurinha Armara",
@@ -21,7 +23,8 @@
         "CardType": "Silver",
         "CombatType": "Range",
         "Faction": "Suns",
-        "Image": "Suns 02"
+        "Image": "Suns 02",
+        "EffectName": "None"
     },
     {
         "Name": "Amalia Dekuji",
@@ -29,7 +32,8 @@
         "CardType": "Silver",
         "CombatType": "Range",
         "Faction": "Suns",
-        "Image": "Suns 03"
+        "Image": "Suns 03",
+        "EffectName": "None"
     },
     {
         "Name": "Roh Lucarel",
@@ -37,7 +41,8 @@
         "CardType": "Silver",
         "CombatType": "Range",
         "Faction": "Suns",
-        "Image": "Suns 04"
+        "Image": "Suns 04",
+        "EffectName": "None"
     },
     {
         "Name": "Elizabeth Garay",
@@ -45,7 +50,8 @@
         "CardType": "Silver",
         "CombatType": "Range",
         "Faction": "Suns",
-        "Image": "Suns 05"
+        "Image": "Suns 05",
+        "EffectName": "None"
     },
     {
         "Name": "Hiatos Rivers",
@@ -53,7 +59,8 @@
         "CardType": "Gold",
         "CombatType": "Range",
         "Faction": "Suns",
-        "Image": "Suns 06"
+        "Image": "Suns 06",
+        "EffectName": "None"
     },
     {
         "Name": "Broso Machete",
@@ -61,7 +68,8 @@
         "CardType": "Silver",
         "CombatType": "Melee",
         "Faction": "Suns",
-        "Image": "Suns 07"
+        "Image": "Suns 07",
+        "EffectName": "None"
     },
     {
         "Name": "Foster Leone",
@@ -69,7 +77,8 @@
         "CardType": "Silver",
         "CombatType": "Melee",
         "Faction": "Suns",
-        "Image": "Suns 08"
+        "Image": "Suns 08",
+        "EffectName": "None" 
     },
     {
         "Name": "Sir Davrian y Lua",
@@ -77,7 +86,8 @@
         "CardType": "Silver",
         "CombatType": "Melee",
         "Faction": "Suns",
-        "Image": "Suns 09"
+        "Image": "Suns 09",
+        "EffectName": "None"
     },
     {
         "Name": "Fairdra Melody",
@@ -85,7 +95,8 @@
         "CardType": "Silver",
         "CombatType": "Melee",
         "Faction": "Suns",
-        "Image": "Suns 10"
+        "Image": "Suns 10",
+        "EffectName": "None"
     },
     {
         "Name": "Juan Gorrión",
@@ -93,7 +104,8 @@
         "CardType": "Silver",
         "CombatType": "Melee",
         "Faction": "Suns",
-        "Image": "Suns 11"
+        "Image": "Suns 11",
+        "EffectName": "None"
     },
     {
         "Name": "Yinliae Varet",
@@ -101,7 +113,8 @@
         "CardType": "Silver",
         "CombatType": "Melee",
         "Faction": "Suns",
-        "Image": "Suns 12"
+        "Image": "Suns 12",
+        "EffectName": "None"
     },
     {
         "Name": "Conde Ariel de Montecristi",
@@ -109,7 +122,8 @@
         "CardType": "Silver",
         "CombatType": "Melee",
         "Faction": "Suns",
-        "Image": "Suns 13"
+        "Image": "Suns 13",
+        "EffectName": "None"
     },
     {
         "Name": "Capitán Soles",
@@ -117,7 +131,8 @@
         "CardType": "Silver",
         "CombatType": "Siege",
         "Faction": "Suns",
-        "Image": "Suns 14"
+        "Image": "Suns 14",
+        "EffectName": "None"
     },
     {
         "Name": "Recluta Soles",
@@ -125,7 +140,8 @@
         "CardType": "Silver",
         "CombatType": "Siege",
         "Faction": "Suns",
-        "Image": "Suns 15"
+        "Image": "Suns 15",
+        "EffectName": "None"
     },
     {
         "Name": "La Orden Solaris",
@@ -133,7 +149,8 @@
         "CardType": "Silver",
         "CombatType": "Siege",
         "Faction": "Suns",
-        "Image": "Suns 16"
+        "Image": "Suns 16",
+        "EffectName": "None"
     }
 
 

@@ -11,11 +11,7 @@ public class Program
             text ??= "";
 
             GwentCompiler mycompiler = new (text);
-            var list = mycompiler.lexer.Tokenize();
-            foreach (var item in list)
-            {
-                Console.WriteLine(item);
-            }
+            
         }
     }
 }

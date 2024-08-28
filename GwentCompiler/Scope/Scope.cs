@@ -14,7 +14,7 @@ namespace GwentCompiler
             values = [];
         }
         
-        public void SetType(string name , GwentType type)
+        public void SetType(string name , GwentType type) 
         {
             types[name] = type;
         }

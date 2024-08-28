@@ -7,14 +7,16 @@ namespace GwentCompiler
         protected IExpression left;
         protected IExpression right;
         protected Operation operation;
+        protected string operatorS;
 
         public delegate GwentObject Operation(GwentObject left, GwentObject right);
 
-        public BinaryExpression(IExpression left, IExpression right, Operation operation)
+        public BinaryExpression(IExpression left, IExpression right, Operation operation, string OperatorS)
         {
             this.left = left;
             this.right = right;
             this.operation = operation;
+            this.operatorS = OperatorS;
         }
 
         public GwentObject Evaluate()

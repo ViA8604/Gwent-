@@ -114,8 +114,9 @@ namespace GwentPro
         public string Faction;
 
         public string Image;
+        public string EffectName;
 
-        public CardData(string name, int points, string cardType, string combatType, string faction, string image)
+        public CardData(string name, int points, string cardType, string combatType, string faction, string image, string effectName)
         {
             Name = name;
             Points = points;
@@ -123,6 +124,7 @@ namespace GwentPro
             CombatType = combatType;
             Faction = faction;
             Image = image;
+            EffectName = effectName;
         }
     }
 

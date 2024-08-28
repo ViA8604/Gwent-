@@ -43,6 +43,18 @@ public class WhileExpression : IExpression
         return new GwentObject(0, GwentType.GwentVoid);
     }
 
-}
+        public override string ToString()
+        {
+            string outpu = "while(" + condition.ToString() + "){\n";
+            foreach (var exp in body)
+            {
+                outpu += exp.ToString();
+            }
+            outpu += "}\n";
+            
+            return outpu;
+        }
+
+    }
 
 }

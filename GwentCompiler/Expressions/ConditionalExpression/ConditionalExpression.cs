@@ -52,6 +52,20 @@ namespace GwentCompiler
             return new GwentObject(0, GwentType.GwentVoid);
         }
 
-
+        public override string ToString()
+        {
+            string outpu = "if(" + condition.ToString() + "){\n";
+            foreach (var exp in true_body)
+            {
+                outpu += exp.ToString();
+            }
+            outpu += "}\nelse{\n";
+            foreach (var exp in false_body)
+            {
+                outpu += exp.ToString();
+            }
+            outpu += "}\n";
+            return outpu;
+        }
     }
 }

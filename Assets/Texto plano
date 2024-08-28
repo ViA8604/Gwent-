@@ -38,7 +38,7 @@ card {
 	Type: "Oro",
 	Name: "Beluga",
 	Faction: "Northern Realms",
-	Power: 10,
+	Power: if(name == "Beluga"){2+5=} else{3+2},
 	Range: ["Melee", "Ranged"],
 	OnActivation: [
 		{
@@ -49,8 +49,12 @@ card {
 			Selector: {
 				Source: "board",
 				Single: false,
-				Predicate: (unit) => unit.Faction == "Northern" @@ "Realms"
-			}
+				Predicate: (unit) => (3+5)/2 == 7
+				  }
+		}
+		       ]
+	}
+#####################################################################			
 			PostAction: {
 				Type: "ReturnToDeck",
 				Selector: {
@@ -62,3 +66,9 @@ card {
 			},
 			Effect
 
+
+
+if(name == "Beluga"){2+5} else{3+2},
+
+
+card {Type: "Oro",Name: "Beluga",Faction: "Northern Realms",Power: 2,Range ["Melee","Ranged"],OnActivation: [ {Effect: {Name: "Damage",Amount: 5,}Selector: {Source: "board",Single: false,Predicate:(unit) => (3+5)/2 == 7}}]}

@@ -23,7 +23,10 @@ namespace GwentCompiler
             return refscope.GetValue(name);
         }
         public GwentType ReturnType => refscope.GetType(name);
-    }
 
-
+        public override string ToString()
+        {
+            return name;
+        }
+    }     
 }

@@ -30,7 +30,7 @@ namespace GwentCompiler
         {
             //Devuelve una lista con los tokens, cada token tiene su tipo, y su valor.
             Token token;
-            List<Token> tokenlist = [];
+            List<Token> tokenlist = new List<Token>();
             do
             {
                 token = GetToken();  //Continuará construyendo los tokens hasta que llegues al final del texto.
@@ -54,7 +54,7 @@ namespace GwentCompiler
             string value;
 
             // "   "
-            if(GetChar(0) == '\0')
+            if (GetChar(0) == '\0')
             {
                 value = "\0";
                 type = TokenType.EOFtoken;
@@ -132,7 +132,7 @@ namespace GwentCompiler
 
         private void BuildStringLiteralToken(out TokenType type, out string value)
         {
-            type = TokenType.StringLiteraltoken ;
+            type = TokenType.StringLiteraltoken;
 
             NextChar();                     // para saltar la " de inicio
             var sb = new StringBuilder();
@@ -173,35 +173,27 @@ namespace GwentCompiler
         private void BuildSymbolToken(out TokenType type, out string value)
         {
             string text = "";   // lo reconocido hasta el momento
-            int matches;        // cantidad de operadores que comienzan con lo reconocido hasta el momento
-            // "+="
-            while(true)
-            {   
-                matches = CompilerUtils.Getsymbol.Count(KeyValuePair => KeyValuePair.Key.StartsWith(text + GetChar(0)));
-                if(matches == 1 && CompilerUtils.Getsymbol.ContainsKey(text))
-                {
-                    value = text + GetChar(0) ;  // guardamos como valor lo que se reconocio
-                    NextChar();
-                    break ;
-                }
-                else if(matches == 0 || GetChar(0)=='\0')
-                {
-                    if(CompilerUtils.Getsymbol.ContainsKey(text))
-                    {
-                      value = text ;
-                      break ;  
-                    }
-                    else {
-                        throw new InvalidDataException($"Unknown symbol : {text + GetChar(0)}");
-                    }
-                }
+            char c = GetChar(0);
 
-                text += GetChar(0);
+            while (CompilerUtils.Getsymbol.Any(w => w.Key.StartsWith(text + c)))
+            {
+                text += c;
                 NextChar();
-                 
+                c = GetChar(0);
+                if(GetChar(0) == '\0') break;
             }
-            type = CompilerUtils.Getsymbol[value];
-            if(type == TokenType.SymbolNewLinetoken){currentline++;}             
+
+            if (CompilerUtils.Getsymbol.Keys.Contains(text))
+            {
+                value = text;
+                type = CompilerUtils.Getsymbol[value];
+                if (type == TokenType.SymbolNewLinetoken) { currentline++; }
+            }
+
+            else
+            {
+                throw new InvalidDataException($"Unrecognized symbol({currentline},{currentcol}) : {text}");
+            }
         }
     }
 }

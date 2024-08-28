@@ -2,15 +2,13 @@ namespace GwentCompiler
 {
     public class FunctionExpression:IExpression
     {
-        public string name;
         public List<(string , GwentType)>parameters;
         public Scope scope;
         public List<IExpression> body;
         GwentObject result;
 
-        public FunctionExpression(string Name , List<(string , GwentType)> Parameters, List<IExpression> Body , Scope refscope)
+        public FunctionExpression(List<(string , GwentType)> Parameters, List<IExpression> Body , Scope refscope)
         {
-            name = Name;
             parameters = Parameters;
             body = Body;
             scope = refscope;
@@ -37,6 +35,24 @@ namespace GwentCompiler
             return result;
         }
         public GwentType ReturnType => body[body.Count - 1].ReturnType;
+
+        public override string ToString()
+        {
+            string output = "(";
+            foreach (var param in parameters)
+            {
+                output += $"{param.Item1} : {param.Item2.ToString()} , ";
+            }
+            output += ") \n { \n";
+
+            foreach (var exp in body)
+            {
+                output += exp.ToString();
+            }
+
+            output += "}";
+            return output;
+        }
     }
 
 }

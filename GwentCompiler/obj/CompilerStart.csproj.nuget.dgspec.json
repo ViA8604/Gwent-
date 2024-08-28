@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/via/Documents/codigo/Proyectos Pro/CompilerStart/CompilerStart.csproj": {}
+    "/Data/GoGwentPOO/Assets/GwentCompiler/CompilerStart.csproj": {}
   },
   "projects": {
-    "/home/via/Documents/codigo/Proyectos Pro/CompilerStart/CompilerStart.csproj": {
+    "/Data/GoGwentPOO/Assets/GwentCompiler/CompilerStart.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/via/Documents/codigo/Proyectos Pro/CompilerStart/CompilerStart.csproj",
+        "projectUniqueName": "/Data/GoGwentPOO/Assets/GwentCompiler/CompilerStart.csproj",
         "projectName": "CompilerStart",
-        "projectPath": "/home/via/Documents/codigo/Proyectos Pro/CompilerStart/CompilerStart.csproj",
+        "projectPath": "/Data/GoGwentPOO/Assets/GwentCompiler/CompilerStart.csproj",
         "packagesPath": "/home/via/.nuget/packages/",
-        "outputPath": "/home/via/Documents/codigo/Proyectos Pro/CompilerStart/obj/",
+        "outputPath": "/Data/GoGwentPOO/Assets/GwentCompiler/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/via/.nuget/NuGet/NuGet.Config"
@@ -37,6 +37,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -53,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.104/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.105/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -6,7 +6,7 @@ namespace GwentCompiler
 {
     public class ComparisonExpression : BinaryExpression
 {
-    public ComparisonExpression(IExpression left, IExpression right, Operation operation) : base(left, right, operation)
+    public ComparisonExpression(IExpression left, IExpression right, Operation operation, string operatorS) : base(left, right, operation, operatorS)
     {
     }
 
@@ -23,5 +23,11 @@ namespace GwentCompiler
     }
 
     public override GwentType ReturnType => GwentType.GwentBool;
+
+    public override string ToString()
+    {
+        string output = $"{left.ToString} {operatorS} {right.ToString}";
+        return output;
+    }
 }
 }

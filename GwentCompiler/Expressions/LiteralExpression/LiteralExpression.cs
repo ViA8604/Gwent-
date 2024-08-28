@@ -17,6 +17,11 @@ namespace GwentCompiler
             return obj;
         }
         public GwentType ReturnType => obj.type;
+
+        public override string ToString()
+        {
+            return $"Literal {obj.value.ToString()}, de tipo {obj.type.ToString()}";
+        }
     }
 
 

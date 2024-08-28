@@ -25,7 +25,7 @@ namespace GwentCompiler
             {
                 if(refscope.GetType(name) != expression.ReturnType)
                 {
-                    throw new InvalidDataException("No ej posible reasignar variables con un tipo diferente.");
+                    throw new InvalidDataException("No es posible reasignar variables con un tipo diferente.");
                 }
             }
             return true;
@@ -39,5 +39,10 @@ namespace GwentCompiler
         }
 
         public GwentType ReturnType => refscope.GetType(name);
+
+        public override string ToString()
+        {
+            return name + " = " + expression.ToString();
+        }
     }
 }

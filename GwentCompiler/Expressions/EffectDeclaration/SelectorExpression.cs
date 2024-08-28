@@ -17,12 +17,17 @@ namespace GwentCompiler
         {
             predicate.CheckSemantic();
             return true;
-        }  
+        }
 
         public GwentObject Evaluate()
         {
-            return new GwentObject(0 , GwentType.GwentNull);
+            return new GwentObject(0, GwentType.GwentNull);
         }
         public GwentType ReturnType => GwentType.GwentVoid;
+
+        public override string ToString()
+        {
+            return $"Source: {source} Single: {single} Predicate: {predicate}";
+        }
     }
 }

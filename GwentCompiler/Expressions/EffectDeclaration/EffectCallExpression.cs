@@ -4,7 +4,7 @@ namespace GwentCompiler
 {
     public class EffectCallExpression : IExpression
     {
-        string effectname;
+        public string effectname;
         List<(string, IExpression)> parameters;
         SelectorExpression selector;
 
@@ -17,10 +17,10 @@ namespace GwentCompiler
         public bool CheckSemantic()
         {
             CheckParametersSemantic();
-            selector.CheckSemantic();
             CheckPredicateReturnType();
 
-            CompilerUtils.FindEffect(parameters);
+            var effect = CompilerUtils.FindEffect(effectname);
+            effect.CheckParameters(parameters);
             return true;
         }
 
@@ -28,8 +28,6 @@ namespace GwentCompiler
         {
             return new GwentObject(0, GwentType.GwentNull);
         }
-        public GwentType ReturnType => GwentType.GwentNull;
-
 
         bool CheckParametersSemantic()
         {
@@ -37,7 +35,6 @@ namespace GwentCompiler
             {
                 if (param.Item2.CheckSemantic())
                 {
-                    return true;
                 }
                 else throw new Exception("Parameter must be the same type");
             }
@@ -46,10 +43,24 @@ namespace GwentCompiler
 
         void CheckPredicateReturnType()
         {
+            selector.CheckSemantic();
             if (selector.predicate.ReturnType != GwentType.GwentBool)
             {
                 throw new InvalidDataException("Predicate must be booleable"); //Exception
             }
+        }
+
+        public GwentType ReturnType => GwentType.GwentNull;
+
+        public override string ToString()
+        {
+            string output = effectname + ", \n";
+            foreach (var param in parameters)
+            {
+                output += param.Item1 + ": " + param.Item2.ToString() + ",\n";
+            }
+            output += "{" + selector.ToString();
+            return effectname;
         }
     }
 }

@@ -5,7 +5,8 @@
         "CardType": "Gold",
         "CombatType": "Leader",
         "Faction": "Crows",
-        "Image": "Crows 00"
+        "Image": "Crows 00",
+        "EffectName": "None"
     },
     {
         "Name": "Aleyra Valiente",
@@ -13,7 +14,8 @@
         "CardType": "Silver",
         "CombatType": "Range",
         "Faction": "Crows",
-        "Image": "Crows 01"
+        "Image": "Crows 01",
+        "EffectName": "None"
     },
     {
         "Name": "Máster Ka Trib Wan",
@@ -21,7 +23,8 @@
         "CardType": "Gold",
         "CombatType": "Range",
         "Faction": "Crows",
-        "Image": "Crows 02"
+        "Image": "Crows 02",
+        "EffectName": "None"
     },
     {
         "Name": "Idris Anhia",
@@ -29,7 +32,8 @@
         "CardType": "Silver",
         "CombatType": "Range",
         "Faction": "Crows",
-        "Image": "Crows 03"
+        "Image": "Crows 03",
+        "EffectName": "None"
     },
     {
         "Name": "Fernas el Sombrerero",
@@ -37,7 +41,8 @@
         "CardType": "Silver",
         "CombatType": "Range",
         "Faction": "Crows",
-        "Image": "Crows 04"
+        "Image": "Crows 04",
+        "EffectName": "None"
     },
     {
         "Name": "Profesor R.",
@@ -45,7 +50,8 @@
         "CardType": "Silver",
         "CombatType": "Range",
         "Faction": "Crows",
-        "Image": "Crows 05"
+        "Image": "Crows 05",
+        "EffectName": "None"
     },
     {
         "Name": "Vian Van Yelsing",
@@ -53,7 +59,8 @@
         "CardType": "Silver",
         "CombatType": "Range",
         "Faction": "Crows",
-        "Image": "Crows 06"
+        "Image": "Crows 06",
+        "EffectName": "None"
     },
     {
         "Name": "Kavin y Layvin",
@@ -61,7 +68,8 @@
         "CardType": "Silver",
         "CombatType": "Melee",
         "Faction": "Crows",
-        "Image": "Crows 07"
+        "Image": "Crows 07",
+        "EffectName": "None"    
     },
     {
         "Name": "Kendrick y Valimir",
@@ -69,7 +77,8 @@
         "CardType": "Silver",
         "CombatType": "Melee",
         "Faction": "Crows",
-        "Image": "Crows 08"
+        "Image": "Crows 08",
+        "EffectName": "None"
     },
     {
         "Name": "Antoine Cruix",
@@ -77,7 +86,8 @@
         "CardType": "Silver",
         "CombatType": "Melee",
         "Faction": "Crows",
-        "Image": "Crows 09"
+        "Image": "Crows 09",
+        "EffectName": "None"
     },
     {
         "Name": "Máster Alexandrius",
@@ -85,7 +95,8 @@
         "CardType": "Silver",
         "CombatType": "Melee",
         "Faction": "Crows",
-        "Image": "Crows 10"
+        "Image": "Crows 10",
+        "EffectName": "None"
     },
     {
         "Name": "Mitus Rhe Saurus",
@@ -93,7 +104,8 @@
         "CardType": "Silver",
         "CombatType": "Melee",
         "Faction": "Crows",
-        "Image": "Crows 11"
+        "Image": "Crows 11",
+        "EffectName": "None"
     },
     {
         "Name": "Pyatroj Dale",
@@ -101,7 +113,8 @@
         "CardType": "Silver",
         "CombatType": "Melee",
         "Faction": "Crows",
-        "Image": "Crows 12"
+        "Image": "Crows 12",
+        "EffectName": "None"
     },
     {
         "Name": "Salomé Alfira",
@@ -109,7 +122,8 @@
         "CardType": "Silver",
         "CombatType": "Melee",
         "Faction": "Crows",
-        "Image": "Crows 13"
+        "Image": "Crows 13",
+        "EffectName": "None"
     },
     {
         "Name": "Capitán Cuervo",
@@ -117,7 +131,8 @@
         "CardType": "Silver",
         "CombatType": "Siege",
         "Faction": "Crows",
-        "Image": "Crows 14"
+        "Image": "Crows 14",
+        "EffectName": "None"
     },
     {
         "Name": "Recluta Cuervo",
@@ -125,7 +140,8 @@
         "CardType": "Silver",
         "CombatType": "Siege",
         "Faction": "Crows",
-        "Image": "Crows 15"
+        "Image": "Crows 15",
+        "EffectName": "None"
     },
     {
         "Name": "Héroes de Guerra",
@@ -133,7 +149,8 @@
         "CardType": "Silver",
         "CombatType": "Siege",
         "Faction": "Crows",
-        "Image": "Crows 16"
+        "Image": "Crows 16",
+        "EffectName": "None"
     }
 
 ]

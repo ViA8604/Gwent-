@@ -3,89 +3,94 @@ namespace GwentCompiler
     public static class CompilerUtils
     {
         public static Dictionary<string, TokenType> Getkeyword = new Dictionary<string, TokenType>() {
-            {"and" , TokenType.KeywordAndtoken} ,
-            {"true" , TokenType.KeywordTruetoken} ,
-            {"false" , TokenType.KeywordFalsetoken} ,
-            {"for" , TokenType.KeywordFortoken} ,
-            {"in" , TokenType.KeywordIntoken} ,
-            {"while" , TokenType.KeywordWhiletoken} ,
-            {"card" , TokenType.KeywordCardtoken} ,
-            {"effect" , TokenType.KeywordDeclarationEffecttoken} ,
-            {"Name" , TokenType.KeywordNametoken} ,
-            {"Params" , TokenType.KeywordParamstoken} ,
-            {"Action" , TokenType.KeywordActiontoken} ,
-            {"Type" , TokenType.KeywordTypetoken} ,
-            {"Faction" , TokenType.KeywordFactiontoken} ,
-            {"Power" , TokenType.KeywordPowertoken} ,
-            {"Range" , TokenType.KeywordRangetoken} ,
-            {"OnActivation" , TokenType.KeywordOnActivationtoken} ,
-            {"Effect" , TokenType.KeywordEffectCalltoken} ,
-            {"Number" , TokenType.KeywordNumbertoken} ,
-            {"String" , TokenType.KeywordStringtoken} ,
-            {"Bool" , TokenType.KeywordBooltoken} ,
-            {"unit" , TokenType.KeywordUnitoken} ,
-            {"Selector" , TokenType.KeywordSelectortoken} ,
-            {"Source" , TokenType.KeywordSourcetoken} ,
-            {"Single" , TokenType.KeywordSingletoken} ,
-            {"Predicate" , TokenType.KeywordPredicatetoken} ,
-            {"PostAction" , TokenType.KeywordPosActiontoken}};
+    {"Action" , TokenType.KeywordActiontoken} ,
+    {"Bool" , TokenType.KeywordBooltoken} ,
+    {"card" , TokenType.KeywordCardtoken} ,
+    {"else" , TokenType.KeywordElsetoken} ,
+    {"effect" , TokenType.KeywordDeclarationEffecttoken} ,
+    {"Effect" , TokenType.KeywordEffectCalltoken} ,
+    {"Faction" , TokenType.KeywordFactiontoken} ,
+    {"false" , TokenType.KeywordFalsetoken} ,
+    {"for" , TokenType.KeywordFortoken} ,
+    {"if" , TokenType.KeywordIftoken} ,
+    {"in" , TokenType.KeywordIntoken} ,
+    {"Name" , TokenType.KeywordNametoken} ,
+    {"Number" , TokenType.KeywordNumbertoken} ,
+    {"OnActivation" , TokenType.KeywordOnActivationtoken} ,
+    {"Params" , TokenType.KeywordParamstoken} ,
+    {"PostAction" , TokenType.KeywordPosActiontoken} ,
+    {"Power" , TokenType.KeywordPowertoken} ,
+    {"Predicate" , TokenType.KeywordPredicatetoken} ,
+    {"Range" , TokenType.KeywordRangetoken} ,
+    {"Selector" , TokenType.KeywordSelectortoken} ,
+    {"Single" , TokenType.KeywordSingletoken} ,
+    {"Source" , TokenType.KeywordSourcetoken} ,
+    {"String" , TokenType.KeywordStringtoken} ,
+    {"true" , TokenType.KeywordTruetoken} ,
+    {"Type" , TokenType.KeywordCardTypetoken} ,
+    {"while" , TokenType.KeywordWhiletoken} ,
+};
 
-        public static Dictionary<string, TokenType> Getsymbol = new Dictionary<string, TokenType>(){
-        {"+" , TokenType.PlusOperatortoken} ,
-        {"+=" , TokenType.PlusEqualOperatortoken},
-        {"++" , TokenType.IncrementOperatortoken} ,
-        {"-" , TokenType.MinusOperatortoken} ,
-        {"-=" , TokenType.MinusEqualOperatortoken},
-        {"--" , TokenType.DecrementOperatortoken} ,
-        {"*" , TokenType.MultiplicationOptoken} ,
-        {"*=" , TokenType.MultiplicationEqualOptoken},
-        {"=" , TokenType.SymbolEqualtoken},
-        {"==" , TokenType.EqualityOperatortoken},
-        {"!=" , TokenType.InequalityOperatortoken},
-        {"," , TokenType.Commatoken},
-        {"." , TokenType.DotSymbToken},
-        {";" , TokenType.Semicolontoken},
-        {":" , TokenType.Colontoken},
-        {"(" , TokenType.OpenParenthesistoken},
-        {")" , TokenType.CloseParenthesistoken},
-        {"{" , TokenType.OpenCurlyBrackettoken},
-        {"}" , TokenType.CloseCurlyBrackettoken},
-        {"[" , TokenType.OpenSquareBrackettoken},
-        {"]" , TokenType.CloseSquareBrackettoken},
-        {"!" , TokenType.Exclamationtoken},
-        {"?" , TokenType.QuestionMarktoken},
-        {"=>" , TokenType.Hashrockettoken},
-        {">" , TokenType.GreaterThantoken},
-        {">=" , TokenType.GreaterEqualThantoken},
-        {"<" , TokenType.LessThantoken},
-        {"<=" , TokenType.LessEqualThantoken},
-        {"\n" , TokenType.SymbolNewLinetoken} ,
-        {" " , TokenType.WhiteSpacetoken} ,
-        {"#" , TokenType.Commenttoken} ,
-        {"\"" , TokenType.StringLiteraltoken} ,
-        {"@" , TokenType.AtSigntoken},
-        {"@@" , TokenType.DoubleAtSigntoken},
-        {"\0" , TokenType.EOFtoken},
-        };
+        public static Dictionary<string, TokenType> Getsymbol = new Dictionary<string, TokenType>() {
+    //Arithmetical
+    {"+" , TokenType.PlusOperatortoken} ,
+    {"+=" , TokenType.PlusEqualOperatortoken},
+    {"++" , TokenType.IncrementOperatortoken} ,
+    {"-" , TokenType.MinusOperatortoken} ,
+    {"-=" , TokenType.MinusEqualOperatortoken},
+    {"--" , TokenType.DecrementOperatortoken} ,
+    {"*" , TokenType.MultiplicationOptoken} ,
+    {"*=" , TokenType.MultiplicationEqualOptoken},
+    {"/" , TokenType.SymbolInvertedBackSlashtoken},
+    {"%" , TokenType.Moduletoken},
+    //Comparison
+    {"==" , TokenType.EqualityOperatortoken},
+    {"!=" , TokenType.InequalityOperatortoken},
+    {">" , TokenType.GreaterThantoken},
+    {">=" , TokenType.GreaterEqualThantoken},
+    {"<" , TokenType.LessThantoken},
+    {"<=" , TokenType.LessEqualThantoken},
+    //Logical
+    {"&&" , TokenType.KeywordLogicalAndtoken} ,
+    {"||" , TokenType.KeywordLogicalOrtoken} ,
+    //Punctuation
+    {"," , TokenType.Commatoken},
+    {"." , TokenType.DotSymbToken},
+    {";" , TokenType.Semicolontoken},
+    {":" , TokenType.Colontoken},
+    {"(" , TokenType.OpenParenthesistoken},
+    {")" , TokenType.CloseParenthesistoken},
+    {"{" , TokenType.OpenCurlyBrackettoken},
+    {"}" , TokenType.CloseCurlyBrackettoken},
+    {"[" , TokenType.OpenSquareBrackettoken},
+    {"]" , TokenType.CloseSquareBrackettoken},
+    //Assignment
+    {"=" , TokenType.SymbolEqualtoken},
+    //Misc
+    {"!" , TokenType.Exclamationtoken},
+    {"?" , TokenType.QuestionMarktoken},
+    {"=>" , TokenType.Hashrockettoken},
+    {"&" , TokenType.KeywordAndtoken} ,
+    {"|" , TokenType.SymbolStraightSlashtoken},
+    {"\n" , TokenType.SymbolNewLinetoken} ,
+    {" " , TokenType.WhiteSpacetoken} ,
+    {"#" , TokenType.Commenttoken} ,
+    {"\"" , TokenType.StringLiteraltoken} ,
+    {"@" , TokenType.AtSigntoken},
+    {"@@" , TokenType.DoubleAtSigntoken},
+    {"\0" , TokenType.EOFtoken},
+};
 
-        public static Dictionary<string, EffectExpression> EffectList = [];
+        public static Dictionary<string, EffectDeclarationExpression> EffectList = [];
 
-        public static EffectExpression FindEffect(string name , List<(string, IExpression)> callparameters)
+        public static EffectDeclarationExpression FindEffect(string name)
         {
-            foreach (var param in callparameters)
+
+            if (EffectList.ContainsKey(name))
             {
-                if (EffectList.ContainsKey(name))
-                {
-                    if (param.Item2.ReturnType == EffectList[param.Item1].ReturnType)
-                    {
-                        return (EffectExpression)param.Item2;
-                    }
-                    else
-                    {
-                        throw new Exception("Effect parameters don't match effect declaration");
-                    }
-                }
+                return EffectList[name];
             }
+
             throw new Exception("Effect not found, make sure it's been declared.");
         }
     }
@@ -116,6 +121,47 @@ namespace GwentCompiler
         {
             return a % b;
         }
+
+        public static GwentObject And(GwentObject left, GwentObject right)
+        {
+            return new GwentObject(left.ToBool() && right.ToBool(), GwentType.GwentBool);
+        }
+
+        public static GwentObject Or(GwentObject left, GwentObject right)
+        {
+            return new GwentObject(left.ToBool() || right.ToBool(), GwentType.GwentBool);
+        }
+
+        public static GwentObject Equal(GwentObject left, GwentObject right)
+        {
+            return new GwentObject(left.value == right.value, GwentType.GwentBool);
+        }
+
+        public static GwentObject NotEqual(GwentObject left, GwentObject right)
+        {
+            return new GwentObject(left.value != right.value, GwentType.GwentBool);
+        }
+
+        public static GwentObject LessThan(GwentObject left, GwentObject right)
+        {
+            return new GwentObject((double)left.value < (double)right.value, GwentType.GwentBool);
+        }
+
+        public static GwentObject GreaterThan(GwentObject left, GwentObject right)
+        {
+            return new GwentObject((double)left.value > (double)right.value, GwentType.GwentBool);
+        }
+
+        public static GwentObject LessEqualThan(GwentObject left, GwentObject right)
+        {
+            return new GwentObject((double)left.value <= (double)right.value, GwentType.GwentBool);
+        }
+
+        public static GwentObject GreaterEqualThan(GwentObject left, GwentObject right)
+        {
+            return new GwentObject((double)left.value >= (double)right.value, GwentType.GwentBool);
+        }
+
     }
 
 }
