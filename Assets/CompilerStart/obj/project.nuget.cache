@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "m5mIlO1cEijjN3HGsUA5qeZNRoxQ8g/vUm7FjjtI+QYNQZNrIaIAkPsMl3VAnYlipG62z+KELiQ9UThSa1qsDA==",
+  "success": true,
+  "projectFilePath": "/Data/GoGwentPOO/Assets/CompilerStart/CompilerStart.csproj",
+  "expectedPackageFiles": [
+    "/home/via/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

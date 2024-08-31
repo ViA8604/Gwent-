@@ -8,6 +8,8 @@ public class PickPlayButton : MonoBehaviour
     // Start is called before the first frame update
     public Button PlayButton;
     public Button EditorButton;
+    public Button CreateButton;
+    GameButton gameButton;
     Button InstPlay;
     Button InstEdit;
     Button Crows;
@@ -17,7 +19,10 @@ public class PickPlayButton : MonoBehaviour
     {
         Crows = GameObject.Find("SelectCrows").GetComponent<Button>();
         Suns = GameObject.Find("SelectSuns").GetComponent<Button>();
+        CreateButton = GameObject.Find("CreateB").GetComponent<Button>();
         side = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameButton>();
+        gameButton = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameButton>();
+
 
     }
     public void ShowButtons()
@@ -26,11 +31,16 @@ public class PickPlayButton : MonoBehaviour
         GameObject canvas = GameObject.Find("Canvas");
         InstPlay = Instantiate(PlayButton, canvas.transform);
         InstEdit = Instantiate(EditorButton, canvas.transform);
-        GameButton gameButton = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameButton>();
-
         InstPlay.onClick.AddListener(gameButton.GoToGameRedSn);
         InstEdit.onClick.AddListener(gameButton.GoToCreatorSn);
 
+    }
+
+    public void CreationButton()
+    {
+        side.yoursidename = "Custom";
+        side.othersidename = "Suns";
+        gameButton.GoToCreatorSn();
     }
     // Update is called once per frame
     void Update()
@@ -48,5 +58,12 @@ public class PickPlayButton : MonoBehaviour
             side.othersidename = "Crows";
             // Perform desired action when Suns button is clicked
         });
+
+        CreateButton.onClick.AddListener(() =>
+            {
+                side.yoursidename = "Custom";
+                side.othersidename = "Suns";
+            });
     }
 }
+

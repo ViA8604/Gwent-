@@ -41,13 +41,6 @@ namespace GwentPro
 
         }
 
-        IEnumerator WaitAndChangeScene()
-        {
-            Debug.Log("Entered Coroutine");
-            yield return new WaitForSeconds(5.0f); // Wait for 5 seconds
-            SceneManager.LoadScene("CardGameScene");
-        }
-
 
         void SetBackImage()
         {

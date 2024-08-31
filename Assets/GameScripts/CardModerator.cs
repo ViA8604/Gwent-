@@ -19,16 +19,17 @@ namespace GwentPro
         {
             string jsonData = File.ReadAllText(filePath);
             List<CardData> cardDataList = JsonConvert.DeserializeObject<List<CardData>>(jsonData);
+            Debug.Log(cardDataList[0].Name);
             return cardDataList;
         }
 
         // Method to generate a prefab from a CardData object
-        static GameObject PrefabGenerator(int counter, CardData card)
+        static GameObject PrefabGenerator(int counter, CardData card, string dataPath)
         {
 #if UNITY_EDITOR
             GameObject cardobj = new GameObject(card.Name);
             cardobj.AddComponent(GetCardScript(card.CombatType) as Type);
-            SetProperties(cardobj, card);
+            SetProperties(cardobj, card, dataPath);
             SetPrefabImage(cardobj, card);
 
             string prefabPath = "Assets/MyPrefabs/" + card.Faction + "Card" + counter + ".prefab";
@@ -45,25 +46,27 @@ namespace GwentPro
 #endif
         }
         // Method to set individual properties of the prefab
-        static void SetProperties(GameObject cardobj, CardData card)
+        static void SetProperties(GameObject cardobj, CardData card, string dataPath)
         {
             cardobj.GetComponent<CardClass>().cardname = card.Name;
             cardobj.GetComponent<CardClass>().cardpoint = card.Points;
             cardobj.GetComponent<CardClass>().cmbtype = (CardClass.combatype)Enum.Parse(typeof(CardClass.combatype), card.CombatType);
             cardobj.GetComponent<CardClass>().crdtype = (CardClass.cardtype)Enum.Parse(typeof(CardClass.cardtype), card.CardType);
-            cardobj.GetComponent<CardClass>().faction = new Faction(card.Faction);
-            cardobj.tag = card.Faction;
+            cardobj.GetComponent<CardClass>().faction = new Faction(dataPath);
+            cardobj.tag = dataPath;
         }
 
         //Sets the image of a card prefab and adds a BoxCollider2D component to the GameObject.
         static void SetPrefabImage(GameObject cardobj, CardData card)
         {
+            Debug.Log(card.Image);
             SpriteRenderer sr = cardobj.AddComponent<SpriteRenderer>();
             Sprite cardimg = Resources.Load<Sprite>("CardImg" + "/" + card.Image);
             sr.sprite = cardimg;
 
             Image image = cardobj.AddComponent<Image>(); // Adding an Image component so the card works with the horizontal layout group.
             Sprite sprite = Resources.Load<Sprite>("CardImg" + "/" + card.Image);
+            Debug.Log("CardImg" + "/" + card.Image);
             image.sprite = sprite; // Set the Sprite to the Image component
             image.enabled = false
             ;
@@ -97,7 +100,7 @@ namespace GwentPro
             int counter = 0;
             foreach (CardData item in cardDataList)
             {
-                prefabsList.Add(PrefabGenerator(counter, item));
+                prefabsList.Add(PrefabGenerator(counter, item,dataPath));
                 counter++;
             }
             return prefabsList;

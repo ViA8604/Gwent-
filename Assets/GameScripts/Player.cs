@@ -28,35 +28,22 @@ namespace GwentPro
 
         void Start()
         {
-            Path_to_data();
             AssignPlayerDeck();
         }
         void Update()
         {
             if (PlayerZones != null && !displayedhand)
             {
-                Debug.Log("Went into the display hand task");
                 SetHand();
                 displayedhand = true;
             }
         }
 
-        void Path_to_data()
-        {
-            if (fname == "Crows")
-            {
-                path_to_data = "CrowData";
-            }
-            else
-            {
-                path_to_data = "SunData";
-            }
-        }
 
 
         void AssignPlayerDeck()
         {
-            DeckObj = new GameObject(fname + "Deck");
+            DeckObj = new GameObject("Deck");
             DeckObj.transform.SetParent(transform); // Set the parent of DeckObj to the current GameObject
             deck = DeckObj.AddComponent<Deck>();
             deck.path_to_data = path_to_data;
@@ -78,6 +65,14 @@ namespace GwentPro
                     cardinst
                 };
             }
+            GameObject LeaderObj = GetGOByName("Leader", PlayerZones);
+            Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+            GameObject leaderinst = Instantiate(deck.LeaderCard, canvas.transform);
+            LeaderCard leaderc = leaderinst.GetComponent<LeaderCard>();
+            leaderc.NewCardHeight = 1.6f;
+            leaderc.NewCardLength = 0.5f;
+            leaderc.transform.SetParent(LeaderObj.transform);
+
         }
 
         public void Add2Hand()

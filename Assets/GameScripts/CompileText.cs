@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using GwentCompiler;
 using GwentPro;
 using TMPro;
 using UnityEngine;
@@ -24,6 +25,8 @@ public class CompileText : MonoBehaviour
 
     public void Compile()
     {
+        string tag = GameObject.Find("GameScenes").GetComponent<GameButton>().yoursidename;
+        GwentCompiler.GwentCompiler mycompiler = new GwentCompiler.GwentCompiler(inputField.text, tag);
         Debug.Log("Compiling");
         //Si no hay problemas de compilación
         CompilationResults(true);
@@ -31,7 +34,7 @@ public class CompileText : MonoBehaviour
 
     public void CompilationResults(bool success)
     {
-        if(success)
+        if (success)
         {
             PlayButton.enabled = true;
         }

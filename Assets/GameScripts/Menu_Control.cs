@@ -12,6 +12,8 @@ public class Menu_Control : MonoBehaviour
     public Button playbutton;
     public Button optionbutton;
     public Button exitbutton;
+    public GameObject MenuObj;
+    public bool menuAdded;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +38,12 @@ public class Menu_Control : MonoBehaviour
         }
         optionbutton.onClick.AddListener(() =>
         {
-            settingsImage.gameObject.SetActive(true);
+            if(!menuAdded)
+            {
+            MenuObj = Instantiate(Resources.Load<GameObject>("GamePrefabs/MenuObj"), GameObject.Find("Canvas").GetComponent<Canvas>().transform);
+            MenuObj.SetActive(true);
+            menuAdded = true;
+            }
         });
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 namespace GwentPro
 {
@@ -10,9 +11,16 @@ namespace GwentPro
         public GameObject Dropdown;
         public Button SetButton;
         public Toggle MusicToggle;
+        public AudioSource Music;
+        bool musicset;
         public Toggle ScreenToggle;
         public TMP_Dropdown resolutionDropdown;
+        public TMP_Dropdown musicDropdown;
 
+        void Awake()
+        {
+            Debug.Log(gameObject.name);
+        }
         void Start()
         {
             resolutionDropdown = Dropdown.GetComponent<TMP_Dropdown>();
@@ -30,15 +38,31 @@ namespace GwentPro
                 // Initialize the screen mode based on the initial value of ScreenToggle
                 OnScreenToggleChange(ScreenToggle);
             });
+
+            MusicToggle.onValueChanged.AddListener(delegate
+            {
+                OnMusicChange(Music);
+            });
         }
 
         void Update()
         {
             SetButton.onClick.AddListener(() =>
             {
-                GameObject rawImage = SetButton.transform.parent.GameObject();
-                rawImage.gameObject.SetActive(false);
+                SetAndGo();
             });
+
+            if (SceneManager.GetActiveScene().name == "ChooseFactionScene" && !musicset)
+            {
+                Music = GameObject.Find("MusicObj").GetComponent<AudioSource>();
+                musicset = true;
+            }
+
+            if (SceneManager.GetActiveScene().name == "MainMenuScene" && MusicToggle.isOn && !musicset)
+            {
+                Music = GameObject.Find("MusicObj").GetComponent<AudioSource>();
+                musicset = true;
+            }
         }
 
         void OnResolutionChange(TMP_Dropdown dropdown)
@@ -64,6 +88,30 @@ namespace GwentPro
         void OnScreenToggleChange(Toggle toggle)
         {
             Screen.fullScreen = toggle.isOn;
+        }
+        void OnMusicChange(AudioSource audio)
+        {
+            if (Music.isPlaying)
+            {
+                Music.Stop();
+            }
+            else
+            {
+                Music.Play();
+            }
+        }
+
+        void SetAndGo()
+        {
+            if (SceneManager.GetActiveScene().name == "MainMenuScene")
+            {
+                bool menuA = GameObject.Find("BackIm").GetComponent<Menu_Control>().menuAdded = false;
+                if (menuA == true)
+                {
+                    GameObject.Find("MenuObj").SetActive(false);
+                    menuA = false;
+                }
+            }
         }
     }
 }

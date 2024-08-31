@@ -22,6 +22,7 @@ public class GameButton : MonoBehaviour
     public void GoToGameSn ()
     {
         SceneManager.LoadScene("ChooseFactionScene");
+        DontDestroyOnLoad(gameObject);
     }
     public void GoToGameRedSn ()
     {

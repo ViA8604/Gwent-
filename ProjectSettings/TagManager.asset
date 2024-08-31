@@ -11,6 +11,7 @@ TagManager:
   - Suns
   - SkipB
   - Compiler
+  - Custom
   layers:
   - Default
   - TransparentFX

@@ -1,0 +1,77 @@
+/home/via/Documents/codigo/Proyectos Pro/CompilerStart/bin/Debug/net8.0/CompilerStart
+/home/via/Documents/codigo/Proyectos Pro/CompilerStart/bin/Debug/net8.0/CompilerStart.deps.json
+/home/via/Documents/codigo/Proyectos Pro/CompilerStart/bin/Debug/net8.0/CompilerStart.runtimeconfig.json
+/home/via/Documents/codigo/Proyectos Pro/CompilerStart/bin/Debug/net8.0/CompilerStart.dll
+/home/via/Documents/codigo/Proyectos Pro/CompilerStart/bin/Debug/net8.0/CompilerStart.pdb
+/home/via/Documents/codigo/Proyectos Pro/CompilerStart/obj/Debug/net8.0/CompilerStart.GeneratedMSBuildEditorConfig.editorconfig
+/home/via/Documents/codigo/Proyectos Pro/CompilerStart/obj/Debug/net8.0/CompilerStart.AssemblyInfoInputs.cache
+/home/via/Documents/codigo/Proyectos Pro/CompilerStart/obj/Debug/net8.0/CompilerStart.AssemblyInfo.cs
+/home/via/Documents/codigo/Proyectos Pro/CompilerStart/obj/Debug/net8.0/CompilerStart.csproj.CoreCompileInputs.cache
+/home/via/Documents/codigo/Proyectos Pro/CompilerStart/obj/Debug/net8.0/CompilerStart.dll
+/home/via/Documents/codigo/Proyectos Pro/CompilerStart/obj/Debug/net8.0/refint/CompilerStart.dll
+/home/via/Documents/codigo/Proyectos Pro/CompilerStart/obj/Debug/net8.0/CompilerStart.pdb
+/home/via/Documents/codigo/Proyectos Pro/CompilerStart/obj/Debug/net8.0/CompilerStart.genruntimeconfig.cache
+/home/via/Documents/codigo/Proyectos Pro/CompilerStart/obj/Debug/net8.0/ref/CompilerStart.dll
+/Data/GoGwentPOO/Assets/GameScripts/GwentCompiler/obj/Debug/net8.0/CompilerStart.csproj.AssemblyReference.cache
+/Data/GoGwentPOO/Assets/GameScripts/GwentCompiler/obj/Debug/net8.0/CompilerStart.GeneratedMSBuildEditorConfig.editorconfig
+/Data/GoGwentPOO/Assets/GameScripts/GwentCompiler/obj/Debug/net8.0/CompilerStart.AssemblyInfoInputs.cache
+/Data/GoGwentPOO/Assets/GameScripts/GwentCompiler/obj/Debug/net8.0/CompilerStart.AssemblyInfo.cs
+/Data/GoGwentPOO/Assets/GameScripts/GwentCompiler/obj/Debug/net8.0/CompilerStart.csproj.CoreCompileInputs.cache
+/Data/GoGwentPOO/Assets/GameScripts/GwentCompiler/obj/Debug/net8.0/CompilerStart.sourcelink.json
+/Data/GoGwentPOO/Assets/GameScripts/GwentCompiler/obj/Debug/net8.0/CompilerStart.dll
+/Data/GoGwentPOO/Assets/GameScripts/GwentCompiler/obj/Debug/net8.0/refint/CompilerStart.dll
+/Data/GoGwentPOO/Assets/GameScripts/GwentCompiler/obj/Debug/net8.0/CompilerStart.pdb
+/Data/GoGwentPOO/Assets/GwentCompiler/obj/Debug/net8.0/CompilerStart.csproj.AssemblyReference.cache
+/Data/GoGwentPOO/Assets/GwentCompiler/obj/Debug/net8.0/CompilerStart.GeneratedMSBuildEditorConfig.editorconfig
+/Data/GoGwentPOO/Assets/GwentCompiler/obj/Debug/net8.0/CompilerStart.AssemblyInfoInputs.cache
+/Data/GoGwentPOO/Assets/GwentCompiler/obj/Debug/net8.0/CompilerStart.AssemblyInfo.cs
+/Data/GoGwentPOO/Assets/GwentCompiler/obj/Debug/net8.0/CompilerStart.csproj.CoreCompileInputs.cache
+/Data/GoGwentPOO/Assets/GwentCompiler/obj/Debug/net8.0/CompilerStart.sourcelink.json
+/Data/GoGwentPOO/Assets/GwentCompiler/obj/Debug/net8.0/CompilerStart.dll
+/Data/GoGwentPOO/Assets/GwentCompiler/obj/Debug/net8.0/refint/CompilerStart.dll
+/Data/GoGwentPOO/Assets/GwentCompiler/obj/Debug/net8.0/CompilerStart.pdb
+/Data/GoGwentPOO/Assets/GwentCompiler/bin/Debug/net8.0/CompilerStart
+/Data/GoGwentPOO/Assets/GwentCompiler/bin/Debug/net8.0/CompilerStart.deps.json
+/Data/GoGwentPOO/Assets/GwentCompiler/bin/Debug/net8.0/CompilerStart.runtimeconfig.json
+/Data/GoGwentPOO/Assets/GwentCompiler/bin/Debug/net8.0/CompilerStart.dll
+/Data/GoGwentPOO/Assets/GwentCompiler/bin/Debug/net8.0/CompilerStart.pdb
+/Data/GoGwentPOO/Assets/GwentCompiler/bin/Debug/net8.0/Newtonsoft.Json.dll
+/Data/GoGwentPOO/Assets/GwentCompiler/obj/Debug/net8.0/CompilerStart.csproj.CopyComplete
+/Data/GoGwentPOO/Assets/GwentCompiler/obj/Debug/net8.0/CompilerStart.genruntimeconfig.cache
+/Data/GoGwentPOO/Assets/GwentCompiler/obj/Debug/net8.0/ref/CompilerStart.dll
+/Data/GoGwentPOO/GwentCompiler/bin/Debug/net8.0/CompilerStart
+/Data/GoGwentPOO/GwentCompiler/bin/Debug/net8.0/CompilerStart.deps.json
+/Data/GoGwentPOO/GwentCompiler/bin/Debug/net8.0/CompilerStart.runtimeconfig.json
+/Data/GoGwentPOO/GwentCompiler/bin/Debug/net8.0/CompilerStart.dll
+/Data/GoGwentPOO/GwentCompiler/bin/Debug/net8.0/CompilerStart.pdb
+/Data/GoGwentPOO/GwentCompiler/bin/Debug/net8.0/Newtonsoft.Json.dll
+/Data/GoGwentPOO/GwentCompiler/obj/Debug/net8.0/CompilerStart.csproj.AssemblyReference.cache
+/Data/GoGwentPOO/GwentCompiler/obj/Debug/net8.0/CompilerStart.GeneratedMSBuildEditorConfig.editorconfig
+/Data/GoGwentPOO/GwentCompiler/obj/Debug/net8.0/CompilerStart.AssemblyInfoInputs.cache
+/Data/GoGwentPOO/GwentCompiler/obj/Debug/net8.0/CompilerStart.AssemblyInfo.cs
+/Data/GoGwentPOO/GwentCompiler/obj/Debug/net8.0/CompilerStart.csproj.CoreCompileInputs.cache
+/Data/GoGwentPOO/GwentCompiler/obj/Debug/net8.0/CompilerStart.sourcelink.json
+/Data/GoGwentPOO/GwentCompiler/obj/Debug/net8.0/CompilerStart.csproj.CopyComplete
+/Data/GoGwentPOO/GwentCompiler/obj/Debug/net8.0/CompilerStart.dll
+/Data/GoGwentPOO/GwentCompiler/obj/Debug/net8.0/refint/CompilerStart.dll
+/Data/GoGwentPOO/GwentCompiler/obj/Debug/net8.0/CompilerStart.pdb
+/Data/GoGwentPOO/GwentCompiler/obj/Debug/net8.0/CompilerStart.genruntimeconfig.cache
+/Data/GoGwentPOO/GwentCompiler/obj/Debug/net8.0/ref/CompilerStart.dll
+/Data/GoGwentPOO/Assets/CompilerStart/bin/Debug/net8.0/CompilerStart
+/Data/GoGwentPOO/Assets/CompilerStart/bin/Debug/net8.0/CompilerStart.deps.json
+/Data/GoGwentPOO/Assets/CompilerStart/bin/Debug/net8.0/CompilerStart.runtimeconfig.json
+/Data/GoGwentPOO/Assets/CompilerStart/bin/Debug/net8.0/CompilerStart.dll
+/Data/GoGwentPOO/Assets/CompilerStart/bin/Debug/net8.0/CompilerStart.pdb
+/Data/GoGwentPOO/Assets/CompilerStart/bin/Debug/net8.0/Newtonsoft.Json.dll
+/Data/GoGwentPOO/Assets/CompilerStart/obj/Debug/net8.0/CompilerStart.csproj.AssemblyReference.cache
+/Data/GoGwentPOO/Assets/CompilerStart/obj/Debug/net8.0/CompilerStart.GeneratedMSBuildEditorConfig.editorconfig
+/Data/GoGwentPOO/Assets/CompilerStart/obj/Debug/net8.0/CompilerStart.AssemblyInfoInputs.cache
+/Data/GoGwentPOO/Assets/CompilerStart/obj/Debug/net8.0/CompilerStart.AssemblyInfo.cs
+/Data/GoGwentPOO/Assets/CompilerStart/obj/Debug/net8.0/CompilerStart.csproj.CoreCompileInputs.cache
+/Data/GoGwentPOO/Assets/CompilerStart/obj/Debug/net8.0/CompilerStart.sourcelink.json
+/Data/GoGwentPOO/Assets/CompilerStart/obj/Debug/net8.0/CompilerStart.csproj.CopyComplete
+/Data/GoGwentPOO/Assets/CompilerStart/obj/Debug/net8.0/CompilerStart.dll
+/Data/GoGwentPOO/Assets/CompilerStart/obj/Debug/net8.0/refint/CompilerStart.dll
+/Data/GoGwentPOO/Assets/CompilerStart/obj/Debug/net8.0/CompilerStart.pdb
+/Data/GoGwentPOO/Assets/CompilerStart/obj/Debug/net8.0/CompilerStart.genruntimeconfig.cache
+/Data/GoGwentPOO/Assets/CompilerStart/obj/Debug/net8.0/ref/CompilerStart.dll

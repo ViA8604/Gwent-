@@ -49,7 +49,7 @@ namespace GwentPro
         public virtual float NewCardHeight
         {
             get { return newcardHeight; }
-            set { newCardWidth = value; }
+            set { newcardHeight = value; }
         }
 
         public void Awake()

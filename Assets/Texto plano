@@ -34,16 +34,41 @@ effect {
 	}
 }
 
+effect {
+	Name: "Aguacate" ,
+	Params: {
+		amount : Number
+	},
+	Action: (target, context) => {
+		while(true)
+		{
+			if(amount < 5)
+			{
+				#"Hola" > 10;
+				#true && 8;
+				#"Hola" || true + 5;
+				y = 5 + 10 - 8 * 2 ;
+			};
+			
+			else
+			{
+				x = 30 + 5 ;
+				z = true && false || false ;
+			};
+		};
+	}
+}
+
 card {
-	Type: "Oro",
+	Type: "Gold",
 	Name: "Beluga",
 	Faction: "Northern Realms",
-	Power: if(name == "Beluga"){2+5=} else{3+2},
+	Power: (2+5-3)*4,
 	Range: ["Melee", "Ranged"],
 	OnActivation: [
 		{
 			Effect: {
-				Name: "Damage",
+				Name: "Aguacate",
 				Amount: 5,
 			}
 			Selector: {
@@ -54,6 +79,56 @@ card {
 		}
 		       ]
 	}
+
+
+effect {
+	Name: "Aguacate" ,
+	Params: {
+		amount : Number
+	},
+	Action: (target, context) => {
+		while(true)
+		{
+			if(amount < 5)
+			{
+				#"Hola" > 10;
+				#true && 8;
+				#"Hola" || true + 5;
+				y = 5 + 10 - 8 * 2 ;
+			};
+			
+			else
+			{
+				x = 30 + 5 ;
+				z = true && false || false ;
+			};
+		};
+	}
+}
+
+card {
+	Type: "Gold",
+	Name: "Beluga",
+	Faction: "Northern Realms",
+	Power: (2+5-3)*4,
+	Range: ["Melee", "Ranged"],
+	OnActivation: [
+		{
+			Effect: {
+				Name: "Aguacate",
+				Amount: 5,
+			}
+			Selector: {
+				Source: "board",
+				Single: false,
+				Predicate: (unit) => (3+5)/2 == 7
+				  }
+		}
+		       ]
+	}
+
+
+
 #####################################################################			
 			PostAction: {
 				Type: "ReturnToDeck",
@@ -71,4 +146,4 @@ card {
 if(name == "Beluga"){2+5} else{3+2},
 
 
-card {Type: "Oro",Name: "Beluga",Faction: "Northern Realms",Power: 2,Range ["Melee","Ranged"],OnActivation: [ {Effect: {Name: "Damage",Amount: 5,}Selector: {Source: "board",Single: false,Predicate:(unit) => (3+5)/2 == 7}}]}
+card {Type: "Gold",Name: "Beluga",Faction: "Northern Realms",Power: 2,Range ["Melee","Ranged"],OnActivation: [ {Effect: {Name: "Damage",Amount: 5,}Selector: {Source: "board",Single: false,Predicate:(unit) => (3+5)/2 == 7}}]}

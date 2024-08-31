@@ -981,7 +981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d84d236af38b116a5d7ff0c28b1231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yoursidename: Locura
+  yoursidename: 
   othersidename: Crows
 --- !u!224 &1044038877
 RectTransform:
@@ -1179,6 +1179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 997d97110357cd9b38286de7f9b64938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
 --- !u!1 &1603414425
 GameObject:
   m_ObjectHideFlags: 0

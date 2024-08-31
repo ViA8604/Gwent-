@@ -127,7 +127,7 @@ namespace GwentPro
         {
             playerObj = new GameObject(playerName);
             player = playerObj.AddComponent<Player>();
-            player.fname = side;
+            player.path_to_data = side;
             playerObj.tag = player.name;
         }
 
