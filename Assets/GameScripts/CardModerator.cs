@@ -39,7 +39,7 @@ namespace GwentPro
 #else
     GameObject cardobj = new GameObject(card.Name);
     cardobj.AddComponent(GetCardScript(card.CombatType) as Type);
-    SetProperties(cardobj, card);
+    SetProperties(cardobj, card, dataPath);
     SetPrefabImage(cardobj, card);
 
     return cardobj;

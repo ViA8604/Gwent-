@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "Beluga",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": "Melee",
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Aguacate"
+  }
+]
