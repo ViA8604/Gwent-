@@ -30,7 +30,7 @@ RectTransform:
   m_GameObject: {fileID: 2224347651083726210}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2194931, y: 0.2167, z: 1.7259}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,11 +52,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c6f621c31ff1c37993c1a3fda09809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardname: Beluga
+  cardname: El Fati
   cardpoint: 16
   selected: 0
   crdtype: 0
-  cmbtype: 0
+  combatTypes:
+  - type: 0
+  - type: 1
   player: {fileID: 0}
   isdragging: 0
   actualzone: {fileID: 0}
@@ -103,7 +105,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 49f1b7877ad2dde179a0870dc83dc29f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 18e1eb5bf389ab1a09b021706c80d662, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,7 +144,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 49f1b7877ad2dde179a0870dc83dc29f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 18e1eb5bf389ab1a09b021706c80d662, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

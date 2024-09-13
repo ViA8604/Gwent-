@@ -4,7 +4,7 @@ namespace GwentCompiler
 {
     public class VariableExpression : IExpression
     {
-        string name;
+        public string name;
         Scope refscope;
 
         public VariableExpression(string Name, Scope scope)

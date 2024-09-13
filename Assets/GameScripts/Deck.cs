@@ -7,6 +7,7 @@ using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace GwentPro
@@ -29,6 +30,7 @@ namespace GwentPro
             redrawScene = GameObject.Find("RedrawObj").GetComponent<RedrawScene>();
             LeaderCard = PopCard(prefabsList);
             showedcards = DeckBuilder(prefabsList);
+
         }
 
         void Update()
@@ -41,6 +43,7 @@ namespace GwentPro
                 redrawScene.Picked = false;
                 timetochange = false;
             }
+
         }
 
 
@@ -53,7 +56,7 @@ namespace GwentPro
 
 
 
-        static void Shuffle(List<GameObject> mazo1)
+        public static void Shuffle(List<GameObject> mazo1)
         {
             System.Random alt = new System.Random();
             int n = mazo1.Count;
@@ -156,12 +159,23 @@ namespace GwentPro
         }
 
 
-        public GameObject PopCard(List<GameObject> Mazo)
+        public static GameObject PopCard(List<GameObject> Mazo)
         {
             GameObject card = Mazo[0];
             Mazo.Remove(Mazo[0]);
             return card;
         }
+
+        public static void PushCard(List<GameObject> Mazo, GameObject card)
+        {
+            Mazo.Insert(0, card);
+        }
+
+        public static void SendBottom(List<GameObject> Mazo, GameObject card)
+        {
+            Mazo.Add(card);
+        }
+
         public static void ResizeInstance(GameObject instance)
         {
             //Para cartas con distinto tamaño
@@ -171,7 +185,7 @@ namespace GwentPro
                 // Reduce la escala a la mitad para el tipo especial
                 instance.transform.localScale = new Vector3(0.08f, 0.13f, 0.2f);
             }
-            else if (checktype.crdtype == CardClass.cardtype.Special && checktype.cmbtype == CardClass.combatype.Special)
+            else if (checktype.crdtype == CardClass.cardtype.Special && CardClass.CombatTypeContains(CardClass.combatype.Special, checktype.combatTypes))
             {
                 instance.transform.localScale = new Vector3(0.12f, 0.2f, 0.2f);
             }

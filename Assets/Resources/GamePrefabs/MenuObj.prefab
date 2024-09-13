@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -98,8 +98,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.94083136, g: 0.94509804, b: 0.06666666, a: 1}
-    m_HighlightedColor: {r: 0.9528302, g: 0.82585555, b: 0.25618547, a: 1}
+    m_NormalColor: {r: 0.4528302, g: 0.4528302, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.764151, g: 0.6442715, b: 0.09732112, a: 1}
     m_PressedColor: {r: 0.9339623, g: 0.5829165, b: 0.09251513, a: 1}
     m_SelectedColor: {r: 0.76969874, g: 0.7924528, b: 0.13830544, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8686493224412832306}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2438896228533357101}
+        m_TargetAssemblyTypeName: GwentPro.ResolutionScript, Assembly-CSharp
+        m_MethodName: SetAndGo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &71647764414899192
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,8 +857,8 @@ RectTransform:
   m_Father: {fileID: 8726751063944224517}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.89526767}
-  m_AnchoredPosition: {x: -2.6755, y: -2.0631027}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -2.6755, y: -2.063095}
   m_SizeDelta: {x: 29.0627, y: 65.4897}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8909439606584301249
@@ -1009,9 +1021,9 @@ RectTransform:
   m_Father: {fileID: 571581863623517929}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2844161612368105236
 MonoBehaviour:
@@ -1395,7 +1407,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1756389837569840953}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.89526767
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1548,11 +1560,11 @@ GameObject:
   - component: {fileID: 2438896228533357101}
   m_Layer: 5
   m_Name: MenuObj
-  m_TagString: Untagged
+  m_TagString: GameMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6421278809005960997
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1560,7 +1572,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4546693068370327637}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1573,7 +1585,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.9837, y: 0.0000076293945}
+  m_AnchoredPosition: {x: -1.9837646, y: 0}
   m_SizeDelta: {x: 1996.5553, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6426610985662660804

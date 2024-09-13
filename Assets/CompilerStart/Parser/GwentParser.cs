@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace GwentCompiler
 {
@@ -136,12 +137,13 @@ namespace GwentCompiler
 
             List<(string, GwentType)> paramsList = new List<(string, GwentType)>();
 
-            if (NextToken().Type == TokenType.KeywordParamstoken)
+            if (Current.Type == TokenType.KeywordParamstoken)
             {
+                NextToken();
                 MatchKind(TokenType.Colontoken);
-                paramsList = GetParamsList();   //Recuerdar que hay que mover el puntero
+                paramsList = GetParamsList();
             }
-            MatchKind(TokenType.Commatoken);
+
             MatchKind(TokenType.KeywordActiontoken);
             MatchKind(TokenType.Colontoken);
 
@@ -189,6 +191,15 @@ namespace GwentCompiler
             }
             MatchKind(TokenType.Commatoken);
 
+            var image = "DefaultImage";
+            if (Current.Type == TokenType.ImageKeywordtoken)
+            {
+                NextToken();
+                MatchKind(TokenType.Colontoken);
+                image = MatchKind(TokenType.StringLiteraltoken).Value;
+                MatchKind(TokenType.Commatoken);
+            }
+
             MatchKind(TokenType.KeywordOnActivationtoken);
             MatchKind(TokenType.Colontoken);
             MatchKind(TokenType.OpenSquareBrackettoken);
@@ -196,7 +207,7 @@ namespace GwentCompiler
             var effectCall = ParseEffectCall(currentScope);
             MatchKind(TokenType.CloseCurlyBrackettoken);
 
-            return new CardExpression(cardType, cardName, cardFaction, cardPower, ranges, effectCall);
+            return new CardExpression(cardType, cardName, cardFaction, cardPower, ranges, image, effectCall);
         }
 
         private EffectCallExpression ParseEffectCall(Scope scope)
@@ -236,6 +247,13 @@ namespace GwentCompiler
             MatchKind(TokenType.Colontoken);
 
             var source = MatchKind(TokenType.StringLiteraltoken).Value;
+            IExpression player = new TriggerPlayerExpression();
+            if (source.StartsWith("other"))
+            {
+                source = source.Substring("other".Length);
+                player = new NotTriggerPlayerExpression();
+            }
+            source = char.ToUpper(source[0]) + source.Substring(1);
 
             MatchKind(TokenType.Commatoken);
             MatchKind(TokenType.KeywordSingletoken);
@@ -249,7 +267,7 @@ namespace GwentCompiler
             MatchKind(TokenType.Colontoken);
             var predicate = ParseFunctionDeclaration(scope, GwentType.CardType);
 
-            var selector = new SelectorExpression(source, value, predicate);
+            var selector = new SelectorExpression(source, player, value, predicate);
 
             MatchKind(TokenType.CloseCurlyBrackettoken);
             MatchKind(TokenType.CloseCurlyBrackettoken);
@@ -300,22 +318,65 @@ namespace GwentCompiler
                 return ParseForExpression(scope);
 
             else if (Current.Type == TokenType.KeywordIftoken)
+            {
                 return ParseIfExpression(scope);
+            }
 
-            else if (Current.Type == TokenType.IDToken && Peek(1).Type == TokenType.SymbolEqualtoken)
-                return ParseAssignmentExpression(scope);
+            return ParseAssignmentExpression(scope);
+        }
 
-            else
-                return ParseOrExpression(scope);
+        private IExpression ParseSetCardPropertyMethod(Scope scope)
+        {
+            var name = MatchKind(TokenType.IDToken).Value;
+            MatchKind(TokenType.DotSymbToken);
+
+            List<TokenType> cardproperties = new List<TokenType>() { TokenType.KeywordCardTypetoken, TokenType.KeywordNametoken, TokenType.KeywordFactiontoken, TokenType.KeywordPowertoken };
+
+            if (!cardproperties.Contains(Current.Type))
+            {
+                throw new Exception($"{Current.Value} is not a property");
+            }
+            var property = NextToken().Value;
+            MatchKind(TokenType.SymbolEqualtoken);
+
+            var setvalue = ParseAssignmentExpression(scope);
+
+            return new ContextSetCardPropertyExpression(name, property, setvalue, scope);
+        }
+
+        private IExpression ParsePropertyAccessMethod(Scope scope, IExpression name)
+        {
+            MatchKind(TokenType.DotSymbToken);
+
+            List<TokenType> cardproperties = new List<TokenType>() { TokenType.KeywordCardTypetoken, TokenType.KeywordNametoken, TokenType.KeywordFactiontoken, TokenType.KeywordPowertoken, TokenType.KeywordOwnertoken};
+
+            if (cardproperties.Contains(Current.Type))
+            {
+                return new ContextCardPropertiesExpression(name, NextToken().Value, scope);
+            }
+
+            throw new Exception($"{Current.Value} is not a card property");
         }
 
         private IExpression ParseAssignmentExpression(Scope scope)
         {
-            var nameVar = NextToken().Value;
-            MatchKind(TokenType.SymbolEqualtoken);
-            IExpression assignment = ParseExpression(scope);
+            if (Current.Type == TokenType.IDToken && Peek(1).Type == TokenType.SymbolEqualtoken)
+            {
+                var nameVar = NextToken().Value;
+                MatchKind(TokenType.SymbolEqualtoken);
+                IExpression assignment = ParseAssignmentExpression(scope);
 
-            return new AssignmentExpression(nameVar, scope, assignment);
+                return new AssignmentExpression(nameVar, scope, assignment);
+            }
+            else if (Current.Type == TokenType.IDToken && Peek(1).Type == TokenType.DotSymbToken && Peek(3).Type == TokenType.SymbolEqualtoken)
+            {
+                return ParseSetCardPropertyMethod(scope);
+            }
+            else
+            {
+                return ParseOrExpression(scope);
+            }
+
         }
 
         private IExpression ParseIfExpression(Scope scope)
@@ -350,9 +411,101 @@ namespace GwentCompiler
             }
             NextToken();
         }
+
+        private IExpression ParseContextExpression(Scope scope)
+        {
+            NextToken();
+            MatchKind(TokenType.DotSymbToken);
+            if (Current.Type == TokenType.KeywordTriggerPlayertoken)
+            {
+                NextToken();
+                return new TriggerPlayerExpression();
+            }
+            else if (CompilerUtils.CardZoneKeywords.Contains(Current.Type))
+            {
+                return new ContextZonesExpression(NextToken().Value, new TriggerPlayerExpression());
+            }
+            else if (CompilerUtils.NameZoneFKeywords.Keys.Contains(Current.Type))
+            {
+                //Formal Context Expression
+                var name = CompilerUtils.NameZoneFKeywords[NextToken().Type];
+
+                MatchKind(TokenType.OpenParenthesistoken);
+                var playerID = ParseExpression(scope);
+                MatchKind(TokenType.CloseParenthesistoken);
+
+                return new ContextZonesExpression(name, playerID);
+            }
+            throw new Exception("Unrecognized context expression: " + Current.Value);
+        }
+
+        private IExpression ParseCardListMethodExpression(IExpression zone, Scope scope)
+        {
+            MatchKind(TokenType.DotSymbToken);
+            switch (Current.Value)
+            {
+                //No params methods
+                case "Shuffle":
+                case "Pop":
+                    return ParseNoParametersMethod(zone, scope);
+
+                case "Push":
+                case "Remove":
+                case "SendBottom":
+                    return ParseParametersMethod(zone, scope);
+
+                default:
+                    throw new Exception("Unrecognized method: " + Current.Value);
+            }
+        }
+
+        private IExpression ParseParametersMethod(IExpression zone, Scope scope)
+        {
+            var token = NextToken();
+            MatchKind(TokenType.OpenParenthesistoken);
+
+            if (token.Type == TokenType.FindKeywordtoken)
+            {
+                var predicate = ParseFunctionDeclaration(scope, GwentType.CardType);
+                MatchKind(TokenType.CloseParenthesistoken);
+                return new ContextFindMethodExpression(zone, scope, predicate);
+            }
+            else
+            {
+                var variable = ParseAssignmentExpression(scope);
+                MatchKind(TokenType.CloseParenthesistoken);
+                if (token.Type == TokenType.PushMethodtoken) return new ContextPushMethodExpression(zone, variable, scope);
+                else if (token.Type == TokenType.RemoveMethodtoken) return new ContextRemoveMethodExpression(zone, variable, scope);
+                else return new ContextSendBottomMethodExpression(zone, variable, scope);
+            }
+        }
+
+
+
+        private IExpression ParseNoParametersMethod(IExpression zone, Scope scope)
+        {
+            var token = NextToken();
+            MatchKind(TokenType.OpenParenthesistoken);
+            MatchKind(TokenType.CloseParenthesistoken);
+            if (token.Type == TokenType.PopMethodtoken) return new ContextPopMethodExpression(zone, scope);
+            return new ContextShuffleMethodExpression(zone, scope);
+        }
+
+
         private IExpression ParseForExpression(Scope scope)
         {
-            throw new NotImplementedException();
+            NextToken();
+
+            List<IExpression> body = new List<IExpression>();
+
+            var valuename = MatchKind(TokenType.IDToken).Value;
+            MatchKind(TokenType.KeywordIntoken);
+
+            var start = ParseExpression(scope);
+
+            GetExpressionBody(scope, body);
+
+            return new ForExpression(valuename, start, body, scope);
         }
 
         private IExpression ParseWhileExpression(Scope scope)
@@ -485,18 +638,40 @@ namespace GwentCompiler
             {
                 case TokenType.OpenParenthesistoken:
                     NextToken();
-                    expression = ParseExpression(scope);
+                    expression = ParseAssignmentExpression(scope);
                     MatchKind(TokenType.CloseParenthesistoken);
                     return expression;
 
                 case TokenType.Exclamationtoken:
                     return new NotExpression(ParseExpression(scope));
 
+                case TokenType.KeywordContextoken:
+
+                    var context = ParseContextExpression(scope);
+                    if (Current.Type == TokenType.DotSymbToken)
+                    {
+                        return ParseCardListMethodExpression(context, scope);
+                    }
+                    return context;
+
+                case TokenType.KeywordTargetstoken:
+                    var targets = new VariableExpression(NextToken().Value, scope);
+                    if (Peek(1).Type == TokenType.DotSymbToken)
+                    {
+                        return ParseCardListMethodExpression(targets, scope);
+                    }
+                    return targets;
+
                 case TokenType.MinusOperatortoken:
                     return new NegativeNumExpression(ParseExpression(scope));
 
                 case TokenType.IDToken:
-                    return new VariableExpression(NextToken().Value, scope);
+                    var variable = new VariableExpression(NextToken().Value, scope);
+                    if (Current.Type == TokenType.DotSymbToken)
+                    {
+                        return ParsePropertyOrMethod(scope, variable);
+                    }
+                    return variable;
 
                 case TokenType.DigitToken:
                     return new LiteralExpression(new GwentObject(NextToken().Value, GwentType.GwentNumber));
@@ -512,6 +687,18 @@ namespace GwentCompiler
                     throw new Exception("Unexpected token: " + Current.Value);
             }
         }
+
+        private IExpression ParsePropertyOrMethod(Scope scope, IExpression variable)
+        {
+            List<TokenType> cardproperties = new List<TokenType>() { TokenType.KeywordCardTypetoken, TokenType.KeywordNametoken, TokenType.KeywordFactiontoken, TokenType.KeywordPowertoken, TokenType.KeywordOwnertoken };
+            List<TokenType> cardMethod = new List<TokenType>() { TokenType.ShuffleMethodtoken, TokenType.PopMethodtoken, TokenType.PushMethodtoken, TokenType.RemoveMethodtoken, TokenType.SendBottomMethodtoken };
+
+            if (cardproperties.Contains(Peek(1).Type)) return ParsePropertyAccessMethod(scope, variable);
+            else if (cardMethod.Contains(Peek(1).Type)) return ParseCardListMethodExpression(variable, scope);
+            throw new Exception($"Unknown property or method: {Current.Value}");
+        }
+
+
         List<(string, GwentType)> GetParamsList()
         {
             List<TokenType> gwentypes = new List<TokenType>() { TokenType.KeywordNumbertoken, TokenType.KeywordStringtoken, TokenType.KeywordBooltoken };

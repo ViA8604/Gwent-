@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using GwentCompiler;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -85,6 +90,9 @@ namespace GwentPro
             {
                 if (currentPlayer.alreadyplayed)
                 {
+                    HorizontalLayoutGroup layoutGroup = currentPlayer.GetGOByName("Hand", currentPlayer.PlayerZones).GetComponent<HorizontalLayoutGroup>();
+
+
                     currentPlayer.alreadyplayed = false;
                     lastPlayerSkipped = false;
                     ChangeTurn();
@@ -112,23 +120,24 @@ namespace GwentPro
         {
             if (Player1Obj == null)
             {
-                CreatePlayer("Player1", out Player1Obj, out Players[0], gameButton.yoursidename);
+                CreatePlayer("Player1", out Player1Obj, out Players[0], gameButton.yoursidename, 0);
                 GameBuilder(Players[0]);
             }
 
             if (Player1Obj != null && Players[0].alreadyset && Player2Obj == null)
             {
-                CreatePlayer("Player2", out Player2Obj, out Players[1], gameButton.othersidename);
+                CreatePlayer("Player2", out Player2Obj, out Players[1], gameButton.othersidename, 1);
                 GameBuilder(Players[1]);
                 setupComplete = true;
             }
         }
-        public void CreatePlayer(string playerName, out GameObject playerObj, out Player player, string side)
+        public void CreatePlayer(string playerName, out GameObject playerObj, out Player player, string side, int id)
         {
             playerObj = new GameObject(playerName);
             player = playerObj.AddComponent<Player>();
             player.path_to_data = side;
             playerObj.tag = player.name;
+            player.id = id;
         }
 
         public static void GameBuilder(Player player)
@@ -216,20 +225,157 @@ namespace GwentPro
             }
         }
 
+
         void EndGame()
         {
             if (Players[0].Rounds > Players[1].Rounds)
             {
-                cardGame.ShowWinnerText(Players[0].fname + " ganan \n la partidaa");
+                cardGame.ShowWinnerText("Jugador 1" + " gana \n la partidaa");
             }
             else if (Players[0].Rounds < Players[1].Rounds)
             {
-                cardGame.ShowWinnerText(Players[1].fname + " ganan \n la partidaa");
+                cardGame.ShowWinnerText("Jugador 2" + " gana \n la partidaa");
             }
             else
             {
                 cardGame.ShowWinnerText("EMPATEEE");
             }
+            SceneManager.LoadScene("EndGameScene");
+        }
+
+        // CompilerAccessMethods ______________________________________________________________________________________________________________________________________________________________________________________        
+
+        public int GetCurrentPlayerNum()
+        {
+            return currentTurn;
+        }
+        
+        public int NotCurrentPlayerID()
+        {
+            return (currentTurn + 1) % 2;
+        }
+        public GameObject GetZone(ZoneObj zoneObj)
+        {
+            Player player = Players[zoneObj.PlayerID];
+
+            if (zoneObj.ZoneName == "Board") return cardGame.BoardObj;
+
+            return player.GetGOByName(zoneObj.ZoneName, player.PlayerZones);
+        }
+
+        public List<CardClass> GetZoneCardList(ZoneObj zoneObj)
+        {
+            GameObject zone = GetZone(zoneObj);
+            List<CardClass> list = new List<CardClass>();
+
+            if (zone.transform.childCount == 0) return list;
+
+            foreach (Transform child in zone.transform)
+            {
+                list.Add(child.gameObject.GetComponent<CardClass>());
+            }
+            return list;
+        }
+
+        public string GetACardProperty(string cardName, ZoneObj zone, string property)
+        {
+            CardClass card = SearchCard(cardName, zone);
+            return card.GetCardProperty(property);
+        }
+
+        public void SetACardProperty(string cardName, ZoneObj zone, string property, string value)
+        {
+            CardClass card = SearchCard(cardName, zone);
+            card.SetCardProperty(property, value);
+        }
+
+        private CardClass SearchCard(string cardName, ZoneObj zone)
+        {
+            List<CardClass> cards = GetZoneCardList(zone);
+
+            foreach (var card in cards)
+            {
+                if (card.name == cardName)
+                {
+                    return card;
+                }
+            }
+            throw new InvalidOperationException($"Card {cardName} not found in the zone {zone.ZoneName}");
+        }
+
+        public Player GetPlayer(int number)
+        {
+            return Players[number];
+        }
+
+        public void ShuffleInstantiatedZone(ZoneObj zone)
+        {
+            HorizontalLayoutGroup layoutGroup = GetZone(zone).GetComponent<HorizontalLayoutGroup>();
+            List<Transform> HandCards = new List<Transform>();
+            for (int i = 0; i < layoutGroup.transform.childCount; i++)
+            {
+                HandCards.Add(layoutGroup.transform.GetChild(i));
+            }
+
+            HandCards = HandCards.OrderBy(x => UnityEngine.Random.value).ToList();
+
+            for (int i = 0; i < HandCards.Count; i++)
+            {
+                HandCards[i].SetSiblingIndex(i);
+            }
+        }
+
+        public List<CompilerCard> GetZoneCardNames(ZoneObj zone)
+        {
+            List<CardClass> cards = GetZoneCardList(zone);
+            List<CompilerCard> cardnames = new List<CompilerCard>();
+
+            foreach (var item in cards)
+            {
+                cardnames.Add(new CompilerCard(item.name, zone));
+            }
+            return cardnames;
+        }
+
+        public CompilerCard PopCard(ZoneObj zone)
+        {
+            GameObject takefrom = GetZone(zone);
+
+            ZoneObj backBoardZone = new ZoneObj("BackBoard", zone.PlayerID);
+
+            CardClass card = takefrom.transform.GetChild(0).gameObject.GetComponent<CardClass>();
+            card.gameObject.transform.SetParent(GetZone(backBoardZone).transform);
+
+            return new CompilerCard(card.name, backBoardZone);
+        }
+
+        public void RemoveCard(string cardName, ZoneObj zone)
+        {
+            CardClass card = SearchCard(cardName, zone);
+            Destroy(card.gameObject);
+        }
+
+        public CompilerCard PushCard(CompilerCard startcard, ZoneObj endzone)
+        {
+            CardClass card = SearchCard(startcard.cardName, startcard.zone);
+            GameObject actualZone = GetZone(endzone);
+
+            ZoneObj actualZoneObj = new ZoneObj(actualZone.name, endzone.PlayerID);
+            card.gameObject.transform.SetParent(actualZone.transform);
+
+            return new CompilerCard(card.name, actualZoneObj);
+        }
+
+        public CompilerCard SendBottomCard(CompilerCard startcard, ZoneObj endzone)
+        {
+            CardClass card = SearchCard(startcard.cardName, startcard.zone);
+            GameObject actualZone = GetZone(endzone);
+
+            ZoneObj actualZoneObj = new ZoneObj(actualZone.name, endzone.PlayerID);
+            card.gameObject.transform.SetParent(actualZone.transform);
+            card.gameObject.transform.SetAsFirstSibling();
+
+             return new CompilerCard(card.name, actualZoneObj);
         }
     }
 }

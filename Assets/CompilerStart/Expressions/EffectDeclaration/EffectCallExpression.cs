@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.IO;
+using System.Diagnostics;
 namespace GwentCompiler
 {
     public class EffectCallExpression : IExpression
@@ -27,8 +28,16 @@ namespace GwentCompiler
         public GwentObject Evaluate()
         {
             var effect = CompilerUtils.FindEffect(effectname);
-            effect.CheckParameters(parameters);
+            effect.SetParameters(parameters, selector.Evaluate());
+            effect.Execute();
+            
             return new GwentObject(0, GwentType.GwentNull);
+        }
+
+        public void CheckCall()
+        {
+            var effect = CompilerUtils.FindEffect(effectname);
+            effect.CheckParameters(parameters);
         }
 
         bool CheckParametersSemantic()

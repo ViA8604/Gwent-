@@ -18,7 +18,8 @@ namespace GwentPro
         public int cardpoint;
         public bool selected;
         public cardtype crdtype;
-        public combatype cmbtype;
+        public List<CombatTypeListItem> combatTypes = new List<CombatTypeListItem>();
+        Dictionary<string, string> properties;
         public Player player;
         public bool isdragging;
         public GameObject actualzone;
@@ -29,11 +30,12 @@ namespace GwentPro
         public Faction faction;
         public Camera activecamera;
         private Vector3 offset;
+        CardGameScene cardGame;
 
         // Declare screenPoint and draggedposition as fields
         private Vector3 screenPoint;
         public Vector3 initialLocalPosition;
-
+        private bool setproperties;
 
         public virtual float NewCardWidth
         {
@@ -54,7 +56,6 @@ namespace GwentPro
 
         public void Awake()
         {
-            ResizeCardObj();
             faction = new Faction(gameObject.tag);
             Material materialTemplate = Resources.Load<Material>("material/BorderCard");
             if (materialTemplate == null)
@@ -99,6 +100,7 @@ namespace GwentPro
                 material.SetColor("_BorderColor", faction.normalcolor);
 
             }
+
         }
         void OnMouseDown()
         {
@@ -113,11 +115,15 @@ namespace GwentPro
             {
                 isdragging = false;
                 selected = false;
-                if (actualzone != null && actualzone.GetComponent<CombatZone>().cmbtype == cmbtype && player.gameObject.tag == actualzone.tag)
+                if (actualzone != null && CombatTypeContains(actualzone.GetComponent<CombatZone>().cmbtype, combatTypes) && player.gameObject.tag == actualzone.tag)
                 {
                     actualzone.GetComponent<CombatZone>().AddCardPoints(gameObject);
                     gameObject.transform.SetParent(actualzone.transform);
                     actualzone = null;
+                    if (cardGame.Compiler != null)
+                    {
+                        cardGame.Compiler.ActivateEffect(cardname);
+                    }
                     player.alreadyplayed = true;
                 }
                 else
@@ -134,14 +140,14 @@ namespace GwentPro
         }
         void SetActiveCamera()
         {
-            if (gameObject.scene.name == "RedrawScene" || cmbtype == combatype.Leader)
+            if (gameObject.scene.name == "RedrawScene" || CombatTypeContains(combatype.Leader, combatTypes))
             {
                 activecamera = null;
             }
             else
             {
                 GameObject crdgameobj = GameObject.Find("CardGameObj");
-                CardGameScene cardGame = crdgameobj.GetComponent<CardGameScene>();
+                cardGame = crdgameobj.GetComponent<CardGameScene>();
                 activecamera = cardGame.dragcamera;
 
             }
@@ -160,15 +166,19 @@ namespace GwentPro
 
         }
 
-
-        protected void ResizeCardObj()
+        public void SetDictProp()
         {
-            Vector3 scale = gameObject.transform.localScale;
-            scale.x = newCardWidth;
-            scale.y = newcardHeight;
-            scale.z = newCardLength;
-            gameObject.transform.localScale = scale;
+            properties = new Dictionary<string, string>()
+            {
+                {"Type", crdtype.ToString()},
+                {"Name", cardname},
+                {"Faction", faction.factionname},
+                {"Power", cardpoint.ToString()},
+                {"Owner", player.id.ToString()}
+
+            };
         }
+
         [System.Serializable]
         public enum combatype
         {
@@ -181,6 +191,16 @@ namespace GwentPro
         }
 
         [System.Serializable]
+        public class CombatTypeListItem
+        {
+            public combatype type;
+
+            public CombatTypeListItem(combatype type)
+            {
+                this.type = type;
+            }
+        }
+        [System.Serializable]
         public enum cardtype
         {
             Gold,
@@ -188,9 +208,41 @@ namespace GwentPro
             Special
 
         }
+        public static bool CombatTypeContains(combatype combatype, List<CombatTypeListItem> list)
+        {
+            foreach (var item in list)
+            {
+                if (item.type == combatype)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
+        public string GetCardProperty(string name)
+        {
+            if (!properties.ContainsKey(name))
+            {
+                throw new Exception($"Property {name} not found in the card: {gameObject.name}");
+            }
+            return properties[name];
+        }
 
-
-
+        public void SetCardProperty(string name, string value)
+        {
+            if (!properties.ContainsKey(name))
+            {
+                throw new Exception($"Property {name} not found in the card: {gameObject.name}");
+            }
+            if (name == "Power")
+            {
+                cardpoint = Convert.ToInt32(value);
+            }
+            else
+            {
+                properties[name] = value;
+            }
+        }
     }
 }

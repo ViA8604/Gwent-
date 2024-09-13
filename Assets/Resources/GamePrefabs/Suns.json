@@ -1,0 +1,177 @@
+[
+    {
+        "Name": "Líder Aymaar Palae",
+        "Points": "0",
+        "CardType": "Gold",
+        "CombatType": ["Leader"],
+        "Faction": "Suns",
+        "Image": "Suns 00",
+        "EffectName": "None"
+    },
+    {
+        "Name": "Faskian Basil",
+        "Points": "3",
+        "CardType": "Silver",
+        "CombatType": ["Range", "Siege"],
+        "Faction": "Suns",
+        "Image": "Suns 01",
+        "EffectName": "None"
+    },
+    {
+        "Name": "Laurinha Armara",
+        "Points": "2",
+        "CardType": "Silver",
+        "CombatType": ["Range"],
+        "Faction": "Suns",
+        "Image": "Suns 02",
+        "EffectName": "None"
+    },
+    {
+        "Name": "Amalia Dekuji",
+        "Points": "4",
+        "CardType": "Silver",
+        "CombatType": ["Range"],
+        "Faction": "Suns",
+        "Image": "Suns 03",
+        "EffectName": "None"
+    },
+    {
+        "Name": "Roh Lucarel",
+        "Points": "3",
+        "CardType": "Silver",
+        "CombatType": ["Range" , "Siege"],
+        "Faction": "Suns",
+        "Image": "Suns 04",
+        "EffectName": "None"
+    },
+    {
+        "Name": "Elizabeth Garay",
+        "Points": "2",
+        "CardType": "Silver",
+        "CombatType": ["Range"],
+        "Faction": "Suns",
+        "Image": "Suns 05",
+        "EffectName": "None"
+    },
+    {
+        "Name": "Hiatos Rivers",
+        "Points": "5",
+        "CardType": "Gold",
+        "CombatType": ["Range"],
+        "Faction": "Suns",
+        "Image": "Suns 06",
+        "EffectName": "None"
+    },
+    {
+        "Name": "Broso Machete",
+        "Points": "2",
+        "CardType": "Silver",
+        "CombatType": ["Melee"],
+        "Faction": "Suns",
+        "Image": "Suns 07",
+        "EffectName": "None"
+    },
+    {
+        "Name": "Foster Leone",
+        "Points": "3",
+        "CardType": "Silver",
+        "CombatType": ["Melee"],
+        "Faction": "Suns",
+        "Image": "Suns 08",
+        "EffectName": "None" 
+    },
+    {
+        "Name": "Sir Davrian y Lua",
+        "Points": "4",
+        "CardType": "Silver",
+        "CombatType": ["Melee"],
+        "Faction": "Suns",
+        "Image": "Suns 09",
+        "EffectName": "None"
+    },
+    {
+        "Name": "Fairdra Melody",
+        "Points": "3",
+        "CardType": "Silver",
+        "CombatType": ["Melee"],
+        "Faction": "Suns",
+        "Image": "Suns 10",
+        "EffectName": "None"
+    },
+    {
+        "Name": "Juan Gorrión",
+        "Points": "1",
+        "CardType": "Silver",
+        "CombatType": ["Melee"],
+        "Faction": "Suns",
+        "Image": "Suns 11",
+        "EffectName": "None"
+    },
+    {
+        "Name": "Yinliae Varet",
+        "Points": "4",
+        "CardType": "Silver",
+        "CombatType": ["Melee"],
+        "Faction": "Suns",
+        "Image": "Suns 12",
+        "EffectName": "None"
+    },
+    {
+        "Name": "Conde Ariel de Montecristi",
+        "Points": "2",
+        "CardType": "Silver",
+        "CombatType": ["Melee"],
+        "Faction": "Suns",
+        "Image": "Suns 13",
+        "EffectName": "None"
+    },
+    {
+        "Name": "Capitán Soles",
+        "Points": "2",
+        "CardType": "Silver",
+        "CombatType": ["Siege"],
+        "Faction": "Suns",
+        "Image": "Suns 14",
+        "EffectName": "None"
+    },
+    {
+        "Name": "Recluta Soles",
+        "Points": "1",
+        "CardType": "Silver",
+        "CombatType": ["Siege"],
+        "Faction": "Suns",
+        "Image": "Suns 15",
+        "EffectName": "None"
+    },
+    {
+        "Name": "La Orden Solaris",
+        "Points": "1",
+        "CardType": "Silver",
+        "CombatType": ["Siege"],
+        "Faction": "Suns",
+        "Image": "Suns 16",
+        "EffectName": "None"
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]

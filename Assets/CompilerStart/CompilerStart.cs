@@ -3,7 +3,8 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System.Diagnostics;
-//using UnityEngine;
+using UnityEngine;
+using GwentPro;
 namespace GwentCompiler
 {
     public class GwentCompiler
@@ -14,6 +15,8 @@ namespace GwentCompiler
 
         public AST ast;
 
+        GameManager manager;
+
         public GwentCompiler(string text, string tag)
         {
             CompilerUtils.tag = tag;
@@ -23,7 +26,14 @@ namespace GwentCompiler
             ast = parser.ParseCode();
             ast.Run();
 
-            
         }
+
+        public void SetGameManager(GameManager gmObject)
+        {
+            manager = gmObject;
+            CompilerUtils.gameManager = manager;
+        }
+
+        
     }
 }

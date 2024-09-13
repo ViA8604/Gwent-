@@ -1,34 +1,60 @@
 using System;
+using UnityEngine;
+using GwentPro;
 using System.Collections.Generic;
 namespace GwentCompiler
 {
     public static class CompilerUtils
     {
         public static string tag = "Custom";
+        public static GameManager gameManager;
+
+
+        public static Dictionary<string, CardExpression> CardExpressions = new Dictionary<string, CardExpression>();
+
+        public static Dictionary<string, EffectDeclarationExpression> EffectList = new Dictionary<string, EffectDeclarationExpression>();
         public static Dictionary<string, TokenType> Getkeyword = new Dictionary<string, TokenType>() {
     {"Action" , TokenType.KeywordActiontoken} ,
     {"Bool" , TokenType.KeywordBooltoken} ,
     {"card" , TokenType.KeywordCardtoken} ,
+    {"context", TokenType.KeywordContextoken},
+    {"Deck" , TokenType.DeckCardtoken},
+    {"DeckOfPlayer" , TokenType.DeckMethodtoken},
     {"else" , TokenType.KeywordElsetoken} ,
     {"effect" , TokenType.KeywordDeclarationEffecttoken} ,
     {"Effect" , TokenType.KeywordEffectCalltoken} ,
     {"Faction" , TokenType.KeywordFactiontoken} ,
     {"false" , TokenType.KeywordFalsetoken} ,
+    {"Field" , TokenType.FieldCardtoken},
+    {"FieldOfPlayer", TokenType.FieldMethodtoken},
+    {"Find", TokenType.FindKeywordtoken},
     {"for" , TokenType.KeywordFortoken} ,
+    {"Graveyard" , TokenType.GraveyardCardtoken},
+    {"GraveyardOfPlayer" , TokenType.GraveyardMethodtoken},
+    {"Hand" , TokenType.HandCardtoken},
+    {"HandOfPlayer" , TokenType.HandMethodtoken},
     {"if" , TokenType.KeywordIftoken} ,
+    {"Image" , TokenType.ImageKeywordtoken} ,
     {"in" , TokenType.KeywordIntoken} ,
     {"Name" , TokenType.KeywordNametoken} ,
     {"Number" , TokenType.KeywordNumbertoken} ,
     {"OnActivation" , TokenType.KeywordOnActivationtoken} ,
+    {"Owner", TokenType.KeywordOwnertoken},
     {"Params" , TokenType.KeywordParamstoken} ,
+    {"Pop" , TokenType.PopMethodtoken},
     {"PostAction" , TokenType.KeywordPosActiontoken} ,
     {"Power" , TokenType.KeywordPowertoken} ,
     {"Predicate" , TokenType.KeywordPredicatetoken} ,
+    {"Push" , TokenType.PushMethodtoken},
     {"Range" , TokenType.KeywordRangetoken} ,
+    {"Remove" , TokenType.RemoveMethodtoken},
     {"Selector" , TokenType.KeywordSelectortoken} ,
+    {"SendBottom" , TokenType.SendBottomMethodtoken},
+    {"Shuffle" , TokenType.ShuffleMethodtoken},
     {"Single" , TokenType.KeywordSingletoken} ,
     {"Source" , TokenType.KeywordSourcetoken} ,
     {"String" , TokenType.KeywordStringtoken} ,
+    {"targets" , TokenType.KeywordTargetstoken},
     {"true" , TokenType.KeywordTruetoken} ,
     {"Type" , TokenType.KeywordCardTypetoken} ,
     {"while" , TokenType.KeywordWhiletoken} ,
@@ -83,17 +109,42 @@ namespace GwentCompiler
     {"\0" , TokenType.EOFtoken},
 };
 
-        public static Dictionary<string, EffectDeclarationExpression> EffectList = new Dictionary<string, EffectDeclarationExpression>();
-
         public static EffectDeclarationExpression FindEffect(string name)
         {
-
             if (EffectList.ContainsKey(name))
             {
                 return EffectList[name];
             }
 
             throw new Exception("Effect not found, make sure it's been declared.");
+        }
+
+        public static void LaunchEffect(string name)
+        {
+            if (CardExpressions.ContainsKey(name))
+            {
+                CardExpressions[name].ActiveEffect();
+            }
+        }
+
+        public static List<TokenType> CardZoneKeywords = new List<TokenType>() { TokenType.DeckCardtoken, TokenType.FieldCardtoken, TokenType.GraveyardCardtoken, TokenType.HandCardtoken };
+        public static Dictionary<TokenType, string> NameZoneFKeywords = new Dictionary<TokenType, string>() {
+        {TokenType.DeckMethodtoken, "Deck" }, {TokenType.FieldMethodtoken, "Field" }, {TokenType.GraveyardMethodtoken, "Graveyard" }, {TokenType.HandMethodtoken, "Hand" }};
+
+
+        public static List<GameObject> ConvertCardListGM(List<CardClass> cards)
+        {
+            List<GameObject> gameObjects = new List<GameObject>();
+            foreach (var card in cards)
+            {
+                gameObjects.Add(card.gameObject);
+            }
+            return gameObjects;
+        }
+
+        public static double GwentObjToDouble(GwentObject a)
+        {
+            return Double.Parse(a.value.ToString());
         }
     }
 
@@ -138,7 +189,7 @@ namespace GwentCompiler
         {
             if (left.type == right.type)
             {
-                return new GwentObject(left.value == right.value, GwentType.GwentBool);
+                return new GwentObject(CompilerUtils.GwentObjToDouble(left) == CompilerUtils.GwentObjToDouble(right), GwentType.GwentBool);
             }
             return new GwentObject(false, GwentType.GwentBool);
         }
@@ -147,29 +198,29 @@ namespace GwentCompiler
         {
             if (left.type == right.type)
             {
-                return new GwentObject(left.value != right.value, GwentType.GwentBool);
+                return new GwentObject(CompilerUtils.GwentObjToDouble(left) != CompilerUtils.GwentObjToDouble(right), GwentType.GwentBool);
             }
             return new GwentObject(true, GwentType.GwentBool);
         }
 
         public static GwentObject LessThan(GwentObject left, GwentObject right)
         {
-            return new GwentObject((double)left.value < (double)right.value, GwentType.GwentBool);
+            return new GwentObject(CompilerUtils.GwentObjToDouble(left) < CompilerUtils.GwentObjToDouble(right), GwentType.GwentBool);
         }
 
         public static GwentObject GreaterThan(GwentObject left, GwentObject right)
         {
-            return new GwentObject((double)left.value > (double)right.value, GwentType.GwentBool);
+            return new GwentObject(CompilerUtils.GwentObjToDouble(left) > CompilerUtils.GwentObjToDouble(right), GwentType.GwentBool);
         }
 
         public static GwentObject LessEqualThan(GwentObject left, GwentObject right)
         {
-            return new GwentObject((double)left.value <= (double)right.value, GwentType.GwentBool);
+            return new GwentObject(CompilerUtils.GwentObjToDouble(left) <= CompilerUtils.GwentObjToDouble(right), GwentType.GwentBool);
         }
 
         public static GwentObject GreaterEqualThan(GwentObject left, GwentObject right)
         {
-            return new GwentObject((double)left.value >= (double)right.value, GwentType.GwentBool);
+            return new GwentObject(CompilerUtils.GwentObjToDouble(left) >= CompilerUtils.GwentObjToDouble(right), GwentType.GwentBool);
         }
 
     }

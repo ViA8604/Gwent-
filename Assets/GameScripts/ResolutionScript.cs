@@ -19,7 +19,6 @@ namespace GwentPro
 
         void Awake()
         {
-            Debug.Log(gameObject.name);
         }
         void Start()
         {
@@ -47,11 +46,6 @@ namespace GwentPro
 
         void Update()
         {
-            SetButton.onClick.AddListener(() =>
-            {
-                SetAndGo();
-            });
-
             if (SceneManager.GetActiveScene().name == "ChooseFactionScene" && !musicset)
             {
                 Music = GameObject.Find("MusicObj").GetComponent<AudioSource>();
@@ -101,16 +95,16 @@ namespace GwentPro
             }
         }
 
-        void SetAndGo()
+        public void SetAndGo()
         {
             if (SceneManager.GetActiveScene().name == "MainMenuScene")
             {
                 bool menuA = GameObject.Find("BackIm").GetComponent<Menu_Control>().menuAdded = false;
                 if (menuA == true)
                 {
-                    GameObject.Find("MenuObj").SetActive(false);
                     menuA = false;
                 }
+                Destroy(gameObject);
             }
         }
     }

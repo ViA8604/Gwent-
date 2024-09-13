@@ -30,7 +30,7 @@ RectTransform:
   m_GameObject: {fileID: 7039875216264226937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2194931, y: 0.2167, z: 1.7259}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -56,7 +56,8 @@ MonoBehaviour:
   cardpoint: 0
   selected: 0
   crdtype: 0
-  cmbtype: 3
+  combatTypes:
+  - type: 3
   player: {fileID: 0}
   isdragging: 0
   actualzone: {fileID: 0}
@@ -103,7 +104,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a97bbada3769605e8851c3e1f0a956ac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b977d2719db6c26b9a2fec06dffac340, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,7 +143,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a97bbada3769605e8851c3e1f0a956ac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b977d2719db6c26b9a2fec06dffac340, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

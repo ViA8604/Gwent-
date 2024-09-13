@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using static GwentPro.CardData;
 namespace GwentCompiler
 {
     public class CardExpression : IExpression
@@ -12,15 +13,17 @@ namespace GwentCompiler
         string faction;
         IExpression power;
         List<string> range;
+        string image;
         EffectCallExpression OnActivation;
 
-        public CardExpression(string Type, string Name, string Faction, IExpression Power, List<string> Range, EffectCallExpression onActivation)
+        public CardExpression(string Type, string Name, string Faction, IExpression Power, List<string> Range, string Image, EffectCallExpression onActivation)
         {
             type = Type;
             name = Name;
             faction = Faction;
             power = Power;
             range = Range;
+            image = Image;
             OnActivation = onActivation;
         }
 
@@ -37,37 +40,43 @@ namespace GwentCompiler
 
         public GwentObject Evaluate()
         {
-            OnActivation.Evaluate();
+            OnActivation.CheckCall();
+            CompilerUtils.CardExpressions[name] = this;
             CreateJson();
             return new GwentObject(0, GwentType.GwentVoid);
         }
 
-        public GwentType ReturnType => GwentType.GwentVoid;
+
+        public void ActiveEffect()
+        {
+            OnActivation.Evaluate();
+        }
 
         void CreateJson()
         {
             string jsondir = "Assets/GameScripts/" + CompilerUtils.tag + ".json";//Directory.GetCurrentDirectory() + "/" + faction + ".json";//Path.Combine("../GameScripts/", faction + ".json");
             System.Console.WriteLine(jsondir);
             int pw = Convert.ToInt32(power.Evaluate().value);
-            CardData card = new CardData(name, pw, type, range[0], faction, "DefaultImage", OnActivation.effectname);
+            GwentPro.CardData card = new GwentPro.CardData(name, pw, type, range, faction, image, OnActivation.effectname);
 
-            List<CardData> cards;
+            List<GwentPro.CardData> cards;
             if (File.Exists(jsondir))
             {
                 string oldjson = File.ReadAllText(jsondir);
-                cards = JsonConvert.DeserializeObject<List<CardData>>(oldjson) ?? new List<CardData>();
+                cards = JsonConvert.DeserializeObject<List<GwentPro.CardData>>(oldjson) ?? new List<GwentPro.CardData>();
             }
             else
             {
-                cards = new List<CardData>();
+                cards = new List<GwentPro.CardData>();
             }
 
             cards?.Add(card);
 
-            string json = JsonConvert.SerializeObject(cards ?? new List<CardData> { card }, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(cards ?? new List<GwentPro.CardData> { card }, Formatting.Indented);
             File.WriteAllText(jsondir, json);
         }
 
+        public GwentType ReturnType => GwentType.GwentVoid;
         public override string ToString()
         {
             string output = "CardExpression: \n";
@@ -85,26 +94,5 @@ namespace GwentCompiler
         }
     }
 
-    public class CardData
-    {
-        public string Name;
-        public int Points;
-        public string CardType;
-        public string CombatType;
-        public string Faction;
 
-        public string Image;
-        public string EffectName;
-
-        public CardData(string name, int points, string cardType, string combatType, string faction, string image, string effectName)
-        {
-            Name = name;
-            Points = points;
-            CardType = cardType;
-            CombatType = combatType;
-            Faction = faction;
-            Image = image;
-            EffectName = effectName;
-        }
-    }
 }

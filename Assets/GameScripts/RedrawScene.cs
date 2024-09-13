@@ -49,11 +49,11 @@ namespace GwentPro
             {
                 image = rawObj.GetComponent<RawImage>();
 
-                if (player.fname == "Crows")
+                if (player.path_to_data == "Crows")
                 {
                     image.texture = Resources.Load<Texture2D>("Backgrounds/CrowsRedraw");
                 }
-                else if (player.fname == "Suns")
+                else if (player.path_to_data == "Suns")
                 {
                     image.texture = Resources.Load<Texture2D>("Backgrounds/SunsRedraw");
                 }

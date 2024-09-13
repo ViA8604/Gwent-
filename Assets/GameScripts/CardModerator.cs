@@ -19,7 +19,6 @@ namespace GwentPro
         {
             string jsonData = File.ReadAllText(filePath);
             List<CardData> cardDataList = JsonConvert.DeserializeObject<List<CardData>>(jsonData);
-            Debug.Log(cardDataList[0].Name);
             return cardDataList;
         }
 
@@ -50,8 +49,10 @@ namespace GwentPro
         {
             cardobj.GetComponent<CardClass>().cardname = card.Name;
             cardobj.GetComponent<CardClass>().cardpoint = card.Points;
-            cardobj.GetComponent<CardClass>().cmbtype = (CardClass.combatype)Enum.Parse(typeof(CardClass.combatype), card.CombatType);
+
+            SetCombatTypeEnums(card.CombatType, cardobj.GetComponent<CardClass>().combatTypes);
             cardobj.GetComponent<CardClass>().crdtype = (CardClass.cardtype)Enum.Parse(typeof(CardClass.cardtype), card.CardType);
+
             cardobj.GetComponent<CardClass>().faction = new Faction(dataPath);
             cardobj.tag = dataPath;
         }
@@ -59,14 +60,12 @@ namespace GwentPro
         //Sets the image of a card prefab and adds a BoxCollider2D component to the GameObject.
         static void SetPrefabImage(GameObject cardobj, CardData card)
         {
-            Debug.Log(card.Image);
             SpriteRenderer sr = cardobj.AddComponent<SpriteRenderer>();
             Sprite cardimg = Resources.Load<Sprite>("CardImg" + "/" + card.Image);
             sr.sprite = cardimg;
 
             Image image = cardobj.AddComponent<Image>(); // Adding an Image component so the card works with the horizontal layout group.
             Sprite sprite = Resources.Load<Sprite>("CardImg" + "/" + card.Image);
-            Debug.Log("CardImg" + "/" + card.Image);
             image.sprite = sprite; // Set the Sprite to the Image component
             image.enabled = false
             ;
@@ -75,22 +74,50 @@ namespace GwentPro
         }
 
         // Returns the appropriate CardScript based on the card's CombatType
-        static Type GetCardScript(string cmbType)
+        static Type GetCardScript(List<string> cmbType)
         {
-            if (cmbType == "Leader")
+            if (cmbType.Count > 0)
             {
-                return typeof(LeaderCard);
-            }
-            else if (cmbType == "Special")
-            {
-                return typeof(SpecialCard);
+                string firstType = cmbType[0];
+                if (firstType == "Leader")
+                {
+                    return typeof(LeaderCard);
+                }
+                else if (firstType == "Special")
+                {
+                    return typeof(SpecialCard);
+                }
+                else
+                {
+                    return typeof(CardClass);
+                }
             }
             else
             {
-                return typeof(CardClass);
+                // Manejar el caso en que CombatType esté vacío
+                Debug.LogError("CombatType está vacío");
+                return null;
             }
         }
 
+        private static void SetCombatTypeEnums(List<string> combatType, List<CardClass.CombatTypeListItem> enumList)
+        {
+            Dictionary<string, CardClass.combatype> dict = new Dictionary<string, CardClass.combatype>(){
+                {"Melee", CardClass.combatype.Melee},
+                {"Range", CardClass.combatype.Range},
+                {"Siege", CardClass.combatype.Siege},
+                {"Leader", CardClass.combatype.Leader},
+                {"Special", CardClass.combatype.Special}
+            };
+            foreach (var element in combatType)
+            {
+                if (dict.ContainsKey(element))
+                {
+                    enumList.Add(new CardClass.CombatTypeListItem(dict[element]));
+                }
+
+            }
+        }
 
         // PrefabsList method to generate a list of prefabs
         public static List<GameObject> PrefabsList(string dataPath)
@@ -100,7 +127,7 @@ namespace GwentPro
             int counter = 0;
             foreach (CardData item in cardDataList)
             {
-                prefabsList.Add(PrefabGenerator(counter, item,dataPath));
+                prefabsList.Add(PrefabGenerator(counter, item, dataPath));
                 counter++;
             }
             return prefabsList;
@@ -113,13 +140,13 @@ namespace GwentPro
         public string Name;
         public int Points;
         public string CardType;
-        public string CombatType;
+        public List<string> CombatType;
         public string Faction;
 
         public string Image;
         public string EffectName;
 
-        public CardData(string name, int points, string cardType, string combatType, string faction, string image, string effectName)
+        public CardData(string name, int points, string cardType, List<string> combatType, string faction, string image, string effectName)
         {
             Name = name;
             Points = points;

@@ -11,6 +11,7 @@ using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 using UnityEngine.Windows;
 using Input = UnityEngine.Input;
+using Unity.VisualScripting;
 
 
 
@@ -18,16 +19,19 @@ namespace GwentPro
 {
     public class CardGameScene : MonoBehaviour
     {
-        GameObject BoardObj;
+        public GameObject BoardObj;
         public Player player1;
         public Player player2;
         public SkipButton SkipButton;
         TextMeshProUGUI[] Counters;
         Canvas canvas;
         public TextMeshProUGUI WinnerSign;
-        public Compiler Compiler;
-        public List<GameObject> ZonesPlayer1;
+        public CompilerHandler Compiler;
+        List<GameObject> ZonesPlayer1;
         List<GameObject> ZonesPlayer2;
+        GameObject LeaderObj1;
+        GameObject LeaderObj2;
+        public GameObject DeckObj;
         public Camera dragcamera;
         bool cardGameScenefound;
         bool cameramoved;
@@ -45,6 +49,8 @@ namespace GwentPro
             WinnerSign = Resources.Load<TextMeshProUGUI>("GamePrefabs/WinnerSign");
             player1.PlayerZones = ZonesPlayer1;
             player2.PlayerZones = ZonesPlayer2;
+            LeaderObj1 = player1.GetGOByName("Leader", ZonesPlayer1);
+            LeaderObj2 = player2.GetGOByName("Leader", ZonesPlayer2);
         }
 
         //Camera position: (954.00, 518.70, -96.90)
@@ -83,7 +89,7 @@ namespace GwentPro
 
         public void ShowWinnerText(string message)
         {
-            WinnerSign.text = message;    
+            WinnerSign.text = message;
             RotateText(Instantiate(WinnerSign, canvas.transform), new Vector2(27.4f, 0), new Vector2(-22.7f, 0));
             winTextActive = true;
         }
@@ -97,11 +103,13 @@ namespace GwentPro
         {
             if (SceneManager.GetActiveScene().name == "CardGameScene" && !cardGameScenefound)
             {
+                player1.FillDeck();
+                player2.FillDeck();
                 SkipButton = GameObject.Find("SkipObj").GetComponent<SkipButton>();
 
                 cardGameScenefound = true;
             }
-            
+
             if (Input.GetMouseButtonDown(0))
             {
                 if (winTextActive)
@@ -133,6 +141,8 @@ namespace GwentPro
             }
         }
 
+
+
         public void ChangeCamera()
         {
             if (!cameramoved)
@@ -148,6 +158,7 @@ namespace GwentPro
                 SkipButton.MoveButton(!cameramoved);
             }
             RotateCounters();
+           // MoveLeaderPosition();
             cameramoved = !cameramoved;
         }
 
@@ -169,6 +180,19 @@ namespace GwentPro
                 rect.localRotation = Quaternion.Euler(0, 0, 180);
                 rect.localPosition = rotatedpos;
 
+            }
+        }
+        void MoveLeaderPosition()
+        {
+            if (cameramoved)
+            {
+                LeaderObj1.transform.position = new Vector3(0f, 8.3f, 10f);
+                LeaderObj2.transform.position = new Vector3(-1.2f, -0.2f, 10f);
+            }
+            else
+            {
+                LeaderObj1.transform.position = new Vector3(0f, 0f, 10f);
+                LeaderObj2.transform.position = new Vector3(-1.2f, 6.8f, 10f);
             }
         }
 

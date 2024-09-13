@@ -15,8 +15,9 @@ namespace GwentPro
     public class Player : MonoBehaviour
     {
         public string fname;
+        public int id;
         public string path_to_data;
-        GameObject DeckObj;
+        public GameObject DeckObj;
         public Deck deck;
         public bool alreadyset;
         public bool alreadyplayed;
@@ -56,7 +57,9 @@ namespace GwentPro
             foreach (GameObject item in deck.hand)
             {
                 GameObject cardinst = Instantiate(item, handObj.transform);
-                cardinst.GetComponent<CardClass>().player = this;
+                CardClass cardC = cardinst.GetComponent<CardClass>();
+                cardC.player = this;
+                cardC.SetDictProp();
                 cardinst.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
                 cardinst.transform.SetParent(handObj.transform);
 
@@ -65,13 +68,15 @@ namespace GwentPro
                     cardinst
                 };
             }
+
             GameObject LeaderObj = GetGOByName("Leader", PlayerZones);
             Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-            GameObject leaderinst = Instantiate(deck.LeaderCard, canvas.transform);
-            LeaderCard leaderc = leaderinst.GetComponent<LeaderCard>();
-            leaderc.NewCardHeight = 1.6f;
-            leaderc.NewCardLength = 0.5f;
-            leaderc.transform.SetParent(LeaderObj.transform);
+            GameObject leaderinst = Instantiate(deck.LeaderCard, LeaderObj.transform);
+            CardClass leaderC = leaderinst.GetComponent<CardClass>();
+            leaderC.player = this;
+            leaderC.SetDictProp();
+            leaderinst.transform.localScale = new Vector3(1.25f, 1.3f, 1.6f);
+            leaderinst.transform.SetParent(LeaderObj.transform);
 
         }
 
@@ -82,7 +87,7 @@ namespace GwentPro
             {
                 if (deck.prefabsList.Count > 0 & handObj.transform.childCount < 10)
                 {
-                    GameObject cardinst = Instantiate(deck.PopCard(deck.prefabsList), handObj.transform);
+                    GameObject cardinst = Instantiate(Deck.PopCard(deck.prefabsList), handObj.transform);
                     cardinst.GetComponent<CardClass>().player = this;
                     cardinst.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
                     cardinst.transform.SetParent(handObj.transform);
@@ -90,8 +95,7 @@ namespace GwentPro
                 }
             }
         }
-
-        GameObject GetGOByName(string name, List<GameObject> collection)
+        public GameObject GetGOByName(string name, List<GameObject> collection)
         {
             foreach (GameObject go in collection)
             {
@@ -101,6 +105,21 @@ namespace GwentPro
                 }
             }
             return null;
+        }
+
+        public void FillDeck()
+        {
+            DeckObj = GetGOByName("Deck", PlayerZones);
+            foreach (var item in deck.prefabsList)
+            {
+                GameObject deckInst = Instantiate(item, DeckObj.transform);
+                CardClass deckC = deckInst.GetComponent<CardClass>();
+                deckC.player = this;
+                deckC.SetDictProp();
+                deckInst.transform.localScale = new Vector3(1.44f, 1.44f, 1.44f);
+                deckInst.transform.SetParent(DeckObj.transform);
+            }
+            Destroy(deck.gameObject);
         }
 
         public void CleanPlayerZones()

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5813726246752913242}
-  - component: {fileID: 8783991812324807628}
+  - component: {fileID: 8720127444182354300}
   - component: {fileID: 2813806129451093544}
   - component: {fileID: 9009772827143899640}
   - component: {fileID: 5044522125970241091}
@@ -30,7 +30,7 @@ RectTransform:
   m_GameObject: {fileID: 125792635917120575}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2194931, y: 0.2167, z: 1.7259}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -40,7 +40,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 7.2, y: 10.08}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8783991812324807628
+--- !u!114 &8720127444182354300
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,11 +52,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c6f621c31ff1c37993c1a3fda09809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardname: Beluga
+  cardname: Bazinga
   cardpoint: 16
   selected: 0
   crdtype: 0
-  cmbtype: 0
+  combatTypes:
+  - type: 1
+  - type: 2
   player: {fileID: 0}
   isdragging: 0
   actualzone: {fileID: 0}
@@ -103,7 +105,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 49f1b7877ad2dde179a0870dc83dc29f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d2a46a2fc39b891a39d98ecddeebf8f9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,7 +144,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 49f1b7877ad2dde179a0870dc83dc29f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d2a46a2fc39b891a39d98ecddeebf8f9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

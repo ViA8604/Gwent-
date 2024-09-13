@@ -1,157 +1,228 @@
 [
-    {
-        "Name": "Líder Wilhelm Gafar",
-        "Points": "0",
-        "CardType": "Gold",
-        "CombatType": "Leader",
-        "Faction": "Crows",
-        "Image": "Crows 00",
-        "EffectName": "None"
-    },
-    {
-        "Name": "Aleyra Valiente",
-        "Points": "3",
-        "CardType": "Silver",
-        "CombatType": "Range",
-        "Faction": "Crows",
-        "Image": "Crows 01",
-        "EffectName": "None"
-    },
-    {
-        "Name": "Máster Ka Trib Wan",
-        "Points": "5",
-        "CardType": "Gold",
-        "CombatType": "Range",
-        "Faction": "Crows",
-        "Image": "Crows 02",
-        "EffectName": "None"
-    },
-    {
-        "Name": "Idris Anhia",
-        "Points": "4",
-        "CardType": "Silver",
-        "CombatType": "Range",
-        "Faction": "Crows",
-        "Image": "Crows 03",
-        "EffectName": "None"
-    },
-    {
-        "Name": "Fernas el Sombrerero",
-        "Points": "3",
-        "CardType": "Silver",
-        "CombatType": "Range",
-        "Faction": "Crows",
-        "Image": "Crows 04",
-        "EffectName": "None"
-    },
-    {
-        "Name": "Profesor R.",
-        "Points": "2",
-        "CardType": "Silver",
-        "CombatType": "Range",
-        "Faction": "Crows",
-        "Image": "Crows 05",
-        "EffectName": "None"
-    },
-    {
-        "Name": "Vian Van Yelsing",
-        "Points": "2",
-        "CardType": "Silver",
-        "CombatType": "Range",
-        "Faction": "Crows",
-        "Image": "Crows 06",
-        "EffectName": "None"
-    },
-    {
-        "Name": "Kavin y Layvin",
-        "Points": "4",
-        "CardType": "Silver",
-        "CombatType": "Melee",
-        "Faction": "Crows",
-        "Image": "Crows 07",
-        "EffectName": "None"    
-    },
-    {
-        "Name": "Kendrick y Valimir",
-        "Points": "3",
-        "CardType": "Silver",
-        "CombatType": "Melee",
-        "Faction": "Crows",
-        "Image": "Crows 08",
-        "EffectName": "None"
-    },
-    {
-        "Name": "Antoine Cruix",
-        "Points": "2",
-        "CardType": "Silver",
-        "CombatType": "Melee",
-        "Faction": "Crows",
-        "Image": "Crows 09",
-        "EffectName": "None"
-    },
-    {
-        "Name": "Máster Alexandrius",
-        "Points": "3",
-        "CardType": "Silver",
-        "CombatType": "Melee",
-        "Faction": "Crows",
-        "Image": "Crows 10",
-        "EffectName": "None"
-    },
-    {
-        "Name": "Mitus Rhe Saurus",
-        "Points": "1",
-        "CardType": "Silver",
-        "CombatType": "Melee",
-        "Faction": "Crows",
-        "Image": "Crows 11",
-        "EffectName": "None"
-    },
-    {
-        "Name": "Pyatroj Dale",
-        "Points": "2",
-        "CardType": "Silver",
-        "CombatType": "Melee",
-        "Faction": "Crows",
-        "Image": "Crows 12",
-        "EffectName": "None"
-    },
-    {
-        "Name": "Salomé Alfira",
-        "Points": "4",
-        "CardType": "Silver",
-        "CombatType": "Melee",
-        "Faction": "Crows",
-        "Image": "Crows 13",
-        "EffectName": "None"
-    },
-    {
-        "Name": "Capitán Cuervo",
-        "Points": "2",
-        "CardType": "Silver",
-        "CombatType": "Siege",
-        "Faction": "Crows",
-        "Image": "Crows 14",
-        "EffectName": "None"
-    },
-    {
-        "Name": "Recluta Cuervo",
-        "Points": "1",
-        "CardType": "Silver",
-        "CombatType": "Siege",
-        "Faction": "Crows",
-        "Image": "Crows 15",
-        "EffectName": "None"
-    },
-    {
-        "Name": "Héroes de Guerra",
-        "Points": "1",
-        "CardType": "Silver",
-        "CombatType": "Siege",
-        "Faction": "Crows",
-        "Image": "Crows 16",
-        "EffectName": "None"
-    }
-
+  {
+    "Name": "Líder Wilhelm Gafar",
+    "Points": 0,
+    "CardType": "Gold",
+    "CombatType": [
+      "Leader"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 00",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Aleyra Valiente",
+    "Points": 3,
+    "CardType": "Silver",
+    "CombatType": [
+      "Range"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 01",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Máster Ka Trib Wan",
+    "Points": 5,
+    "CardType": "Gold",
+    "CombatType": [
+      "Range"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 02",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Idris Anhia",
+    "Points": 4,
+    "CardType": "Silver",
+    "CombatType": [
+      "Range"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 03",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Fernas el Sombrerero",
+    "Points": 3,
+    "CardType": "Silver",
+    "CombatType": [
+      "Range",
+      "Siege"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 04",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Profesor R.",
+    "Points": 2,
+    "CardType": "Silver",
+    "CombatType": [
+      "Range",
+      "Siege"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 05",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Vian Van Yelsing",
+    "Points": 2,
+    "CardType": "Silver",
+    "CombatType": [
+      "Range"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 06",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Kavin y Layvin",
+    "Points": 4,
+    "CardType": "Silver",
+    "CombatType": [
+      "Melee"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 07",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Kendrick y Valimir",
+    "Points": 3,
+    "CardType": "Silver",
+    "CombatType": [
+      "Melee",
+      "Siege"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 08",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Antoine Cruix",
+    "Points": 2,
+    "CardType": "Silver",
+    "CombatType": [
+      "Melee"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 09",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Máster Alexandrius",
+    "Points": 3,
+    "CardType": "Silver",
+    "CombatType": [
+      "Melee"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 10",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Mitus Rhe Saurus",
+    "Points": 1,
+    "CardType": "Silver",
+    "CombatType": [
+      "Melee"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 11",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Pyatroj Dale",
+    "Points": 2,
+    "CardType": "Silver",
+    "CombatType": [
+      "Melee"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 12",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Salomé Alfira",
+    "Points": 4,
+    "CardType": "Silver",
+    "CombatType": [
+      "Melee"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 13",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Capitán Cuervo",
+    "Points": 2,
+    "CardType": "Silver",
+    "CombatType": [
+      "Siege"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 14",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Recluta Cuervo",
+    "Points": 1,
+    "CardType": "Silver",
+    "CombatType": [
+      "Siege"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 15",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Héroes de Guerra",
+    "Points": 1,
+    "CardType": "Silver",
+    "CombatType": [
+      "Siege"
+    ],
+    "Faction": "Crows",
+    "Image": "Crows 16",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Kevvin",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Ranged"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Kevvin",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Ranged"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Kevvin",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Ranged"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  }
 ]
-

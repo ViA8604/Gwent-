@@ -12,6 +12,7 @@ TagManager:
   - SkipB
   - Compiler
   - Custom
+  - GameMenu
   layers:
   - Default
   - TransparentFX

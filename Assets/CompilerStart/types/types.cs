@@ -44,7 +44,22 @@ public enum TokenType
     
     Unknowntoken,
     WhiteSpacetoken,
-
+        DeckCardtoken,
+        FieldCardtoken,
+        GraveyardCardtoken,
+        HandCardtoken,
+        DeckMethodtoken,
+        FieldMethodtoken,
+        GraveyardMethodtoken,
+        HandMethodtoken,
+        ShuffleMethodtoken,
+        SendBottomMethodtoken,
+        RemoveMethodtoken,
+        PushMethodtoken,
+        PopMethodtoken,
+        FindKeywordtoken,
+        ImageKeywordtoken,
+        KeywordOwnertoken,
     }
 
     public class GwentObject
@@ -62,7 +77,7 @@ public enum TokenType
         {
             if (type == GwentType.GwentBool)
             {
-                return (bool)value;
+                return value.ToString().ToLower() == "true";
             }
             throw new Exception("GwentObject non-booleable");
         }
@@ -74,8 +89,8 @@ public enum TokenType
                 throw new Exception("GwentObject non-addable");
             }
 
-            double leftValue = GwentObjToDouble(left);
-            double rightValue = GwentObjToDouble(right);
+            double leftValue = CompilerUtils.GwentObjToDouble(left);
+            double rightValue = CompilerUtils.GwentObjToDouble(right);
 
             return new GwentObject(leftValue + rightValue, GwentType.GwentNumber);
         }
@@ -87,8 +102,8 @@ public enum TokenType
                 throw new Exception("GwentObject non-substractable");
             }
             
-            double leftValue = GwentObjToDouble(left);
-            double rightValue = GwentObjToDouble(right);
+            double leftValue = CompilerUtils.GwentObjToDouble(left);
+            double rightValue = CompilerUtils.GwentObjToDouble(right);
 
             return new GwentObject(leftValue - rightValue, GwentType.GwentNumber);
         }
@@ -100,8 +115,8 @@ public enum TokenType
                 throw new Exception("GwentObject non-multipliable");
             }
 
-            double leftValue = GwentObjToDouble(left);
-            double rightValue = GwentObjToDouble(right);
+            double leftValue = CompilerUtils.GwentObjToDouble(left);
+            double rightValue = CompilerUtils.GwentObjToDouble(right);
 
             return new GwentObject(leftValue * rightValue, GwentType.GwentNumber);
         }
@@ -113,8 +128,8 @@ public enum TokenType
                 throw new Exception("GwentObject non-dividable");
             }
 
-            double leftValue = GwentObjToDouble(left);
-            double rightValue = GwentObjToDouble(right);
+            double leftValue = CompilerUtils.GwentObjToDouble(left);
+            double rightValue = CompilerUtils.GwentObjToDouble(right);
 
             return new GwentObject(leftValue / rightValue, GwentType.GwentNumber);
         }
@@ -126,21 +141,40 @@ public enum TokenType
                 throw new Exception("GwentObject non-modulable");
             }
 
-            double leftValue = GwentObjToDouble(left);
-            double rightValue = GwentObjToDouble(right);
+            double leftValue = CompilerUtils.GwentObjToDouble(left);
+            double rightValue = CompilerUtils.GwentObjToDouble(right);
 
             return new GwentObject(leftValue % rightValue, GwentType.GwentNumber);
         }
-        private static double GwentObjToDouble(GwentObject a)
-        {
-            return Double.Parse(a.value.ToString());
-        }
+       
         
     }
     public enum GwentType
     {
         GwentNumber, GwentString, GwentBool, GwentVoid, GwentNull,
-        CardType,
+        CardType, GwentList,
+        Zone,
+    }
+    public class CompilerCard
+    {
+        public string cardName;
+        public ZoneObj zone;
+        public CompilerCard(string CardName, ZoneObj Zone)
+        {
+            cardName = CardName;
+            zone = Zone;
+        }
     }
 
+    public class ZoneObj
+    {
+        public string ZoneName;
+        public int PlayerID;
+
+        public ZoneObj(string zoneName, int playerID)
+        {
+            ZoneName = zoneName;
+            PlayerID = playerID;
+        }
+    }
 }

@@ -1,0 +1,51 @@
+           __________   __________  ____    ___    __   ______________
+    /\    / /_  __/ /  / /_  __/ / / ___\  / _ \  / /  / /_  __/___  /
+   /  \  / / / / / /__/ / / / / / / /___  / / \_\/ /__/ / / /     / /
+  / /\ \/ / / / / ___  / / / / /  \____ \/ /  __/ ___  / / /     / / FONTS
+ / /  \  /_/ /_/ /  / /_/ /_/ /_______/ /\ \_/ / /  / /_/ /_    / /____
+/_/    \/_____/_/  /_/_____/_____/\____/  \___/_/  /_/_____/   /______/
+
+Faith Collapsing v1.0
+
+This one's kinda a cross between one of those disfunctional messy
+old typewriter fonts, and one of those old English blackletter gothic
+type thingy fonts.  The little "not defined" thing is from the cover
+of Rantology.  And the name's from a Ministry song.  Because Ministry 
+is awesome.  And their concerts are awesomer, especially when they're 
+loud to the point of painfulness and you get stepped on by obnoxious 
+large drunk guys.  Curse my height deficiency!  Curse yooouuuu!  But 
+then we went to Perkins after and ate pancakes so it's okay.  We, 
+being me and my friends, NOT the previously mentioned large obnoxious 
+drunk guy.  Because I hate him.
+
+This font is free, and you can do whatever you want with it, for your 
+personal use.  If you want to distribute this font, that's fine.  Just 
+keep this text file with it so people know who made it.  You can 
+distribute it on any free font websites or any other form you want, as 
+long as you keep it free and don't claim you made it.  Cause you didn't.  
+No selling it, or claiming it as your own.  If you want to use this 
+font to make something really cool, just email me about it to get 
+permission.  I'll want a copy of whatever you make.  If you make money 
+off my font, I want some too.  No commercial use without my permission
+first. 
+
+Speaking of money, if you like my font a lot and want to give me money,
+I'd love that.  Donations are awesome and therefore people who donate
+are awesome. Email me and we could work something out, and then maybe
+I'll give you something super awesome as well.  A drawing, a custom
+stenciled t-shirt, I make stuff like that.  Depends on if I'm feeling
+generous.  And if I have enough shirt/fabric paint/plastic sheets/crap.
+
+Email me if you like my font, or if you want to make some spiffy stuff 
+with it, or just want to have some sort of conversation.  I don't like
+talking to strangers in real life, but on the internet I generally
+enjoy it.  Although recently my email access has been severely restricted, 
+because of stuff, so if you're planning on emailing me, be prepared for 
+a possibly looong wait for a reply.  Don't worry, I'll try to reply to 
+all the emails I get, it just might take a while.  :(
+
+nihilschiz@herzeleid.net
+http://nihilschiz.deviantart.com
+Check this site for some of my artwork.
+http://www.myspace.com/organizm7
+My myspace!  It's horrible!  AAAGGGHHH!!!
