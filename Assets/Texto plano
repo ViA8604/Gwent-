@@ -88,6 +88,32 @@ card {
 		}
 		       ]
 	}
+	card {
+		Type: "Silver",
+		Name: "Hermito_TU_en_Salsa",
+		Faction: "Cubiculo_2",
+		Power: (2/1)*2+1,
+		Range: ["Melee"],
+		OnActivation: [
+			{
+				Effect: {
+					Name: "Aguacate",
+					Amount: 5,
+				}
+				Selector: {
+					Source: "board",
+					Single: false,
+					Predicate: (unit) => (3+5)/2 == 7
+					  }
+			}
+			{
+				Effect:"Draw",
+			}
+			{
+				Effect:"Draw",
+			}
+				   ]
+		}
 
 
 effect {
