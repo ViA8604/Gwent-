@@ -32,8 +32,6 @@ namespace GwentCompiler
         {
             manager = gmObject;
             CompilerUtils.gameManager = manager;
-        }
-
-        
+        }        
     }
 }

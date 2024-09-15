@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8239110940877461144}
   m_Layer: 0
   m_Name: Northern RealmsCard17
-  m_TagString: Crows
+  m_TagString: Suns
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c6f621c31ff1c37993c1a3fda09809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardname: Kevvin
+  cardname: Thalmor Embassy
   cardpoint: 16
   selected: 0
   crdtype: 0
@@ -62,6 +62,7 @@ MonoBehaviour:
   isdragging: 0
   actualzone: {fileID: 0}
   activecamera: {fileID: 0}
+  cardGame: {fileID: 0}
   initialLocalPosition: {x: 0, y: 0, z: 0}
 --- !u!212 &9121086497051579422
 SpriteRenderer:

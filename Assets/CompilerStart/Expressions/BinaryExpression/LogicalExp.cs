@@ -5,7 +5,7 @@ namespace GwentCompiler
 {
     public class LogicalExpression : BinaryExpression
 {
-    public LogicalExpression(IExpression left, IExpression right, Operation operation, string opSymbol) : base(left, right, operation, opSymbol)
+    public LogicalExpression(IExpression left, IExpression right, Func<GwentObject,GwentObject,GwentObject> operation, string opSymbol) : base(left, right, operation, opSymbol)
     {
     }
 

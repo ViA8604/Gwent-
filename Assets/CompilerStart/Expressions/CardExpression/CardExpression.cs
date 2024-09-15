@@ -8,15 +8,15 @@ namespace GwentCompiler
 {
     public class CardExpression : IExpression
     {
-        string type;
-        string name;
-        string faction;
+        IExpression type;
+        IExpression name;
+        IExpression faction;
         IExpression power;
         List<string> range;
-        string image;
+        IExpression image;
         EffectCallExpression OnActivation;
 
-        public CardExpression(string Type, string Name, string Faction, IExpression Power, List<string> Range, string Image, EffectCallExpression onActivation)
+        public CardExpression(IExpression Type, IExpression Name, IExpression Faction, IExpression Power, List<string> Range, IExpression Image, EffectCallExpression onActivation)
         {
             type = Type;
             name = Name;
@@ -29,11 +29,22 @@ namespace GwentCompiler
 
         public bool CheckSemantic()
         {
+            type.CheckSemantic();
+            name.CheckSemantic();
+            faction.CheckSemantic();
             power.CheckSemantic();
+            image.CheckSemantic();
+
             if (power.ReturnType != GwentType.GwentNumber)
             {
                 throw new Exception("Power property return type must be number");
             }
+            
+            if(type.ReturnType != GwentType.GwentString || name.ReturnType != GwentType.GwentString)
+                throw new Exception("Type and name expressions must return string");
+            
+            if(faction.ReturnType != GwentType.GwentString || image.ReturnType != GwentType.GwentString)
+                throw new Exception("Faction and Image expressions must return string");
             OnActivation.CheckSemantic();
             return true;
         }
@@ -41,7 +52,6 @@ namespace GwentCompiler
         public GwentObject Evaluate()
         {
             OnActivation.CheckCall();
-            CompilerUtils.CardExpressions[name] = this;
             CreateJson();
             return new GwentObject(0, GwentType.GwentVoid);
         }
@@ -55,9 +65,15 @@ namespace GwentCompiler
         void CreateJson()
         {
             string jsondir = "Assets/GameScripts/" + CompilerUtils.tag + ".json";//Directory.GetCurrentDirectory() + "/" + faction + ".json";//Path.Combine("../GameScripts/", faction + ".json");
-            System.Console.WriteLine(jsondir);
+            
             int pw = Convert.ToInt32(power.Evaluate().value);
-            GwentPro.CardData card = new GwentPro.CardData(name, pw, type, range, faction, image, OnActivation.effectname);
+            string cardName = name.Evaluate().value.ToString();
+            string cardType = type.Evaluate().value.ToString();
+            string cardFaction = faction.Evaluate().value.ToString();
+            string cardImage = image.Evaluate().value.ToString();
+            string effName = OnActivation.effectname.Evaluate().value.ToString();
+
+            GwentPro.CardData card = new GwentPro.CardData(cardName, pw, cardType, range, cardFaction, cardImage, effName);
 
             List<GwentPro.CardData> cards;
             if (File.Exists(jsondir))
@@ -74,6 +90,7 @@ namespace GwentCompiler
 
             string json = JsonConvert.SerializeObject(cards ?? new List<GwentPro.CardData> { card }, Formatting.Indented);
             File.WriteAllText(jsondir, json);
+            CompilerUtils.CardExpressions[cardName] = this;
         }
 
         public GwentType ReturnType => GwentType.GwentVoid;

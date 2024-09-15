@@ -210,7 +210,6 @@ namespace GwentCompiler
             {
                 value = text;
                 type = CompilerUtils.Getsymbol[value];
-                if (type == TokenType.SymbolNewLinetoken) { currentline++; }
             }
 
             else

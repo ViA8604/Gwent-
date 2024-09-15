@@ -11,31 +11,37 @@ public class GameButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
-    public void GoToMenuSn ()
+    public void GoToMenuSn()
     {
         SceneManager.LoadScene("MainMenuScene");
     }
-    
-    public void GoToGameSn ()
+
+    public void GoToGameSn()
     {
         SceneManager.LoadScene("ChooseFactionScene");
         DontDestroyOnLoad(gameObject);
     }
-    public void GoToGameRedSn ()
+    public void GoToGameRedSn()
     {
         SceneManager.LoadScene("RedrawScene");
         DontDestroyOnLoad(gameObject);
     }
-    public void GoToCreatorSn ()
+    public void GoToCreatorSn()
     {
         SceneManager.LoadScene("EditorScene");
         DontDestroyOnLoad(gameObject);
     }
 
-    public void ExitGame ()
+    public void GoToDeckViewScene()
+    {
+        SceneManager.LoadScene("DeckViewScene");
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void ExitGame()
     {
         Application.Quit();
     }

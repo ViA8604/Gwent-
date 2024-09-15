@@ -6,7 +6,7 @@ namespace GwentCompiler
 {
     public class ComparisonExpression : BinaryExpression
 {
-    public ComparisonExpression(IExpression left, IExpression right, Operation operation, string opSymbol) : base(left, right, operation, opSymbol)
+    public ComparisonExpression(IExpression left, IExpression right, Func<GwentObject,GwentObject,GwentObject> operation, string opSymbol) : base(left, right, operation, opSymbol)
     {
     }
 

@@ -1,0 +1,290 @@
+[
+  {
+    "Name": "Kevvin",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Leader",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "CardTest1",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Bazinga",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Range",
+      "Siege"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "CardTest2",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Fuas",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Libelula",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "CardTest1",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Lunita",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "El Fati",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "CardTest1",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Joaquin",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Dragonball",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "CardTest2",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Louis",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Mermelada",
+    "Points": 4,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Duna",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Gizmo",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Kevvin",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Leader",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "CardTest1",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Bazinga",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Range",
+      "Siege"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "CardTest2",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Fuas",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Libelula",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "CardTest1",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Lunita",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "El Fati",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "CardTest1",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Joaquin",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Dragonball",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "CardTest2",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Louis",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Mermelada",
+    "Points": 4,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Duna",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "Gizmo",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "Return to Deck Mod"
+  }
+]

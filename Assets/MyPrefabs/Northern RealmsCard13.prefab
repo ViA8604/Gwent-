@@ -56,11 +56,14 @@ MonoBehaviour:
   cardpoint: 16
   selected: 0
   crdtype: 0
-  cmbtype: 01000000
+  combatTypes:
+  - type: 1
+  - type: 2
   player: {fileID: 0}
   isdragging: 0
   actualzone: {fileID: 0}
   activecamera: {fileID: 0}
+  cardGame: {fileID: 0}
   initialLocalPosition: {x: 0, y: 0, z: 0}
 --- !u!212 &943181102502004603
 SpriteRenderer:

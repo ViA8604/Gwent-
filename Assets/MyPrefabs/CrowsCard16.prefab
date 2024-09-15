@@ -62,6 +62,7 @@ MonoBehaviour:
   isdragging: 0
   actualzone: {fileID: 0}
   activecamera: {fileID: 0}
+  cardGame: {fileID: 0}
   initialLocalPosition: {x: 0, y: 0, z: 0}
 --- !u!212 &7219063901666415043
 SpriteRenderer:

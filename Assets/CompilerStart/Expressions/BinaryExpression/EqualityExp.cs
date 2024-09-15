@@ -6,7 +6,7 @@ namespace GwentCompiler
 {
     public class EqualityExpression : BinaryExpression
 {
-    public EqualityExpression(IExpression left, IExpression right, Operation operation, string opSymbol) : base(left, right, operation, opSymbol)
+    public EqualityExpression(IExpression left, IExpression right, Func<GwentObject,GwentObject,GwentObject> operation, string opSymbol) : base(left, right, operation, opSymbol)
     {
     }
 

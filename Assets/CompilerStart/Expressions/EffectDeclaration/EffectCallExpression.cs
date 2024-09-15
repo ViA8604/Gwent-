@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.IO;
 using System.Diagnostics;
+using UnityEngine;
+
 namespace GwentCompiler
 {
     public class EffectCallExpression : IExpression
     {
-        public string effectname;
+        public IExpression effectname;
+        string effName = "";
         List<(string, IExpression)> parameters;
         SelectorExpression selector;
 
-        public EffectCallExpression(string Effectname, List<(string, IExpression)> Parameters, SelectorExpression Selector)
+        public EffectCallExpression(IExpression Effectname, List<(string, IExpression)> Parameters, SelectorExpression Selector)
         {
             effectname = Effectname;
             parameters = Parameters;
@@ -19,6 +22,10 @@ namespace GwentCompiler
         }
         public bool CheckSemantic()
         {
+            effectname.CheckSemantic();
+            if(effectname.ReturnType != GwentType.GwentString)
+                throw new Exception("On Activation effect expresion must return string");
+            
             CheckParametersSemantic();
             selector.CheckSemantic();
 
@@ -27,7 +34,10 @@ namespace GwentCompiler
 
         public GwentObject Evaluate()
         {
-            var effect = CompilerUtils.FindEffect(effectname);
+            if(effName == "")
+                effName = effectname.Evaluate().value.ToString();
+            
+            var effect = CompilerUtils.FindEffect(effName);
             effect.SetParameters(parameters, selector.Evaluate());
             effect.Execute();
             
@@ -36,7 +46,10 @@ namespace GwentCompiler
 
         public void CheckCall()
         {
-            var effect = CompilerUtils.FindEffect(effectname);
+            if(effName == "")
+                effName = effectname.Evaluate().value.ToString();
+
+            var effect = CompilerUtils.FindEffect(effName);
             effect.CheckParameters(parameters);
         }
 

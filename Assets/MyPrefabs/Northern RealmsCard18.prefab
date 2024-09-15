@@ -9,14 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1573660864033304003}
-  - component: {fileID: 2057480767865263557}
+  - component: {fileID: 2943559766155782961}
   - component: {fileID: 6888837371028533906}
   - component: {fileID: 7959436968073185654}
   - component: {fileID: 7566326700630807131}
   - component: {fileID: 1143397219257583554}
   m_Layer: 0
   m_Name: Northern RealmsCard18
-  m_TagString: Custom
+  m_TagString: Suns
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +40,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 7.2, y: 10.08}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2057480767865263557
+--- !u!114 &2943559766155782961
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,15 +52,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c6f621c31ff1c37993c1a3fda09809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardname: Joaquin
+  cardname: Thalmor Embassy
   cardpoint: 16
   selected: 0
   crdtype: 0
-  cmbtype: 00000000
+  combatTypes:
+  - type: 0
   player: {fileID: 0}
   isdragging: 0
   actualzone: {fileID: 0}
   activecamera: {fileID: 0}
+  cardGame: {fileID: 0}
   initialLocalPosition: {x: 0, y: 0, z: 0}
 --- !u!212 &6888837371028533906
 SpriteRenderer:

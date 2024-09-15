@@ -30,7 +30,7 @@ namespace GwentPro
         public Faction faction;
         public Camera activecamera;
         private Vector3 offset;
-        CardGameScene cardGame;
+        public CardGameScene cardGame;
 
         // Declare screenPoint and draggedposition as fields
         private Vector3 screenPoint;
@@ -102,7 +102,7 @@ namespace GwentPro
             }
 
         }
-        void OnMouseDown()
+        public virtual void OnMouseDown()
         {
             selected = !selected;
             screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position); // Obtiene la posición del objeto en coordenadas de pantalla
@@ -138,9 +138,9 @@ namespace GwentPro
                 }
             }
         }
-        void SetActiveCamera()
+        protected void SetActiveCamera()
         {
-            if (gameObject.scene.name == "RedrawScene" || CombatTypeContains(combatype.Leader, combatTypes))
+            if (gameObject.scene.name == "RedrawScene" || gameObject.scene.name == "DeckViewScene" || CombatTypeContains(combatype.Leader, combatTypes))
             {
                 activecamera = null;
             }
@@ -243,6 +243,7 @@ namespace GwentPro
             {
                 properties[name] = value;
             }
+            SetDictProp();
         }
     }
 }

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using UnityEngine;
+using Unity.VisualScripting;
 
 namespace GwentCompiler
 {
@@ -132,7 +134,7 @@ namespace GwentCompiler
             MatchKind(TokenType.KeywordNametoken);
             MatchKind(TokenType.Colontoken);
 
-            var nameToken = MatchKind(TokenType.StringLiteraltoken);
+            var nameExpr = ParseAssignmentExpression(newScope); // parsea la expr string
             MatchKind(TokenType.Commatoken);
 
             List<(string, GwentType)> paramsList = new List<(string, GwentType)>();
@@ -149,7 +151,7 @@ namespace GwentCompiler
 
             var ActionFExpression = ParseFunctionDeclaration(newScope, GwentType.GwentNull);
             MatchKind(TokenType.CloseCurlyBrackettoken);
-            return new EffectDeclarationExpression(nameToken.Value, paramsList, ActionFExpression, newScope);
+            return new EffectDeclarationExpression(nameExpr, paramsList, ActionFExpression, newScope);
         }
 
         private IExpression ParseCardDeclarationExpression(Scope currentScope)
@@ -158,17 +160,18 @@ namespace GwentCompiler
 
             MatchKind(TokenType.KeywordCardTypetoken);
             MatchKind(TokenType.Colontoken);
-            var cardType = MatchKind(TokenType.StringLiteraltoken).Value;
+
+            var cardType = ParseAssignmentExpression(currentScope);
             MatchKind(TokenType.Commatoken);
 
             MatchKind(TokenType.KeywordNametoken);
             MatchKind(TokenType.Colontoken);
-            var cardName = MatchKind(TokenType.StringLiteraltoken).Value;
+            var cardName = ParseAssignmentExpression(currentScope);
             MatchKind(TokenType.Commatoken);
 
             MatchKind(TokenType.KeywordFactiontoken);
             MatchKind(TokenType.Colontoken);
-            var cardFaction = MatchKind(TokenType.StringLiteraltoken).Value;
+            var cardFaction = ParseAssignmentExpression(currentScope);
             MatchKind(TokenType.Commatoken);
 
             MatchKind(TokenType.KeywordPowertoken);
@@ -180,6 +183,7 @@ namespace GwentCompiler
             MatchKind(TokenType.KeywordRangetoken);
             MatchKind(TokenType.Colontoken);
             MatchKind(TokenType.OpenSquareBrackettoken);
+
             List<string> ranges = new List<string>();
             while (Current.Type != TokenType.CloseSquareBrackettoken)
             {
@@ -191,20 +195,23 @@ namespace GwentCompiler
             }
             MatchKind(TokenType.Commatoken);
 
-            var image = "DefaultImage";
+            IExpression image = new LiteralExpression(new GwentObject("DefaultImage", GwentType.GwentString)) ;
             if (Current.Type == TokenType.ImageKeywordtoken)
             {
                 NextToken();
                 MatchKind(TokenType.Colontoken);
-                image = MatchKind(TokenType.StringLiteraltoken).Value;
+                image = ParseAssignmentExpression(currentScope);;
                 MatchKind(TokenType.Commatoken);
             }
 
             MatchKind(TokenType.KeywordOnActivationtoken);
             MatchKind(TokenType.Colontoken);
+
             MatchKind(TokenType.OpenSquareBrackettoken);
             MatchKind(TokenType.OpenCurlyBrackettoken);
+            
             var effectCall = ParseEffectCall(currentScope);
+            
             MatchKind(TokenType.CloseCurlyBrackettoken);
 
             return new CardExpression(cardType, cardName, cardFaction, cardPower, ranges, image, effectCall);
@@ -219,7 +226,7 @@ namespace GwentCompiler
             MatchKind(TokenType.KeywordNametoken);
             MatchKind(TokenType.Colontoken);
 
-            var effectname = MatchKind(TokenType.StringLiteraltoken).Value;
+            var effectname = ParseAssignmentExpression(scope);
 
             MatchKind(TokenType.Commatoken);
 
@@ -230,7 +237,7 @@ namespace GwentCompiler
                 var paramName = MatchKind(TokenType.IDToken).Value;
                 MatchKind(TokenType.Colontoken);
 
-                var paramValue = ParseExpression(scope);
+                var paramValue = ParseAssignmentExpression(scope);
                 paramsList.Add((paramName, paramValue));
                 MatchKind(TokenType.Commatoken);
                 if (Current.Type == TokenType.CloseCurlyBrackettoken)
@@ -348,11 +355,28 @@ namespace GwentCompiler
         {
             MatchKind(TokenType.DotSymbToken);
 
-            List<TokenType> cardproperties = new List<TokenType>() { TokenType.KeywordCardTypetoken, TokenType.KeywordNametoken, TokenType.KeywordFactiontoken, TokenType.KeywordPowertoken, TokenType.KeywordOwnertoken};
-
+            List<TokenType> cardproperties = new List<TokenType>() { TokenType.KeywordCardTypetoken, TokenType.KeywordNametoken, TokenType.KeywordFactiontoken, TokenType.KeywordPowertoken, TokenType.KeywordOwnertoken };
+            List<TokenType> validOperators = new List<TokenType>() 
+            {
+                TokenType.PlusEqualOperatortoken, TokenType.MinusEqualOperatortoken, 
+                TokenType.MultiplicationEqualOptoken, TokenType.DivitionEqualOptoken,
+                TokenType.IncrementOperatortoken, TokenType.DecrementOperatortoken
+            };
             if (cardproperties.Contains(Current.Type))
             {
-                return new ContextCardPropertiesExpression(name, NextToken().Value, scope);
+                string property = NextToken().Value;    // card.Power
+                var getExpr = new ContextCardPropertiesExpression(name, property, scope);
+
+                if(validOperators.Contains(Current.Type))
+                {
+                    var op = NextToken();
+                    var right = (op.Type == TokenType.IncrementOperatortoken || op.Type == TokenType.DecrementOperatortoken)? new LiteralExpression(new GwentObject(1,GwentType.GwentNumber)) : ParseAssignmentExpression(scope);
+                    var function = CompilerUtils.PredicatesDict[op.Type].Item1;
+                    var toAssignExpr = new ArithmeticExpression(getExpr,right, function , op.Value);
+                    VariableExpression varName = (VariableExpression)name ;
+                    return new ContextSetCardPropertyExpression(varName.name , property , toAssignExpr , scope);
+                }
+                return getExpr;            
             }
 
             throw new Exception($"{Current.Value} is not a card property");
@@ -591,17 +615,31 @@ namespace GwentCompiler
         private IExpression ParseSumOrSubExpression(Scope scope)
         {
             var left = ParseMulOrDivExpression(scope);
-            while (Current.Type == TokenType.PlusOperatortoken || Current.Type == TokenType.MinusOperatortoken)
+            var operators = new List<TokenType>(){
+                TokenType.PlusOperatortoken, TokenType.MinusOperatortoken, TokenType.PlusEqualOperatortoken,
+                TokenType.MinusEqualOperatortoken, TokenType.AtSigntoken, TokenType.DoubleAtSigntoken};
+            
+            while (operators.Contains(Current.Type))
             {
                 var op = NextToken(); // -
                 var right = ParseMulOrDivExpression(scope);
+                var pred = CompilerUtils.PredicatesDict[op.Type];
+                
                 switch (op.Type)
                 {
                     case TokenType.PlusOperatortoken:
-                        left = new ArithmeticExpression(left, right, GwentPredicates.Sum, "+");
-                        break;
                     case TokenType.MinusOperatortoken:
-                        left = new ArithmeticExpression(left, right, GwentPredicates.Sub, "-");
+                        left = new ArithmeticExpression(left, right, pred.Item1, pred.Item2 );
+                        break;
+                    
+                    case TokenType.AtSigntoken:
+                    case TokenType.DoubleAtSigntoken:
+                        left = new ConcatenationExpression(left, right, pred.Item1, pred.Item2);
+                        break;
+                    
+                    case TokenType.PlusEqualOperatortoken:
+                    case TokenType.MinusEqualOperatortoken:
+                        left = new AutoSetExpression(left, right, scope, pred.Item1, pred.Item2);
                         break;
                 }
             }
@@ -611,23 +649,27 @@ namespace GwentCompiler
         private IExpression ParseMulOrDivExpression(Scope scope)
         {
             var left = ParseTerm(scope);
-            while (Current.Type == TokenType.MultiplicationOptoken || Current.Type == TokenType.SymbolInvertedBackSlashtoken || Current.Type == TokenType.Moduletoken)
+            while (Current.Type == TokenType.MultiplicationOptoken || Current.Type == TokenType.SymbolInvertedBackSlashtoken || Current.Type == TokenType.Moduletoken || Current.Type == TokenType.MultiplicationEqualOptoken || Current.Type == TokenType.DivitionEqualOptoken)
             {
                 var op = NextToken();
                 var right = ParseTerm(scope);
+                var pred = CompilerUtils.PredicatesDict[op.Type];
+
                 switch (op.Type)
                 {
                     case TokenType.MultiplicationOptoken:
-                        left = new ArithmeticExpression(left, right, GwentPredicates.Mul, "*");
-                        break;
                     case TokenType.SymbolInvertedBackSlashtoken:
-                        left = new ArithmeticExpression(left, right, GwentPredicates.Div, "/");
-                        break;
                     case TokenType.Moduletoken:
-                        left = new ArithmeticExpression(left, right, GwentPredicates.Mod, "%");
+                        left = new ArithmeticExpression(left, right, pred.Item1, pred.Item2 );
+                        break;
+                    
+                    case TokenType.MultiplicationEqualOptoken:
+                    case TokenType.DivitionEqualOptoken:
+                        left = new AutoSetExpression(left, right, scope, pred.Item1, pred.Item2);
                         break;
                 }
             }
+            
             return left;
         }
 
@@ -666,12 +708,7 @@ namespace GwentCompiler
                     return new NegativeNumExpression(ParseExpression(scope));
 
                 case TokenType.IDToken:
-                    var variable = new VariableExpression(NextToken().Value, scope);
-                    if (Current.Type == TokenType.DotSymbToken)
-                    {
-                        return ParsePropertyOrMethod(scope, variable);
-                    }
-                    return variable;
+                    return ParseAfterVariable(scope);
 
                 case TokenType.DigitToken:
                     return new LiteralExpression(new GwentObject(NextToken().Value, GwentType.GwentNumber));
@@ -732,6 +769,25 @@ namespace GwentCompiler
             };
             return types[value];
         }
+
+        private IExpression ParseAfterVariable(Scope scope)
+        {
+            var variable = new VariableExpression(NextToken().Value, scope);
+            
+            if (Current.Type == TokenType.DotSymbToken)
+            {
+                return ParsePropertyOrMethod(scope, variable);
+            }
+            else if (Current.Type == TokenType.IncrementOperatortoken || Current.Type == TokenType.DecrementOperatortoken)
+            {
+                string opSymbol = NextToken().Value;
+                Func<GwentObject, GwentObject, GwentObject> function = (opSymbol == "++")?GwentPredicates.Sum : GwentPredicates.Sub;
+                return new PrevSucExpression(variable, scope, function, opSymbol); 
+            }
+            else
+                return variable;
+        }
+
     }
 
 }

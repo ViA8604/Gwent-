@@ -6,14 +6,14 @@ namespace GwentCompiler
 {
     public class EffectDeclarationExpression : IExpression
     {
-        string name;
+        IExpression nameExpr;
         List<(string, GwentType)> parameters;
         Scope scope;
         FunctionExpression action;
 
-        public EffectDeclarationExpression(string Name, List<(string, GwentType)> Parameters, FunctionExpression _action, Scope refscope)
+        public EffectDeclarationExpression(IExpression NameExpr, List<(string, GwentType)> Parameters, FunctionExpression _action, Scope refscope)
         {
-            name = Name;
+            nameExpr = NameExpr;
             parameters = Parameters;
             action = _action;
             scope = refscope;
@@ -21,6 +21,10 @@ namespace GwentCompiler
 
         public bool CheckSemantic()
         {
+            nameExpr.CheckSemantic();
+            if(nameExpr.ReturnType != GwentType.GwentString )
+                throw new Exception("Effect Name expression must return string");
+
             foreach (var param in parameters)
             {
                 scope.SetType(param.Item1, param.Item2);
@@ -32,6 +36,7 @@ namespace GwentCompiler
 
         public GwentObject Evaluate()
         {
+            string name = nameExpr.Evaluate().value.ToString();
             CompilerUtils.EffectList[name] = this;
             return new GwentObject(0, GwentType.GwentNull);
         }
@@ -66,7 +71,7 @@ namespace GwentCompiler
 
         public override string ToString()
         {
-            string output = $"Name: {name} \n";
+            string output = $"Name: {nameExpr.Evaluate().value.ToString()} \n";
             foreach (var param in parameters)
             {
                 output += param.Item1 + ": " + param.Item2.ToString() + ",\n";
