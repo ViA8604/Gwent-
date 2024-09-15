@@ -11,6 +11,15 @@ effect {
 	};
     }
 }
+effect {
+	Name: "SendToGraveyard",
+	Action: (targets, context) => {
+	  for target in targets {
+		graveyard=context.GraveyardOfPlayer;
+		graveyard.Push(target);
+	};
+    }
+}
 
 effect {
 	Name: "Draw",
