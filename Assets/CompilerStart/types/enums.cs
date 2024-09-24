@@ -38,6 +38,7 @@ namespace GwentCompiler
     StringLiteraltoken, SymbolEqualtoken, SymbolInvertedBackSlashtoken,
     SymbolMinusEqualtoken, SymbolMultiplicationOptoken, SymbolNewLinetoken,
     SymbolStraightSlashtoken, Unknowntoken, WhiteSpacetoken, DeckCardtoken, FieldCardtoken, GraveyardCardtoken, HandCardtoken, DeckMethodtoken, FieldMethodtoken, GraveyardMethodtoken, HandMethodtoken, ShuffleMethodtoken, SendBottomMethodtoken, RemoveMethodtoken, PushMethodtoken, PopMethodtoken, FindKeywordtoken, ImageKeywordtoken, KeywordOwnertoken, DivitionEqualOptoken,
+        NoneKeywordtoken,
     }
     public enum GwentType {
         GwentNumber, GwentString, GwentBool, GwentVoid, GwentNull,

@@ -23,34 +23,44 @@ namespace GwentCompiler
         public bool CheckSemantic()
         {
             effectname.CheckSemantic();
-            if(effectname.ReturnType != GwentType.GwentString)
+            if (effectname.ReturnType != GwentType.GwentString)
+            {
                 throw new Exception("On Activation effect expresion must return string");
-            
-            CheckParametersSemantic();
-            selector.CheckSemantic();
+            }
+            effName = effectname.Evaluate().value.ToString();
+            if (effName != "None")
+            {
+                CheckParametersSemantic();
+                selector.CheckSemantic();
+            }
 
             return true;
         }
 
         public GwentObject Evaluate()
         {
-            if(effName == "")
+            if (effName == "")
                 effName = effectname.Evaluate().value.ToString();
-            
-            var effect = CompilerUtils.FindEffect(effName);
-            effect.SetParameters(parameters, selector.Evaluate());
-            effect.Execute();
-            
+
+            if (effName != "None")
+            {
+                var effect = CompilerUtils.FindEffect(effName);
+                effect.SetParameters(parameters, selector.Evaluate());
+                effect.Execute();
+            }
+
             return new GwentObject(0, GwentType.GwentNull);
         }
 
         public void CheckCall()
         {
-            if(effName == "")
+            if (effName == "")
                 effName = effectname.Evaluate().value.ToString();
-
-            var effect = CompilerUtils.FindEffect(effName);
-            effect.CheckParameters(parameters);
+            if (effName != "None")
+            {
+                var effect = CompilerUtils.FindEffect(effName);
+                effect.CheckParameters(parameters);
+            }
         }
 
         bool CheckParametersSemantic()

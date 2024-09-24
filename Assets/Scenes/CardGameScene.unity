@@ -1915,6 +1915,7 @@ GameObject:
   - component: {fileID: 1249887743}
   - component: {fileID: 1249887742}
   - component: {fileID: 1249887741}
+  - component: {fileID: 1249887744}
   m_Layer: 5
   m_Name: P2Deck
   m_TagString: Player2
@@ -2005,6 +2006,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1249887739}
   m_CullTransparentMesh: 1
+--- !u!50 &1249887744
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249887739}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 7
 --- !u!1 &1402692574
 GameObject:
   m_ObjectHideFlags: 0
@@ -2151,7 +2179,7 @@ GameObject:
   - component: {fileID: 1406270139}
   - component: {fileID: 1406270138}
   m_Layer: 5
-  m_Name: P1BackBoard
+  m_Name: P1BackTable
   m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2360,6 +2388,7 @@ GameObject:
   - component: {fileID: 1465574963}
   - component: {fileID: 1465574962}
   - component: {fileID: 1465574964}
+  - component: {fileID: 1465574965}
   m_Layer: 5
   m_Name: P2Graveyard
   m_TagString: Player2
@@ -2451,6 +2480,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!114 &1465574965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465574960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: -15
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &1471024236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2463,7 +2518,7 @@ GameObject:
   - component: {fileID: 1471024239}
   - component: {fileID: 1471024238}
   m_Layer: 5
-  m_Name: P2BackBoard
+  m_Name: P2BackTable
   m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3242,6 +3297,7 @@ GameObject:
   - component: {fileID: 1917700103}
   - component: {fileID: 1917700102}
   - component: {fileID: 1917700101}
+  - component: {fileID: 1917700104}
   m_Layer: 5
   m_Name: P1Deck
   m_TagString: Player1
@@ -3332,6 +3388,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1917700099}
   m_CullTransparentMesh: 1
+--- !u!50 &1917700104
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917700099}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 7
 --- !u!1 &1979468257
 GameObject:
   m_ObjectHideFlags: 0
@@ -3419,6 +3502,7 @@ GameObject:
   - component: {fileID: 2051983673}
   - component: {fileID: 2051983672}
   - component: {fileID: 2051983674}
+  - component: {fileID: 2051983675}
   m_Layer: 5
   m_Name: P1Graveyard
   m_TagString: Player1
@@ -3510,6 +3594,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!114 &2051983675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051983670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: -15
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

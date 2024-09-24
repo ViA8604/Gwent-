@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 993830082491947609}
   m_Layer: 0
   m_Name: Northern RealmsCard34
-  m_TagString: Custom
+  m_TagString: Suns
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,15 +52,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c6f621c31ff1c37993c1a3fda09809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardname: Duna
+  cardname: El Fati
   cardpoint: 16
   selected: 0
   crdtype: 0
-  cmbtype: 0
+  combatTypes:
+  - type: 0
+  - type: 1
   player: {fileID: 0}
   isdragging: 0
   actualzone: {fileID: 0}
   activecamera: {fileID: 0}
+  cardGame: {fileID: 0}
   initialLocalPosition: {x: 0, y: 0, z: 0}
 --- !u!212 &2882838369057888158
 SpriteRenderer:
@@ -103,7 +106,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 49f1b7877ad2dde179a0870dc83dc29f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 18e1eb5bf389ab1a09b021706c80d662, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,7 +145,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 49f1b7877ad2dde179a0870dc83dc29f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 18e1eb5bf389ab1a09b021706c80d662, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

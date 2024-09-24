@@ -21,6 +21,7 @@ namespace GwentPro
         public Deck deck;
         public bool alreadyset;
         public bool alreadyplayed;
+        public GameObject crdgameobj;
         public List<GameObject> PlayerZones;
         bool displayedhand;
         public int Skippedturns;
@@ -53,12 +54,14 @@ namespace GwentPro
 
         void SetHand()
         {
+            GameObject crdgameobj = GameObject.Find("CardGameObj");
             GameObject handObj = GetGOByName("Hand", PlayerZones);
             foreach (GameObject item in deck.hand)
             {
                 GameObject cardinst = Instantiate(item, handObj.transform);
                 CardClass cardC = cardinst.GetComponent<CardClass>();
                 cardC.player = this;
+                cardC.cardGame = crdgameobj.GetComponent<CardGameScene>();
                 cardC.SetDictProp();
                 cardinst.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
                 cardinst.transform.SetParent(handObj.transform);
@@ -74,6 +77,7 @@ namespace GwentPro
             GameObject leaderinst = Instantiate(deck.LeaderCard, LeaderObj.transform);
             CardClass leaderC = leaderinst.GetComponent<CardClass>();
             leaderC.player = this;
+            leaderC.cardGame = crdgameobj.GetComponent<CardGameScene>();
             leaderC.SetDictProp();
             leaderinst.transform.localScale = new Vector3(1.25f, 1.3f, 1.6f);
             leaderinst.transform.SetParent(LeaderObj.transform);
@@ -89,6 +93,7 @@ namespace GwentPro
                 {
                     GameObject cardinst = Instantiate(Deck.PopCard(deck.prefabsList), handObj.transform);
                     cardinst.GetComponent<CardClass>().player = this;
+                    cardinst.GetComponent<CardClass>().cardGame = crdgameobj.GetComponent<CardGameScene>();
                     cardinst.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
                     cardinst.transform.SetParent(handObj.transform);
                     CardsInScene.Add(cardinst);
@@ -110,11 +115,13 @@ namespace GwentPro
         public void FillDeck()
         {
             DeckObj = GetGOByName("Deck", PlayerZones);
+           
             foreach (var item in deck.prefabsList)
             {
                 GameObject deckInst = Instantiate(item, DeckObj.transform);
                 CardClass deckC = deckInst.GetComponent<CardClass>();
                 deckC.player = this;
+                deckC.cardGame = crdgameobj.GetComponent<CardGameScene>();
                 deckC.SetDictProp();
                 deckInst.transform.localScale = new Vector3(1.44f, 1.44f, 1.44f);
                 deckInst.transform.SetParent(DeckObj.transform);

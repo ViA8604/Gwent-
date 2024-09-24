@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7504335903497237085}
-  - component: {fileID: 12705357890353195}
+  - component: {fileID: 3557124032400084016}
   - component: {fileID: 7614307538850711663}
   - component: {fileID: 6204054145986465192}
   - component: {fileID: 2336130378439719841}
@@ -40,7 +40,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 7.2, y: 10.08}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &12705357890353195
+--- !u!114 &3557124032400084016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,20 +49,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1418939346708870615}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33c6f621c31ff1c37993c1a3fda09809, type: 3}
+  m_Script: {fileID: 11500000, guid: ca4b064bde778c685882342bb3e41aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardname: Gizmo
+  cardname: Kevvin
   cardpoint: 16
   selected: 0
   crdtype: 0
   combatTypes:
-  - type: 0
+  - type: 3
   - type: 1
   player: {fileID: 0}
   isdragging: 0
   actualzone: {fileID: 0}
   activecamera: {fileID: 0}
+  cardGame: {fileID: 0}
   initialLocalPosition: {x: 0, y: 0, z: 0}
 --- !u!212 &7614307538850711663
 SpriteRenderer:
@@ -105,7 +106,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 49f1b7877ad2dde179a0870dc83dc29f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 18e1eb5bf389ab1a09b021706c80d662, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -144,7 +145,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 49f1b7877ad2dde179a0870dc83dc29f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 18e1eb5bf389ab1a09b021706c80d662, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

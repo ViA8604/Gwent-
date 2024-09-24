@@ -52,10 +52,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c6f621c31ff1c37993c1a3fda09809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardname: Joaquin
-  cardpoint: 16
+  cardname: Louis
+  cardpoint: 6
   selected: 0
-  crdtype: 0
+  crdtype: 1
   combatTypes:
   - type: 0
   - type: 1

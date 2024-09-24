@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using GwentCompiler;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 namespace GwentPro
 {
@@ -24,6 +26,7 @@ namespace GwentPro
         bool sceneChanged = false;
         public bool setupComplete;
         public bool gamestarted;
+        public GameObject CompilerZone;
         private static GameManager instance;
 
 
@@ -249,32 +252,61 @@ namespace GwentPro
         {
             return currentTurn;
         }
-        
+
         public int NotCurrentPlayerID()
         {
             return (currentTurn + 1) % 2;
         }
         public GameObject GetZone(ZoneObj zoneObj)
         {
+            Debug.Log(zoneObj.ZoneName);
             Player player = Players[zoneObj.PlayerID];
 
-            if (zoneObj.ZoneName == "Board") return cardGame.BoardObj;
-
-            return player.GetGOByName(zoneObj.ZoneName, player.PlayerZones);
+            CompilerZone = player.GetGOByName(zoneObj.ZoneName, player.PlayerZones);
+            if(zoneObj.ZoneName == "Board")
+            {
+                CompilerZone = GameObject.Find("Board");
+            }
+            return CompilerZone;
         }
 
         public List<CardClass> GetZoneCardList(ZoneObj zoneObj)
         {
             GameObject zone = GetZone(zoneObj);
+
             List<CardClass> list = new List<CardClass>();
 
-            if (zone.transform.childCount == 0) return list;
+            if (zone.transform.childCount == 0)
+            {
+
+                Debug.LogError($"No cards in the {zoneObj.ZoneName}");
+            }
 
             foreach (Transform child in zone.transform)
             {
+                if(child.GetComponent<CardClass>() != null)
+                {
                 list.Add(child.gameObject.GetComponent<CardClass>());
+                }
+                else 
+                {
+                    Debug.LogError($"No card in {zoneObj.ZoneName}");
+                    Debug.Log($"Llamando a GetZoneCardList en {child.name}");
+                    list.AddRange(GetZoneCardList(new ZoneObj(child.name, zoneObj.PlayerID)));
+                }
             }
             return list;
+        }
+
+        private List<CardClass> GetFieldCardList(int playerID)
+        {
+            List<CardClass> fieldCards = new List<CardClass>();
+            ZoneObj[] zones = new ZoneObj[] { new ZoneObj("Melee", playerID) , new ZoneObj("Range" , playerID) , new ZoneObj("Siege" , playerID)};
+            foreach (var zone in zones)
+            {
+                fieldCards.Concat(GetZoneCardList(zone));
+            }
+            return fieldCards;
         }
 
         public string GetACardProperty(string cardName, ZoneObj zone, string property)
@@ -331,7 +363,7 @@ namespace GwentPro
             List<CompilerCard> cardnames = new List<CompilerCard>();
 
             foreach (var item in cards)
-            {
+            {   
                 cardnames.Add(new CompilerCard(item.name, zone));
             }
             return cardnames;
@@ -341,7 +373,7 @@ namespace GwentPro
         {
             GameObject takefrom = GetZone(zone);
 
-            ZoneObj backBoardZone = new ZoneObj("BackBoard", zone.PlayerID);
+            ZoneObj backBoardZone = new ZoneObj("BackTable", zone.PlayerID);
 
             CardClass card = takefrom.transform.GetChild(0).gameObject.GetComponent<CardClass>();
             card.gameObject.transform.SetParent(GetZone(backBoardZone).transform);
@@ -359,9 +391,10 @@ namespace GwentPro
         {
             CardClass card = SearchCard(startcard.cardName, startcard.zone);
             GameObject actualZone = GetZone(endzone);
-
+    
             ZoneObj actualZoneObj = new ZoneObj(actualZone.name, endzone.PlayerID);
             card.gameObject.transform.SetParent(actualZone.transform);
+            card.cardGame = card.player.crdgameobj.GetComponent<CardGameScene>();
 
             return new CompilerCard(card.name, actualZoneObj);
         }
@@ -375,7 +408,7 @@ namespace GwentPro
             card.gameObject.transform.SetParent(actualZone.transform);
             card.gameObject.transform.SetAsFirstSibling();
 
-             return new CompilerCard(card.name, actualZoneObj);
+            return new CompilerCard(card.name, actualZoneObj);
         }
     }
 }

@@ -146,10 +146,10 @@ namespace GwentPro
             }
             else
             {
-                GameObject crdgameobj = GameObject.Find("CardGameObj");
-                cardGame = crdgameobj.GetComponent<CardGameScene>();
+                if(cardGame != null)
+                {
                 activecamera = cardGame.dragcamera;
-
+                }
             }
         }
 

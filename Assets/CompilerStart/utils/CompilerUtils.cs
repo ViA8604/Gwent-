@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using GwentPro;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 namespace GwentCompiler
 {
@@ -9,13 +10,14 @@ namespace GwentCompiler
     {
         public static string tag = "Custom";
         public static GameManager gameManager;
-       
+
         public static Dictionary<string, CardExpression> CardExpressions = new Dictionary<string, CardExpression>();
 
         public static Dictionary<string, EffectDeclarationExpression> EffectList = new Dictionary<string, EffectDeclarationExpression>();
         public static Dictionary<string, TokenType> Getkeyword = new Dictionary<string, TokenType>() {
         {"Action" , TokenType.KeywordActiontoken} ,
         {"Bool" , TokenType.KeywordBooltoken} ,
+        {"Board", TokenType.KeywordBoardtoken},
         {"card" , TokenType.KeywordCardtoken} ,
         {"context", TokenType.KeywordContextoken},
         {"Deck" , TokenType.DeckCardtoken},
@@ -37,6 +39,7 @@ namespace GwentCompiler
         {"Image" , TokenType.ImageKeywordtoken} ,
         {"in" , TokenType.KeywordIntoken} ,
         {"Name" , TokenType.KeywordNametoken} ,
+        {"None" , TokenType.NoneKeywordtoken} ,
         {"Number" , TokenType.KeywordNumbertoken} ,
         {"OnActivation" , TokenType.KeywordOnActivationtoken} ,
         {"Owner", TokenType.KeywordOwnertoken},
@@ -111,13 +114,13 @@ namespace GwentCompiler
         };
 
         public static Dictionary<TokenType, string> NameZoneFKeywords = new Dictionary<TokenType, string>() {
-        {TokenType.DeckMethodtoken, "Deck" }, 
-        {TokenType.FieldMethodtoken, "Field" }, 
-        {TokenType.GraveyardMethodtoken, "Graveyard" }, 
+        {TokenType.DeckMethodtoken, "Deck" },
+        {TokenType.FieldMethodtoken, "Field" },
+        {TokenType.GraveyardMethodtoken, "Graveyard" },
         {TokenType.HandMethodtoken, "Hand" }
         };
 
-        public static Dictionary<TokenType, (Func<GwentObject,GwentObject, GwentObject>, string)> PredicatesDict = new Dictionary<TokenType, (Func<GwentObject,GwentObject, GwentObject>, string)>()
+        public static Dictionary<TokenType, (Func<GwentObject, GwentObject, GwentObject>, string)> PredicatesDict = new Dictionary<TokenType, (Func<GwentObject, GwentObject, GwentObject>, string)>()
         {
             {TokenType.PlusOperatortoken, (GwentPredicates.Sum, "+")},
             {TokenType.MinusOperatortoken, (GwentPredicates.Sub, "-")},
@@ -134,10 +137,10 @@ namespace GwentCompiler
 
             {TokenType.AtSigntoken , (GwentPredicates.ConcatString, "@")},
             {TokenType.DoubleAtSigntoken , (GwentPredicates.ConcatStringWithSpace, "@@" )},
-            
+
             {TokenType.Moduletoken, (GwentPredicates.Mod, "%=")},
         };
-        public static List<TokenType> CardZoneKeywords = new List<TokenType>() { TokenType.DeckCardtoken, TokenType.FieldCardtoken, TokenType.GraveyardCardtoken, TokenType.HandCardtoken };
+        public static List<TokenType> CardZoneKeywords = new List<TokenType>() { TokenType.KeywordBoardtoken, TokenType.DeckCardtoken, TokenType.FieldCardtoken, TokenType.GraveyardCardtoken, TokenType.HandCardtoken };
 
         public static EffectDeclarationExpression FindEffect(string name)
         {
@@ -146,17 +149,20 @@ namespace GwentCompiler
                 return EffectList[name];
             }
 
-            throw new Exception("Effect not found, make sure it's been declared.");
+            throw new Exception($"Effect {name} not found, make sure it's been declared.");
         }
 
         public static void LaunchEffect(string name)
         {
-            if (CardExpressions.ContainsKey(name))
+            if (name != "None")
             {
-                CardExpressions[name].ActiveEffect();
+                if (CardExpressions.ContainsKey(name))
+                {
+                    CardExpressions[name].ActiveEffect();
+                }
             }
         }
-        
+
         public static List<GameObject> ConvertCardListGM(List<CardClass> cards)
         {
             List<GameObject> gameObjects = new List<GameObject>();
@@ -171,5 +177,6 @@ namespace GwentCompiler
         {
             return Double.Parse(a.value.ToString());
         }
+
     }
 }

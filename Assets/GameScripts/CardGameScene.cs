@@ -48,6 +48,8 @@ namespace GwentPro
             FillZones();
             WinnerSign = Resources.Load<TextMeshProUGUI>("GamePrefabs/WinnerSign");
             player1.PlayerZones = ZonesPlayer1;
+            player1.crdgameobj = gameObject;
+            player2.crdgameobj = gameObject;
             player2.PlayerZones = ZonesPlayer2;
             LeaderObj1 = player1.GetGOByName("Leader", ZonesPlayer1);
             LeaderObj2 = player2.GetGOByName("Leader", ZonesPlayer2);

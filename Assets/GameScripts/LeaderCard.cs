@@ -14,6 +14,7 @@ namespace GwentPro
         }
         public override void OnMouseDown()
         {
+            base.OnMouseDown();
             base.SetActiveCamera();
             if (cardGame.Compiler != null)
             {

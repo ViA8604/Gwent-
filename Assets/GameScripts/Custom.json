@@ -9,43 +9,42 @@
     ],
     "Faction": "Northern Realms",
     "Image": "CardTest1",
-    "EffectName": "Return to Deck Mod"
+    "EffectName": "Damage"
   },
   {
-    "Name": "Bazinga",
+    "Name": "PowerBazinga",
     "Points": 16,
-    "CardType": "Gold",
+    "CardType": "Silver",
     "CombatType": [
       "Range",
       "Siege"
     ],
     "Faction": "Northern Realms",
-    "Image": "CardTest2",
+    "Image": "CardTest3",
     "EffectName": "Return to Deck Mod"
   },
   {
-    "Name": "Fuas",
-    "Points": 16,
-    "CardType": "Gold",
+    "Name": "Hermito_TU_en_Salsa",
+    "Points": 5,
+    "CardType": "Silver",
     "CombatType": [
-      "Melee",
-      "Range"
+      "Melee"
     ],
-    "Faction": "Northern Realms",
-    "Image": "DefaultImage",
-    "EffectName": "Return to Deck Mod"
+    "Faction": "Cubiculo_2",
+    "Image": "CardTest5",
+    "EffectName": "Draw"
   },
   {
     "Name": "Libelula",
-    "Points": 16,
+    "Points": 3,
     "CardType": "Gold",
     "CombatType": [
       "Melee",
       "Range"
     ],
     "Faction": "Northern Realms",
-    "Image": "CardTest1",
-    "EffectName": "Return to Deck Mod"
+    "Image": "CardTest2",
+    "EffectName": "Send to Graveyard"
   },
   {
     "Name": "Lunita",
@@ -56,7 +55,7 @@
       "Range"
     ],
     "Faction": "Northern Realms",
-    "Image": "DefaultImage",
+    "Image": "CardTest8",
     "EffectName": "Return to Deck Mod"
   },
   {
@@ -68,47 +67,23 @@
       "Range"
     ],
     "Faction": "Northern Realms",
-    "Image": "CardTest1",
-    "EffectName": "Return to Deck Mod"
-  },
-  {
-    "Name": "Joaquin",
-    "Points": 16,
-    "CardType": "Gold",
-    "CombatType": [
-      "Melee",
-      "Range"
-    ],
-    "Faction": "Northern Realms",
-    "Image": "DefaultImage",
-    "EffectName": "Return to Deck Mod"
-  },
-  {
-    "Name": "Dragonball",
-    "Points": 16,
-    "CardType": "Gold",
-    "CombatType": [
-      "Melee",
-      "Range"
-    ],
-    "Faction": "Northern Realms",
-    "Image": "CardTest2",
-    "EffectName": "Return to Deck Mod"
+    "Image": "CardTest7",
+    "EffectName": "Seek And Destroy"
   },
   {
     "Name": "Louis",
-    "Points": 16,
-    "CardType": "Gold",
+    "Points": 6,
+    "CardType": "Silver",
     "CombatType": [
       "Melee",
       "Range"
     ],
     "Faction": "Northern Realms",
     "Image": "DefaultImage",
-    "EffectName": "Return to Deck Mod"
+    "EffectName": "None"
   },
   {
-    "Name": "Mermelada",
+    "Name": "Gizmo",
     "Points": 4,
     "CardType": "Gold",
     "CombatType": [
@@ -117,31 +92,19 @@
     ],
     "Faction": "Northern Realms",
     "Image": "DefaultImage",
-    "EffectName": "Return to Deck Mod"
+    "EffectName": "None"
   },
   {
-    "Name": "Duna",
-    "Points": 16,
-    "CardType": "Gold",
+    "Name": "Terreneitor",
+    "Points": 6,
+    "CardType": "Silver",
     "CombatType": [
-      "Melee",
+      "Siege",
       "Range"
     ],
     "Faction": "Northern Realms",
-    "Image": "DefaultImage",
-    "EffectName": "Return to Deck Mod"
-  },
-  {
-    "Name": "Gizmo",
-    "Points": 16,
-    "CardType": "Gold",
-    "CombatType": [
-      "Melee",
-      "Range"
-    ],
-    "Faction": "Northern Realms",
-    "Image": "DefaultImage",
-    "EffectName": "Return to Deck Mod"
+    "Image": "CardTest4",
+    "EffectName": "None"
   },
   {
     "Name": "Kevvin",
@@ -153,43 +116,42 @@
     ],
     "Faction": "Northern Realms",
     "Image": "CardTest1",
-    "EffectName": "Return to Deck Mod"
+    "EffectName": "Damage"
   },
   {
-    "Name": "Bazinga",
+    "Name": "PowerBazinga",
     "Points": 16,
-    "CardType": "Gold",
+    "CardType": "Silver",
     "CombatType": [
       "Range",
       "Siege"
     ],
     "Faction": "Northern Realms",
-    "Image": "CardTest2",
+    "Image": "CardTest3",
     "EffectName": "Return to Deck Mod"
   },
   {
-    "Name": "Fuas",
-    "Points": 16,
-    "CardType": "Gold",
+    "Name": "Hermito_TU_en_Salsa",
+    "Points": 5,
+    "CardType": "Silver",
     "CombatType": [
-      "Melee",
-      "Range"
+      "Melee"
     ],
-    "Faction": "Northern Realms",
-    "Image": "DefaultImage",
-    "EffectName": "Return to Deck Mod"
+    "Faction": "Cubiculo_2",
+    "Image": "CardTest5",
+    "EffectName": "Draw"
   },
   {
     "Name": "Libelula",
-    "Points": 16,
+    "Points": 3,
     "CardType": "Gold",
     "CombatType": [
       "Melee",
       "Range"
     ],
     "Faction": "Northern Realms",
-    "Image": "CardTest1",
-    "EffectName": "Return to Deck Mod"
+    "Image": "CardTest2",
+    "EffectName": "Send to Graveyard"
   },
   {
     "Name": "Lunita",
@@ -200,7 +162,7 @@
       "Range"
     ],
     "Faction": "Northern Realms",
-    "Image": "DefaultImage",
+    "Image": "CardTest8",
     "EffectName": "Return to Deck Mod"
   },
   {
@@ -212,47 +174,23 @@
       "Range"
     ],
     "Faction": "Northern Realms",
-    "Image": "CardTest1",
-    "EffectName": "Return to Deck Mod"
-  },
-  {
-    "Name": "Joaquin",
-    "Points": 16,
-    "CardType": "Gold",
-    "CombatType": [
-      "Melee",
-      "Range"
-    ],
-    "Faction": "Northern Realms",
-    "Image": "DefaultImage",
-    "EffectName": "Return to Deck Mod"
-  },
-  {
-    "Name": "Dragonball",
-    "Points": 16,
-    "CardType": "Gold",
-    "CombatType": [
-      "Melee",
-      "Range"
-    ],
-    "Faction": "Northern Realms",
-    "Image": "CardTest2",
-    "EffectName": "Return to Deck Mod"
+    "Image": "CardTest7",
+    "EffectName": "Seek And Destroy"
   },
   {
     "Name": "Louis",
-    "Points": 16,
-    "CardType": "Gold",
+    "Points": 6,
+    "CardType": "Silver",
     "CombatType": [
       "Melee",
       "Range"
     ],
     "Faction": "Northern Realms",
     "Image": "DefaultImage",
-    "EffectName": "Return to Deck Mod"
+    "EffectName": "None"
   },
   {
-    "Name": "Mermelada",
+    "Name": "Gizmo",
     "Points": 4,
     "CardType": "Gold",
     "CombatType": [
@@ -261,10 +199,69 @@
     ],
     "Faction": "Northern Realms",
     "Image": "DefaultImage",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Terreneitor",
+    "Points": 6,
+    "CardType": "Silver",
+    "CombatType": [
+      "Siege",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "CardTest4",
+    "EffectName": "None"
+  },
+  {
+    "Name": "Kevvin",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Leader",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "CardTest1",
+    "EffectName": "Damage"
+  },
+  {
+    "Name": "PowerBazinga",
+    "Points": 16,
+    "CardType": "Silver",
+    "CombatType": [
+      "Range",
+      "Siege"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "CardTest3",
     "EffectName": "Return to Deck Mod"
   },
   {
-    "Name": "Duna",
+    "Name": "Hermito_TU_en_Salsa",
+    "Points": 5,
+    "CardType": "Silver",
+    "CombatType": [
+      "Melee"
+    ],
+    "Faction": "Cubiculo_2",
+    "Image": "CardTest5",
+    "EffectName": "Draw"
+  },
+  {
+    "Name": "Libelula",
+    "Points": 3,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "CardTest2",
+    "EffectName": "Send to Graveyard"
+  },
+  {
+    "Name": "Lunita",
     "Points": 16,
     "CardType": "Gold",
     "CombatType": [
@@ -272,12 +269,36 @@
       "Range"
     ],
     "Faction": "Northern Realms",
-    "Image": "DefaultImage",
+    "Image": "CardTest8",
     "EffectName": "Return to Deck Mod"
+  },
+  {
+    "Name": "El Fati",
+    "Points": 16,
+    "CardType": "Gold",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "CardTest7",
+    "EffectName": "Seek And Destroy"
+  },
+  {
+    "Name": "Louis",
+    "Points": 6,
+    "CardType": "Silver",
+    "CombatType": [
+      "Melee",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "DefaultImage",
+    "EffectName": "None"
   },
   {
     "Name": "Gizmo",
-    "Points": 16,
+    "Points": 4,
     "CardType": "Gold",
     "CombatType": [
       "Melee",
@@ -285,6 +306,18 @@
     ],
     "Faction": "Northern Realms",
     "Image": "DefaultImage",
-    "EffectName": "Return to Deck Mod"
+    "EffectName": "None"
+  },
+  {
+    "Name": "Terreneitor",
+    "Points": 6,
+    "CardType": "Silver",
+    "CombatType": [
+      "Siege",
+      "Range"
+    ],
+    "Faction": "Northern Realms",
+    "Image": "CardTest4",
+    "EffectName": "None"
   }
 ]

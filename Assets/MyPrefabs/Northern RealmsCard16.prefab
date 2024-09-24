@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2515279858302079909}
-  - component: {fileID: 3022772145281871037}
+  - component: {fileID: 3840300265672653445}
   - component: {fileID: 3446354064583344615}
   - component: {fileID: 8288653144344498775}
   - component: {fileID: 3400609722546725246}
@@ -40,7 +40,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 7.2, y: 10.08}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3022772145281871037
+--- !u!114 &3840300265672653445
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c6f621c31ff1c37993c1a3fda09809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardname: Lunita
-  cardpoint: 16
+  cardname: Gizmo
+  cardpoint: 4
   selected: 0
   crdtype: 0
   combatTypes:

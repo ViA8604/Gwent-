@@ -189,27 +189,15 @@
     "EffectName": "None"
   },
   {
-    "Name": "Thalmor Embassy",
-    "Points": 16,
-    "CardType": "Gold",
+    "Name": "PowerBazinga",
+    "Points": 2,
+    "CardType": "Silver",
     "CombatType": [
-      "Melee",
-      "Ranged"
+      "Range",
+      "Siege"
     ],
     "Faction": "Northern Realms",
-    "Image": "DefaultImage",
-    "EffectName": "Increase Damage"
-  },
-  {
-    "Name": "Thalmor Embassy",
-    "Points": 16,
-    "CardType": "Gold",
-    "CombatType": [
-      "Melee",
-      "Ranged"
-    ],
-    "Faction": "Northern Realms",
-    "Image": "DefaultImage",
-    "EffectName": "Increase Damage"
+    "Image": "CardTest3",
+    "EffectName": "Return to Deck Mod"
   }
 ]
